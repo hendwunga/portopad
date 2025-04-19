@@ -1,0 +1,80 @@
+:host {
+  display: block;
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+  // Optional: Set a specific background for the gallery section if desired
+  // background-color: var(--bg-color); // Or var(--card-bg) if you want it slightly different
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  margin-top: 0;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(280px, 1fr)
+  ); // Slightly larger min-width might look better with text
+  gap: var(--spacing-lg); // Use larger gap consistent with other card grids
+
+  @media (max-width: 767.98px) {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+  }
+  @media (max-width: 575.98px) {
+    // Keep 1 column on very small screens for better readability
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+} // End .photo-grid
+
+// .photo-item now uses .card-base for background, border, padding, shadow, hover
+.photo-item {
+  // Inherits styles from .card-base
+  // No need for overflow: hidden unless image needs clipping
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto; // Let the image determine its height based on width
+    aspect-ratio: 16 / 10; // Or 4/3, 3/2 - Adjust for desired image shape
+    object-fit: cover; // Cover the aspect ratio area
+    border-radius: 8px; // Apply radius directly to image if you want *only* image rounded
+    // Or inherit from card-base if you want the whole card rounded:
+    // border-top-left-radius: inherit;
+    // border-top-right-radius: inherit;
+    margin-bottom: var(--spacing-sm); // Space between image and details
+  }
+
+  .photo-details {
+    // Container for text below image
+    // Padding is handled by .card-base on .photo-item
+    margin-top: auto; // Push details down if card height varies and you align items start
+  }
+
+  .photo-title {
+    // Style like a card title (h5 used in HTML)
+    font-family: var(--font-secondary);
+    font-size: 1.1rem; // Slightly smaller than h4
+    font-weight: 600;
+    color: var(--primary-dark); // Or var(--text-color)
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.4;
+  }
+
+  .photo-description {
+    // Style for the description paragraph
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.85;
+    line-height: 1.6;
+    margin-bottom: 0; // Remove default paragraph margin if it's the last element
+    max-width: none; // Override global p max-width if set
+  }
+} // End .photo-item
+
+// Remove all styles for the old .photo-caption (absolute positioned overlay)

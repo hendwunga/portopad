@@ -1,0 +1,51 @@
+:host {
+  display: block;
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+}
+
+.about-indented {
+  h2 {
+    text-align: left;
+    margin: 0 0 var(--spacing-md) 0;
+
+    /* // Opsional garis bawah judul
+    // &::after {
+    //   content: "";
+    //   display: block;
+    //   width: 60px;
+    //   height: 3px;
+    //   background-color: var(--primary-color);
+    //   margin-top: var(--spacing-xs);
+    // } */
+
+    @media (max-width: 767.98px) {
+      text-align: center;
+
+      &::after {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+
+  p {
+    text-align: left;
+    max-width: none;
+    margin: 0;
+    padding-left: var(--spacing-lg);
+    border-left: 3px solid var(--primary-color);
+    padding-left: calc(var(--spacing-lg) - 3px);
+
+    @media (max-width: 767.98px) {
+      padding-left: var(--spacing-md);
+      border-left: none;
+
+      /* // Jika ingin tengah saat mobile
+      text-align: center;
+      max-width: 75ch;
+      margin-left: auto;
+      margin-right: auto; */
+    }
+  }
+}

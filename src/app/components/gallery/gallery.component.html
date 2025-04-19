@@ -1,0 +1,16 @@
+<section id="gallery" class="container content-section">
+  <h2>{{ galleryTitle }}</h2>
+  <div class="photo-grid">
+    <!-- Add card-base class here -->
+    <div class="photo-item card-base" *ngFor="let image of images">
+      <img [src]="image.src" [alt]="image.alt" loading="lazy">
+      <div class="photo-details">
+        <!-- Use h5 or similar for the title -->
+        <h5 class="photo-title">{{ image.title }}</h5>
+        <!-- Use p for the description -->
+        <p class="photo-description">{{ image.description }}</p>
+      </div>
+      <!-- The old photo-caption div is removed -->
+    </div>
+  </div>
+</section>

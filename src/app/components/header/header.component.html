@@ -1,0 +1,39 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <!-- <div class="logo">
+      <a href="#">Hendro Wunga</a>
+    </div> -->
+
+    <!-- Beri kelas untuk target JS & styling -->
+    <ul class="nav-links" [class.active]="isMobileMenuOpen">
+      <li><a href="#about" (click)="closeMobileMenu()">About</a></li>
+      <li><a href="#skills" (click)="closeMobileMenu()">Skills</a></li>
+      <li><a href="#projects" (click)="closeMobileMenu()">Projects</a></li>
+      <li><a href="#certifications"
+          (click)="closeMobileMenu()">Certifications</a></li>
+      <li><a href="#gallery"
+          (click)="closeMobileMenu()">Activity</a></li>
+      <li><a href="#contact" (click)="closeMobileMenu()">Contact</a></li>
+    </ul>
+
+    <!-- Tombol Dark Mode -->
+    <button
+      class="dark-btn"
+      id="darkModeToggle"
+      aria-label="Toggle Dark Mode"
+      (click)="toggleTheme()"
+      [attr.aria-pressed]="(isDarkMode$ | async) === 'dark'">
+      <span class="light-icon"
+        *ngIf="(isDarkMode$ | async) === 'light'">🌙</span>
+      <span class="dark-icon" *ngIf="(isDarkMode$ | async) === 'dark'">☀️</span>
+    </button>
+
+    <!-- Tombol Mobile Menu Toggle (Hamburger) -->
+    <button class="mobile-menu-toggle" (click)="toggleMobileMenu()"
+      aria-label="Toggle menu">
+      <span class="hamburger-icon">☰</span>
+
+    </button>
+
+  </div>
+</nav>
