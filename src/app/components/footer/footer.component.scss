@@ -1,0 +1,20 @@
+:host {
+  display: block;
+  background: var(--card-bg); // Use card background for footer consistency
+  color: var(--text-color);
+  text-align: center;
+  padding: var(--spacing-lg) var(--spacing-md);
+  margin-top: var(--spacing-xl);
+  border-top: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  opacity: 0.8;
+
+  p {
+    // Target p specifically within footer
+    text-align: center;
+    margin-bottom: 0;
+    max-width: none; // Override global max-width for p if needed
+    margin-left: auto;
+    margin-right: auto;
+  } // End p
+} // End :host
