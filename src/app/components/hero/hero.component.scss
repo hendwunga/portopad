@@ -1,0 +1,298 @@
+// Import global variables/mixins if applicable
+// @import '../../../../styles/variables'; // Example
+
+/* Style dasar section hero */
+:host {
+  display: block; /* Komponen hero adalah block */
+}
+
+/* === Keyframes (Keep at top level or in a separate partial) === */
+@keyframes cardFallIn {
+  from {
+    opacity: 0;
+    transform: translateY(-60px) rotate(-10deg); /* Mulai lebih atas & miring */
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(10px) rotate(3deg); /* Efek overshoot */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg); /* Posisi akhir */
+  }
+}
+
+@keyframes fadeInUpElement {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero {
+  min-height: 75vh; /* Sesuaikan sesuai kebutuhan */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl) var(--spacing-md);
+  background: var(--hero-bg);
+  overflow: hidden; /* Penting untuk animasi/layout */
+  position: relative;
+
+  @media (max-width: 991.98px) {
+    /* Tablet dan lebih kecil */
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+  @media (max-width: 767.98px) {
+    /* Mobile */
+    min-height: auto; /* Tinggi fleksibel */
+    padding: var(--spacing-xl) var(--spacing-sm);
+  }
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: row; /* Teks kiri, gambar kanan di layar lebar */
+  align-items: center; /* Sejajarkan vertikal */
+  justify-content: space-between; /* Atau gunakan gap */
+  gap: var(--spacing-xl); /* Jarak antara teks dan gambar */
+  max-width: 1100px; /* Batas lebar konten hero */
+  width: 100%;
+  margin: 0 auto;
+
+  @media (max-width: 991.98px) {
+    flex-direction: column; /* Susun vertikal */
+    gap: var(--spacing-lg);
+    max-width: 700px;
+  }
+}
+
+/* Pengaturan layout flex item */
+.hero-text {
+  flex: 1.2; /* Porsi lebar teks */
+  text-align: left; /* Teks rata kiri */
+  order: 1; /* Teks di sisi kiri */
+
+  @media (max-width: 991.98px) {
+    order: 2; /* Teks di bawah */
+    text-align: center; /* Teks rata tengah */
+    flex-basis: auto;
+    width: 100%;
+  }
+}
+
+.hero-image {
+  flex: 0.8; /* Porsi lebar gambar */
+  display: flex;
+  justify-content: center; /* Pusatkan gambar di dalam div */
+  align-items: center;
+  order: 2; /* Gambar di sisi kanan */
+
+  @media (max-width: 991.98px) {
+    order: 1; /* Gambar di atas */
+    flex-basis: auto;
+    margin-bottom: var(--spacing-md);
+  }
+}
+
+/* Terapkan animasi & Style Dasar Gambar */
+.profile-pic {
+  /* Ukuran */
+  width: 350px;
+  height: 350px;
+  border-radius: 24px;
+  object-fit: cover;
+  border: 7px solid var(--bg-color);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); /* Shadow dasar */
+  transition: transform 0.4s ease-out, box-shadow 0.4s ease-out; /* Transisi untuk hover */
+
+  /* Animasi kartu jatuh */
+  opacity: 0;
+  animation-name: cardFallIn;
+  animation-duration: 1s;
+  animation-delay: 0.1s;
+  animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  animation-fill-mode: forwards;
+
+  /* Styling Hover untuk Efek Glow pada Gambar */
+  &:hover {
+    transform: scale(1.03);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25),
+      0 0 25px 8px rgba(0, 191, 166, 0.45);
+
+    @media (max-width: 991.98px) {
+      /* Sesuaikan hover tablet jika perlu */
+      /* box-shadow: 0 14px 40px rgba(0, 0, 0, 0.2), 0 0 20px 4px rgba(0, 191, 166, 0.4); */
+    }
+    @media (max-width: 767.98px) {
+      /* Nonaktifkan hover glow di mobile jika mau */
+      /* transform: scale(1); */
+      /* box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12); */
+    }
+    @media (max-width: 575.98px) {
+      /* box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); */
+    }
+  }
+
+  @media (max-width: 991.98px) {
+    width: 260px; /* Ukuran Tablet */
+    height: 260px;
+    border-radius: 18px;
+  }
+  @media (max-width: 767.98px) {
+    width: 200px; /* Ukuran Mobile */
+    height: 200px;
+    border-radius: 14px;
+  }
+  @media (max-width: 575.98px) {
+    width: 170px; /* Ukuran Mobile Kecil */
+    height: 170px;
+    border-radius: 12px;
+  }
+} // End .profile-pic
+
+// Animation Base for Text elements - Applied individually below
+%fade-in-up-base {
+  // Using a placeholder selector for common animation props
+  opacity: 0;
+  animation-name: fadeInUpElement;
+  animation-duration: 0.8s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+/* === Styling Elemen Spesifik dalam .hero-text === */
+.hero-greeting,
+.hero-name,
+.hero-subtitle,
+.hero-contact-icons,
+.hero-buttons {
+  @extend %fade-in-up-base; // Apply base animation
+  position: relative; // Needed for stacking context or potential ::before/::after
+}
+
+/* Atur delay agar elemen muncul berurutan */
+.hero-greeting {
+  animation-delay: 0.4s;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--primary-dark);
+  margin-bottom: var(--spacing-xs);
+}
+
+.hero-name {
+  animation-delay: 0.6s;
+  font-size: 3.5rem;
+  margin-bottom: var(--spacing-xs);
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--primary-dark)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+
+  @media (max-width: 991.98px) {
+    font-size: 3rem;
+  }
+  @media (max-width: 767.98px) {
+    font-size: 2.5rem;
+  }
+  @media (max-width: 575.98px) {
+    font-size: 2.2rem;
+  }
+} // End .hero-name
+
+.hero-subtitle {
+  animation-delay: 0.8s;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text-color);
+  margin-bottom: var(--spacing-lg); /* Jarak ke ikon kontak */
+  max-width: 60ch; /* Batasi lebar subtitle */
+
+  @media (max-width: 991.98px) {
+    max-width: none; /* Hapus batasan lebar */
+  }
+  @media (max-width: 767.98px) {
+    font-size: 1.1rem;
+  }
+  @media (max-width: 575.98px) {
+    font-size: 1rem;
+  }
+} // End .hero-subtitle
+
+/* === Styling untuk Ikon Kontak di Hero === */
+.hero-contact-icons {
+  animation-delay: 0.9s;
+  display: flex;
+  justify-content: flex-start; /* Rata kiri */
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg); /* Jarak ke tombol */
+  margin-top: calc(-1 * var(--spacing-sm)); /* Tarik ke atas sedikit */
+
+  @media (max-width: 991.98px) {
+    justify-content: center; /* Tengahkan ikon */
+    margin-top: 0; /* Reset margin atas negatif */
+    margin-bottom: var(--spacing-md); /* Kurangi jarak ke tombol */
+  }
+  @media (max-width: 767.98px) {
+    gap: var(--spacing-sm); /* Kurangi jarak ikon */
+  }
+} // End .hero-contact-icons
+
+.contact-link-hero {
+  display: inline-flex;
+  padding: var(--spacing-xs);
+  border-radius: 50%;
+  transition: background-color var(--transition-speed) ease,
+    color var(--transition-speed) ease; /* Tambahkan transisi color */
+  color: var(--text-color); /* Warna ikon default dari sini */
+
+  svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor; /* Ambil warna dari .contact-link-hero */
+    stroke-width: 2;
+    fill: none;
+    transition: transform var(--transition-speed) ease; /* Hanya transisi transform */
+
+    @media (max-width: 767.98px) {
+      width: 22px; /* Perkecil ikon sedikit */
+      height: 22px;
+    }
+  }
+
+  &:hover {
+    background-color: var(--border-color);
+    color: var(--primary-color); /* Ubah warna ikon saat hover */
+
+    svg {
+      transform: scale(1.1); /* Opsional: perbesar ikon saat hover */
+    }
+  }
+} // End .contact-link-hero
+/* ======================================= */
+
+.hero-buttons {
+  animation-delay: 1s;
+  margin-top: 0; /* Margin atas diambil alih oleh margin bawah ikon */
+  display: flex;
+  justify-content: flex-start; /* Tombol rata kiri */
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+
+  @media (max-width: 991.98px) {
+    justify-content: center; /* Tengahkan tombol */
+  }
+  @media (max-width: 767.98px) {
+    gap: var(--spacing-xs); /* Kurangi jarak tombol */
+  }
+} // End .hero-buttons
