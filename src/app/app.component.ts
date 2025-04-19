@@ -44,6 +44,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
+  title = 'portopad';
   private themeSubscription?: Subscription;
   private clickListener?: (e: Event) => void;
 
