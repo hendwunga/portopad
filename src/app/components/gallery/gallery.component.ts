@@ -19,26 +19,25 @@ export class GalleryComponent {
   galleryTitle = 'My Activity'; // Section title remains the same
   images: GalleryImage[] = [
     {
-      src: 'assets/kegiatan/hmif.JPG',
+      src: 'assets/activity/hmif.JPG',
       alt: 'Anggota HMIF',
       title: 'Himpunan Mahasiswa', // Use as the title below the image
       description:
         'Active participation in the Informatics Student Association activities and events.', // Add a description
     },
     {
-      src: 'assets/kegiatan/projekInfo.jpg',
+      src: 'assets/activity/projekInfo.jpg',
       alt: 'Presentasi Proyek Informatika',
       title: 'Project Presentation',
       description:
         'Presenting a group project for the final assessment in an Informatics course.',
     },
     {
-      src: 'assets/kegiatan/ITDay.JPG',
+      src: 'assets/activity/ITDay.JPG',
       alt: 'Panitia IT Day',
       title: 'IT Day Committee',
       description:
         'Volunteering as part of the organizing committee for the campus IT Day event.',
     },
-    // Add more images with titles and descriptions as needed
   ];
 }
