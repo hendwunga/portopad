@@ -5,31 +5,43 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        node-version: [20.19.0]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+        node-version: [18.x, 20.x]
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        cache-dependency-path: package-lock.json
-    - run: npm ci
-    - name: Run tests
-      run: npm run test:ci
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: package-lock.json
+      - run: npm ci
+      - name: Run lint
+        run: npm run lint # jika ada script lint
+      - name: Run tests
+        env:
+          CHROME_BIN: /usr/bin/google-chrome
+        run: npm run test:ci
 
-    - name: Build
-      run: npm run build
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: "npm"
+          cache-dependency-path: package-lock.json
+      - run: npm ci
+      - name: Build
+        run: npm run build
