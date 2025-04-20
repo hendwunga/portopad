@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
   isDarkMode$: Observable<'light' | 'dark'>;
-  isMobileMenuOpen = false; // State untuk menu mobile
+  isMobileMenuOpen = false;
 
   constructor(private themeService: ThemeService) {
     this.isDarkMode$ = this.themeService.isDarkTheme;
@@ -24,15 +24,12 @@ export class HeaderComponent implements OnInit {
     this.themeService.toggleTheme();
   }
 
-  // Fungsi untuk membuka/menutup menu mobile
   toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 
-  // Fungsi untuk menutup menu mobile (dipanggil saat link diklik)
   closeMobileMenu(): void {
     if (this.isMobileMenuOpen) {
-      // Hanya tutup jika sedang terbuka
       this.isMobileMenuOpen = false;
     }
   }

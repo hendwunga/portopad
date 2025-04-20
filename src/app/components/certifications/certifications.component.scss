@@ -19,7 +19,7 @@ h2 {
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
   }
-} // End .certification-grid
+}
 
 .certification-card {
   background: var(--card-bg);
@@ -31,7 +31,6 @@ h2 {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--border-color);
-  /* Jika menggunakan .card-base global, style di atas bisa dihapus */
 
   &:hover {
     transform: translateY(-8px);
@@ -55,27 +54,23 @@ h2 {
   }
 
   .certification-instructors {
-    /* Hapus flex-grow jika tidak ada elemen lain setelahnya */
-    /* flex-grow: 1; */
-    margin-bottom: var(--spacing-md); /* Beri jarak ke tombol link */
+    margin-bottom: var(--spacing-md);
   }
 
   strong {
     font-weight: 600;
-    color: var(--text-color); // Inherits from parent, but explicit is fine
+    color: var(--text-color);
     opacity: 1;
   }
 
   .certification-link-wrapper {
-    margin-top: auto; /* Dorong tombol ke bawah */
-    padding-top: var(--spacing-sm); /* Jarak dari teks instruktur */
+    margin-top: auto;
+    padding-top: var(--spacing-sm);
     text-align: center;
-    /* Style .styled-link-button diambil dari global styles.css */
-  } // End .certification-link-wrapper
-} // End .certification-card
+  }
+}
 
-/* === Style untuk Tombol Show All === */
 .show-all-container {
-  text-align: center; /* Pusatkan tombol */
-  margin-top: var(--spacing-lg); /* Jarak dari grid */
-} // End .show-all-container
+  text-align: center;
+  margin-top: var(--spacing-lg);
+}

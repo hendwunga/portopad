@@ -96,6 +96,5 @@ export class SkillsComponent {
         },
       ],
     },
-    // Tambahkan kategori lain jika perlu
   ];
 }

@@ -1,7 +1,6 @@
 <section id="certifications" class="container content-section">
   <h2>Certifications</h2>
   <div class="certification-grid">
-    <!-- Loop melalui array displayedCertifications -->
     <div class="certification-card"
       *ngFor="let cert of displayedCertifications">
       <h4>{{ cert.title }}</h4>
@@ -10,30 +9,25 @@
         <strong>Completed:</strong> {{ cert.completedDate }}
       </p>
       <p class="certification-instructors">
-        <!-- Tampilkan "Instructor" atau "Instructors" -->
         <strong>{{ cert.instructors.length > 1 ? 'Instructors' :
           'Instructor'}}:</strong>
-        <!-- Gabungkan nama instruktur dengan koma -->
         {{ cert.instructors.join(', ') }}
       </p>
-      <!-- Tampilkan link jika URL ada -->
       <div class="certification-link-wrapper" *ngIf="cert.certificateUrl">
         <a [href]="cert.certificateUrl"
           target="_blank"
           rel="noopener noreferrer"
-          class="styled-link-button"> <!-- Gunakan class button reusable -->
+          class="styled-link-button">
           View Certificate
         </a>
       </div>
     </div>
   </div>
 
-  <!-- === Tombol Show All === -->
   <div class="show-all-container" *ngIf="shouldShowLoadMoreButton">
     <button class="btn outline" (click)="loadAllCertifications()">
       Show All Certifications
     </button>
   </div>
-  <!-- ======================= -->
 
 </section>

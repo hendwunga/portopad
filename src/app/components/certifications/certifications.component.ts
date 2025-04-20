@@ -1,26 +1,22 @@
-import { Component, OnInit } from '@angular/core'; // Import OnInit
-import { CommonModule } from '@angular/common'; // Diperlukan untuk *ngFor, *ngIf
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 interface Certification {
   title: string;
   provider: string;
-  completedDate: string; // Bisa string atau Date
+  completedDate: string;
   instructors: string[];
-  certificateUrl?: string; // URL opsional
+  certificateUrl?: string;
 }
 
 @Component({
   selector: 'app-certifications',
   standalone: true,
-  imports: [CommonModule], // Import CommonModule
+  imports: [CommonModule],
   templateUrl: './certifications.component.html',
   styleUrls: ['./certifications.component.scss'],
 })
 export class CertificationsComponent implements OnInit {
-  // Implement OnInit
-
-  // --- DATA PROPERTY ---
-  // Simpan semua sertifikasi di sini
   allCertifications: Certification[] = [
     {
       title: 'Java Spring Boot: Professional eCommerce Project Masterclass',
@@ -54,27 +50,18 @@ export class CertificationsComponent implements OnInit {
     },
   ];
 
-  // --- STATE PROPERTIES ---
-  // Array untuk sertifikasi yang ditampilkan di template
   displayedCertifications: Certification[] = [];
-  // Batas tampilan awal
   readonly displayLimit = 3;
-  // Status apakah semua ditampilkan
   showAll = false;
 
-  // --- LIFECYCLE HOOK ---
   ngOnInit(): void {
-    // Saat komponen siap, tampilkan sejumlah 'displayLimit' sertifikasi
     this.updateDisplayedCertifications();
   }
 
-  // --- METHODS ---
-  // Fungsi untuk mengupdate daftar yang tampil
   private updateDisplayedCertifications(): void {
     if (this.showAll) {
       this.displayedCertifications = this.allCertifications;
     } else {
-      // Ambil sejumlah 'displayLimit' dari awal array
       this.displayedCertifications = this.allCertifications.slice(
         0,
         this.displayLimit
@@ -82,14 +69,11 @@ export class CertificationsComponent implements OnInit {
     }
   }
 
-  // Fungsi yang dipanggil saat tombol "Show All" diklik
   loadAllCertifications(): void {
-    this.showAll = true; // Set status untuk tampilkan semua
-    this.updateDisplayedCertifications(); // Update array yang ditampilkan
+    this.showAll = true;
+    this.updateDisplayedCertifications();
   }
 
-  // --- GETTER ---
-  // Helper getter untuk mengecek di template apakah perlu tombol "Show All"
   get shouldShowLoadMoreButton(): boolean {
     return this.allCertifications.length > this.displayLimit && !this.showAll;
   }

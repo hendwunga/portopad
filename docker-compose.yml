@@ -1,0 +1,12 @@
+services:
+  web:
+    container_name: portopad_web
+    build:
+      context: .
+      args:
+        APP_NAME: ${APP_NAME}
+    ports:
+      - "${PORT}:82"
+    environment:
+      - NGINX_HOST=${NGINX_HOST}
+    restart: always
