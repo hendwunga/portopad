@@ -2,7 +2,6 @@
   <div class="container">
     <h2>My Projects</h2>
     <div class="project-grid">
-      <!-- Loop melalui array displayedProjects -->
       <div class="project-card" *ngFor="let project of displayedProjects">
         <h4>{{ project.title }} ({{ project.year }})</h4>
         <p class="project-role"><strong>Role:</strong> {{ project.role }}</p>
@@ -13,20 +12,18 @@
           <a [href]="project.githubUrl"
             target="_blank"
             rel="noopener noreferrer"
-            class="styled-link-button"> <!-- Ganti ke class button Anda -->
+            class="styled-link-button">
             View on GitHub
           </a>
         </div>
       </div>
     </div>
 
-    <!-- === Tombol Show All === -->
     <div class="show-all-container" *ngIf="shouldShowLoadMoreButton">
       <button class="btn outline" (click)="loadAllProjects()">
         Show All Projects
       </button>
     </div>
-    <!-- ======================= -->
 
   </div>
 </section>

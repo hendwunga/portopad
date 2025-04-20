@@ -19,7 +19,6 @@ export class ThemeService {
       '(prefers-color-scheme: dark)'
     ).matches;
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-      // Pastikan dijalankan di browser
       const savedTheme = localStorage.getItem('darkMode');
       const prefersDark = window.matchMedia(
         '(prefers-color-scheme: dark)'
@@ -30,7 +29,6 @@ export class ThemeService {
         this.setTheme('light');
       }
     } else {
-      // Default jika tidak di browser (misal: SSR)
       this.setTheme('light');
     }
   }
@@ -44,7 +42,6 @@ export class ThemeService {
     }
 
     if (typeof document !== 'undefined') {
-      // Pastikan document ada
       if (isDark) {
         this.renderer.addClass(document.body, 'dark-mode');
       } else {

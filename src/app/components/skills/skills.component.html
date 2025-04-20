@@ -1,7 +1,6 @@
 <section id="skills" class="container content-section">
   <h2>My Skills</h2>
   <div class="skills-categories">
-    <!-- Setiap .skill-category ini akan menjadi kartu -->
     <div class="skill-category" *ngFor="let category of skillCategories">
       <h3 class="category-name">{{ category.categoryName }}</h3>
       <div class="category-icons">
@@ -9,8 +8,6 @@
           [title]="skill.name">
           <img [src]="skill.iconUrl" [alt]="skill.altText"
             class="skill-icon-img-cat">
-          <!-- Opsional: Tampilkan nama skill di bawah ikon -->
-          <!-- <span class="skill-name-cat">{{ skill.name }}</span> -->
         </div>
       </div>
     </div>
