@@ -6,20 +6,14 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
-RUN npm install
-
 RUN npm run build -- --configuration production
 
-# Stage 2: Serve with NGINX
-FROM nginx:alpine
-
-RUN rm -rf /usr/share/nginx/html/*
-
-COPY --from=builder /app/dist/portopad/browser /usr/share/nginx/html
+FROM nginx:stable-alpine
+ARG APP_NAME=portopad
 
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=builder /app/dist/$APP_NAME/browser /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 82
-
 CMD ["nginx", "-g", "daemon off;"]
