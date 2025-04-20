@@ -1,10 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap");
 
 :root {
   --primary-color: #00bfa6;
   --primary-dark: #009688;
   --secondary-color: #3a7bd5;
-
   --bg-color: #f8f9fa;
   --text-color: #212529;
   --card-bg: #ffffff;
@@ -17,16 +16,13 @@
   --btn-primary-text: #ffffff;
   --btn-outline-text: var(--primary-color);
   --link-color: var(--primary-dark);
-
   --font-primary: "Poppins", sans-serif;
   --font-secondary: "Inter", sans-serif;
-
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 1.5rem;
   --spacing-lg: 2.5rem;
   --spacing-xl: 4rem;
-
   --transition-speed: 0.3s;
   --transition-ease-out: ease-out;
   --transition-standard: all var(--transition-speed) var(--transition-ease-out);
@@ -46,7 +42,6 @@ body.dark-mode {
   --icon-color: var(--text-color);
   --btn-outline-text: var(--primary-color);
   --link-color: var(--primary-color);
-
   --primary-color: #26a69a;
   --primary-dark: #00897b;
   --btn-primary-text: #ffffff;
@@ -239,7 +234,7 @@ img {
   padding: var(--spacing-xs) var(--spacing-sm);
   border: 1px solid var(--primary-color);
   border-radius: 20px;
-  transition: var(--transition-standard);
+  transition: var(--transition-standard); // Use standard transition
 
   &:hover {
     background-color: var(--primary-color);
@@ -263,7 +258,7 @@ img {
 @mixin fadeInStaggered($selector, $item-count, $delay-step) {
   @for $i from 1 through $item-count {
     #{$selector}:nth-child(#{$i}) {
-      opacity: 0;
+      opacity: 0; // Start hidden
       animation-name: fadeInUpElement;
       animation-duration: var(--animation-duration-normal);
       animation-timing-function: var(--animation-easing-function);
