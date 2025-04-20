@@ -1,0 +1,81 @@
+:host {
+  display: block;
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  margin-top: 0;
+}
+
+.certification-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+
+  @media (max-width: 767.98px) {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+} // End .certification-grid
+
+.certification-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: var(--spacing-lg);
+  box-shadow: var(--card-shadow);
+  transition: transform var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  /* Jika menggunakan .card-base global, style di atas bisa dihapus */
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--card-hover-shadow);
+  }
+
+  h4 {
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.25rem;
+    color: var(--primary-dark);
+    line-height: 1.4;
+  }
+
+  .certification-meta,
+  .certification-instructors {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    opacity: 0.9;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .certification-instructors {
+    /* Hapus flex-grow jika tidak ada elemen lain setelahnya */
+    /* flex-grow: 1; */
+    margin-bottom: var(--spacing-md); /* Beri jarak ke tombol link */
+  }
+
+  strong {
+    font-weight: 600;
+    color: var(--text-color); // Inherits from parent, but explicit is fine
+    opacity: 1;
+  }
+
+  .certification-link-wrapper {
+    margin-top: auto; /* Dorong tombol ke bawah */
+    padding-top: var(--spacing-sm); /* Jarak dari teks instruktur */
+    text-align: center;
+    /* Style .styled-link-button diambil dari global styles.css */
+  } // End .certification-link-wrapper
+} // End .certification-card
+
+/* === Style untuk Tombol Show All === */
+.show-all-container {
+  text-align: center; /* Pusatkan tombol */
+  margin-top: var(--spacing-lg); /* Jarak dari grid */
+} // End .show-all-container
