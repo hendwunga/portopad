@@ -4,7 +4,7 @@
   --primary-color: #00bfa6;
   --primary-dark: #009688;
   --secondary-color: #3a7bd5;
-  /* Light Mode */
+
   --bg-color: #f8f9fa;
   --text-color: #212529;
   --card-bg: #ffffff;
@@ -17,16 +17,16 @@
   --btn-primary-text: #ffffff;
   --btn-outline-text: var(--primary-color);
   --link-color: var(--primary-dark);
-  /* Font Families */
+
   --font-primary: "Poppins", sans-serif;
   --font-secondary: "Inter", sans-serif;
-  /* Spacing */
+
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 1.5rem;
   --spacing-lg: 2.5rem;
   --spacing-xl: 4rem;
-  /* Transitions & Animations */
+
   --transition-speed: 0.3s;
   --transition-ease-out: ease-out;
   --transition-standard: all var(--transition-speed) var(--transition-ease-out);
@@ -34,7 +34,6 @@
   --animation-easing-function: var(--transition-ease-out);
 }
 
-/* Dark Mode Variables */
 body.dark-mode {
   --bg-color: #121212;
   --text-color: #e0e0e0;
@@ -47,13 +46,12 @@ body.dark-mode {
   --icon-color: var(--text-color);
   --btn-outline-text: var(--primary-color);
   --link-color: var(--primary-color);
-  /* Update warna primer/dark untuk dark mode */
+
   --primary-color: #26a69a;
   --primary-dark: #00897b;
   --btn-primary-text: #ffffff;
 }
 
-/* === Global Styles === */
 *,
 *::before,
 *::after {
@@ -83,7 +81,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Base heading styles */
 h1,
 h2,
 h3,
@@ -117,16 +114,14 @@ h3 {
 }
 h4 {
   font-size: 1.2rem;
-  color: var(--primary-dark); /* Default h4 color */
+  color: var(--primary-dark);
 }
 
-/* Base paragraph styles */
 p {
   margin-bottom: var(--spacing-md);
-  max-width: 75ch; /* Default max width */
+  max-width: 75ch;
 }
 
-/* Base anchor styles */
 a {
   color: var(--link-color);
   text-decoration: none;
@@ -136,20 +131,17 @@ a {
   }
 }
 
-/* Base list styles */
 ul {
   list-style: none;
   padding-left: 0;
 }
 
-/* Base image styles */
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-/* === Utility Classes === */
 .container {
   width: 100%;
   max-width: 1140px;
@@ -166,7 +158,6 @@ img {
   }
 }
 
-/* === Buttons (Global) === */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -179,7 +170,7 @@ img {
   text-decoration: none;
   cursor: pointer;
   border: 2px solid transparent;
-  transition: var(--transition-standard); // Use standard transition
+  transition: var(--transition-standard);
   white-space: nowrap;
 
   &.primary {
@@ -222,25 +213,23 @@ img {
   }
 }
 
-/* === Card Base Style (REUSABLE) === */
 .card-base {
   background: var(--card-bg);
   border-radius: 12px;
-  padding: var(--spacing-lg); // Default padding
+  padding: var(--spacing-lg);
   box-shadow: var(--card-shadow);
   border: 1px solid var(--border-color);
   transition: transform var(--transition-speed) var(--transition-ease-out),
     box-shadow var(--transition-speed) var(--transition-ease-out);
   display: flex;
-  flex-direction: column; // Default layout
+  flex-direction: column;
 
   &:hover {
-    transform: translateY(-8px); // Default hover effect
+    transform: translateY(-8px);
     box-shadow: var(--card-hover-shadow);
   }
 }
 
-/* Style Tombol Sertifikasi/Link (Reusable) */
 .styled-link-button {
   display: inline-block;
   font-weight: 500;
@@ -250,19 +239,16 @@ img {
   padding: var(--spacing-xs) var(--spacing-sm);
   border: 1px solid var(--primary-color);
   border-radius: 20px;
-  transition: var(--transition-standard); // Use standard transition
+  transition: var(--transition-standard);
 
   &:hover {
     background-color: var(--primary-color);
     color: var(--btn-primary-text);
     text-decoration: none;
-    border-color: var(
-      --primary-color
-    ); // Ensure border stays same on hover bg change
+    border-color: var(--primary-color);
   }
 }
 
-/* === Global Animations === */
 @keyframes fadeInUpElement {
   from {
     opacity: 0;
@@ -274,13 +260,10 @@ img {
   }
 }
 
-/* === SCSS Animation Mixin (Example for Staggering) === */
-// Mixin to apply fadeInUp with delay
-// Usage: @include fadeInStaggered(element-selector, 5, 0.1s);
 @mixin fadeInStaggered($selector, $item-count, $delay-step) {
   @for $i from 1 through $item-count {
     #{$selector}:nth-child(#{$i}) {
-      opacity: 0; // Start hidden
+      opacity: 0;
       animation-name: fadeInUpElement;
       animation-duration: var(--animation-duration-normal);
       animation-timing-function: var(--animation-easing-function);
