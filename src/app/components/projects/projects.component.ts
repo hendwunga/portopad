@@ -1,27 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Diperlukan untuk *ngFor
+import { CommonModule } from '@angular/common';
 
-// Definisikan struktur data untuk sebuah project
 interface Project {
   title: string;
   year: number;
   role: string;
-  details: string[]; // Array string untuk daftar detail
+  details: string[];
   githubUrl: string;
 }
 
 @Component({
-  selector: 'app-projects', // Selector untuk digunakan di HTML lain
-  standalone: true, // Komponen ini berdiri sendiri (tidak butuh NgModule)
-  imports: [CommonModule], // Mengimpor CommonModule agar bisa pakai *ngFor di template
-  templateUrl: './projects.component.html', // Path ke file template HTML
-  styleUrls: ['./projects.component.scss'], // Path ke file CSS
+  selector: 'app-projects',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './projects.component.html',
+  styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent implements OnInit {
-  // Mengimplementasikan OnInit lifecycle hook
-
-  // --- DATA PROPERTY ---
-  // Array ini menyimpan SEMUA data project Anda
   allProjects: Project[] = [
     {
       title: 'Online Agricultural Store, NTT',
@@ -81,43 +76,27 @@ export class ProjectsComponent implements OnInit {
     },
   ];
 
-  // --- STATE PROPERTIES ---
-  // Array ini HANYA menyimpan project yang akan ditampilkan di template saat ini
   displayedProjects: Project[] = [];
-  // Batas jumlah project yang ditampilkan awalnya
   readonly displayLimit = 2;
-  // Penanda apakah semua project sedang ditampilkan
   showAll = false;
 
-  // --- LIFECYCLE HOOK ---
-  // Fungsi ini dijalankan sekali saat komponen pertama kali dimuat
   ngOnInit(): void {
-    // Inisialisasi tampilan awal dengan jumlah project terbatas
     this.updateDisplayedProjects();
   }
 
-  // --- METHODS ---
-  // Fungsi internal untuk mengupdate array 'displayedProjects' berdasarkan status 'showAll'
   private updateDisplayedProjects(): void {
     if (this.showAll) {
-      // Jika 'showAll' true, tampilkan semua project
       this.displayedProjects = this.allProjects;
     } else {
-      // Jika 'showAll' false, tampilkan hanya sejumlah 'displayLimit' project
-      // slice(0, limit) mengambil elemen dari indeks 0 sampai sebelum indeks limit
       this.displayedProjects = this.allProjects.slice(0, this.displayLimit);
     }
   }
 
-  // Method yang dipanggil oleh tombol 'Show All' di template HTML
   loadAllProjects(): void {
-    this.showAll = true; // Ubah status menjadi tampilkan semua
-    this.updateDisplayedProjects(); // Perbarui daftar yang ditampilkan
+    this.showAll = true;
+    this.updateDisplayedProjects();
   }
 
-  // --- GETTER ---
-  // Helper getter untuk memudahkan pengecekan di template HTML (*ngIf)
-  // Mengembalikan true jika jumlah total project > batas tampilan DAN belum semua ditampilkan
   get shouldShowLoadMoreButton(): boolean {
     return this.allProjects.length > this.displayLimit && !this.showAll;
   }

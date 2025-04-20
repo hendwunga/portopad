@@ -1,13 +1,7 @@
-/* src/app/components/projects/projects.component.scss */
-
-// Import global variables/mixins if applicable
-// @import '../../../../styles/variables'; // Example
-
 :host {
   display: block;
   padding-top: var(--spacing-xl);
   padding-bottom: var(--spacing-xl);
-  /* background-color: var(--bg-color); */ /* Opsional */
 }
 
 h2 {
@@ -16,30 +10,17 @@ h2 {
   margin-top: 0;
 }
 
-/* === Project Grid Layout === */
 .project-grid {
   display: grid;
-  /* Definisikan TEPAT DUA kolom yang sama lebar */
   grid-template-columns: 1fr 1fr;
-  /* Atau jika ingin sedikit perbedaan lebar: grid-template-columns: 1.1fr 0.9fr; */
-  gap: var(--spacing-lg); /* Jarak antar kartu (baris dan kolom) */
-  /* align-items: start; */ /* Uncomment jika tinggi kartu bervariasi & tidak ingin stretch */
+  gap: var(--spacing-lg);
 
-  /* === Responsive Design (PENTING) === */
   @media (max-width: 767.98px) {
-    /* Di mobile, kembalikan ke 1 kolom */
-    grid-template-columns: 1fr; /* Hanya satu kolom */
-    gap: var(--spacing-md); /* Sesuaikan jarak untuk mobile */
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
   }
+}
 
-  /* Media query untuk tablet (opsional) */
-  /* Jika di tablet ingin 1 kolom: */
-  /* @media (max-width: 991.98px) {
-      grid-template-columns: 1fr;
-  } */
-} // End .project-grid
-
-/* === Project Card Styling === */
 .project-card {
   background: var(--card-bg);
   border-radius: 12px;
@@ -50,7 +31,7 @@ h2 {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--border-color);
-  margin-bottom: 0; /* Pastikan tidak ada margin bawah tambahan */
+  margin-bottom: 0;
 
   &:hover {
     transform: translateY(-8px);
@@ -73,7 +54,7 @@ h2 {
 
   .project-details {
     margin-bottom: var(--spacing-md);
-    flex-grow: 1; // Allows project links to stick to the bottom
+    flex-grow: 1;
 
     li {
       margin-bottom: var(--spacing-xs);
@@ -91,19 +72,17 @@ h2 {
         display: inline-block;
         width: 1em;
       }
-    } // End li
-  } // End .project-details
+    }
+  }
 
   .project-links {
-    margin-top: auto; // Pushes links to the bottom because .project-details has flex-grow: 1
+    margin-top: auto;
     padding-top: var(--spacing-sm);
     text-align: center;
-    /* Tombol di project-links menggunakan class .styled-link-button dari global */
-  } // End .project-links
-} // End .project-card
+  }
+}
 
-/* === Style untuk Tombol Show All === */
 .show-all-container {
-  text-align: center; /* Pusatkan tombol */
-  margin-top: var(--spacing-lg); /* Jarak dari grid */
-} // End .show-all-container
+  text-align: center;
+  margin-top: var(--spacing-lg);
+}
