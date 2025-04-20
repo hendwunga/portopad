@@ -24,8 +24,6 @@ jobs:
           cache: "npm"
           cache-dependency-path: package-lock.json
       - run: npm ci
-      - name: Run lint
-        run: npm run lint # jika ada script lint
       - name: Run tests
         env:
           CHROME_BIN: /usr/bin/google-chrome
