@@ -69,7 +69,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.themeSubscription?.unsubscribe();
 
-    // Bersihkan event listener saat komponen dihancurkan
     if (this.clickListener) {
       document.removeEventListener('click', this.clickListener);
     }
