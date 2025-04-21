@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   web:
     container_name: portopad_web
@@ -7,9 +6,7 @@ services:
       args:
         APP_NAME: ${APP_NAME}
     ports:
-      - "${PORT}:80"
+      - "${PORT}:82"
     environment:
       - NGINX_HOST=${NGINX_HOST}
-    volumes:
-      - ./src:/app/src
     restart: always
