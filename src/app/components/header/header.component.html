@@ -6,6 +6,7 @@
 
     <ul class="nav-links" [class.active]="isMobileMenuOpen">
       <li><a href="#about" (click)="closeMobileMenu()">About</a></li>
+      <li><a href="#education" (click)="closeMobileMenu()">Education</a></li>
       <li><a href="#skills" (click)="closeMobileMenu()">Skills</a></li>
       <li><a href="#projects" (click)="closeMobileMenu()">Projects</a></li>
       <li><a href="#certifications"
@@ -15,7 +16,6 @@
       <li><a href="#contact" (click)="closeMobileMenu()">Contact</a></li>
     </ul>
 
-    <!-- Tombol Dark Mode -->
     <button
       class="dark-btn"
       id="darkModeToggle"
@@ -27,7 +27,6 @@
       <span class="dark-icon" *ngIf="(isDarkMode$ | async) === 'dark'">☀️</span>
     </button>
 
-    <!-- Tombol Mobile Menu Toggle (Hamburger) -->
     <button class="mobile-menu-toggle" (click)="toggleMobileMenu()"
       aria-label="Toggle menu">
       <span class="hamburger-icon">☰</span>

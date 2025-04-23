@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface Skill {
@@ -19,8 +19,8 @@ interface SkillCategory {
   templateUrl: './skills.component.html',
   styleUrls: ['./skills.component.scss'],
 })
-export class SkillsComponent {
-  skillCategories: SkillCategory[] = [
+export class SkillsComponent implements OnInit {
+  private skillCategoriesData: SkillCategory[] = [
     {
       categoryName: 'Languages & Frameworks',
       skills: [
@@ -44,6 +44,16 @@ export class SkillsComponent {
           altText: 'Laravel Logo',
           iconUrl: 'assets/logos/laravel-svgrepo-com.svg',
         },
+        {
+          name: 'AngularJS',
+          altText: 'AngularJS Logo',
+          iconUrl: 'assets/logos/AngularJS.svg',
+        },
+        {
+          name: 'Bootstrap',
+          altText: 'Bootstrap Logo',
+          iconUrl: 'assets/logos/Bootstrap.svg',
+        },
       ],
     },
     {
@@ -58,6 +68,16 @@ export class SkillsComponent {
           name: 'PostgreSQL',
           altText: 'PostgreSQL Logo',
           iconUrl: 'assets/logos/postgresql-logo-svgrepo-com.svg',
+        },
+        {
+          name: 'MongoDB',
+          altText: 'MongoDB Logo',
+          iconUrl: 'assets/logos/MongoDB.svg',
+        },
+        {
+          name: 'SQL Developer',
+          altText: 'SQL Developer Logo',
+          iconUrl: 'assets/logos/SQL-Developer.svg',
         },
       ],
     },
@@ -79,6 +99,37 @@ export class SkillsComponent {
           altText: 'Postman Logo',
           iconUrl: 'assets/logos/postman.svg',
         },
+        {
+          name: 'GitHub Actions',
+          altText: 'GitHub Actions Logo',
+          iconUrl: 'assets/logos/GitHub-Actions.svg',
+        },
+        {
+          name: 'NGINX',
+          altText: 'NGINX Logo',
+          iconUrl: 'assets/logos/NGINX.svg',
+        },
+        {
+          name: 'Gradle',
+          altText: 'Gradle Logo',
+          iconUrl: 'assets/logos/Gradle.png',
+        },
+        {
+          name: 'Apache Maven',
+          altText: 'Apache Maven Logo',
+          iconUrl: 'assets/logos/Apache-Maven.svg',
+        },
+        { name: 'NPM', altText: 'NPM Logo', iconUrl: 'assets/logos/NPM.svg' },
+        {
+          name: 'JUnit',
+          altText: 'JUnit Logo',
+          iconUrl: 'assets/logos/JUnit.svg',
+        },
+        {
+          name: 'OpenAPI',
+          altText: 'OpenAPI Logo',
+          iconUrl: 'assets/logos/OpenAPI.png',
+        },
       ],
     },
     {
@@ -96,5 +147,29 @@ export class SkillsComponent {
         },
       ],
     },
+    {
+      categoryName: 'Operating Systems',
+      skills: [
+        {
+          name: 'Linux',
+          altText: 'Linux Logo',
+          iconUrl: 'assets/logos/Linux.png',
+        },
+        {
+          name: 'Windows 11',
+          altText: 'Windows 11 Logo',
+          iconUrl: 'assets/logos/Windows-11.svg',
+        },
+      ],
+    },
   ];
+
+  allSkills: Skill[] = [];
+
+  ngOnInit(): void {
+    this.allSkills = this.skillCategoriesData.flatMap(
+      (category) => category.skills
+    );
+    this.allSkills.sort((a, b) => a.name.localeCompare(b.name));
+  }
 }

@@ -2,26 +2,48 @@
   <div class="container">
     <h2>My Projects</h2>
     <div class="project-grid">
-      <div class="project-card" *ngFor="let project of displayedProjects">
+
+      <div class="project-card"
+        *ngFor="let project of displayedProjects; let i = index">
+
+        <img class="project-image"
+          [src]="project.imageUrl"
+          [alt]="project.title + ' Screenshot'"
+          (error)="handleImageError($event)">
+
         <h4>{{ project.title }} ({{ project.year }})</h4>
-        <p class="project-role"><strong>Role:</strong> {{ project.role }}</p>
-        <ul class="project-details">
-          <li *ngFor="let detail of project.details">{{ detail }}</li>
-        </ul>
-        <div class="project-links">
-          <a [href]="project.githubUrl"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="styled-link-button">
-            View on GitHub
-          </a>
+
+        <button class="btn outline details-button"
+          (click)="toggleDetails(project)"
+          [attr.aria-expanded]="project.isExpanded"
+          [attr.aria-controls]="project.id">
+          {{ project.isExpanded ? 'Hide Details' : 'Show Details' }}
+        </button>
+
+        <div class="project-details-collapsible"
+          [id]="project.id"
+          [@expandCollapse]="project.isExpanded">
+
+          <p class="project-role"><strong>Role:</strong> {{ project.role }}</p>
+          <ul class="project-details">
+            <li *ngFor="let detail of project.details">{{ detail }}</li>
+          </ul>
+          <div class="project-links">
+            <a [href]="project.githubUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="styled-link-button">
+              View on GitHub
+            </a>
+          </div>
         </div>
+
       </div>
     </div>
 
     <div class="show-all-container" *ngIf="shouldShowLoadMoreButton">
       <button class="btn outline" (click)="loadAllProjects()">
-        Show All Projects
+        All Projects
       </button>
     </div>
 

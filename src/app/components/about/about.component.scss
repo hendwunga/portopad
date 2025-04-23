@@ -1,21 +1,20 @@
 :host {
   display: block;
-  padding-top: var(--spacing-xl);
-  padding-bottom: var(--spacing-xl);
+  padding-top: var(--spacing-xl, 3rem);
+  padding-bottom: var(--spacing-xl, 3rem);
+  background-color: var(--section-bg, var(--bg-color));
 }
 
 .about-indented {
   h2 {
     text-align: left;
-    margin: 0 0 var(--spacing-md) 0;
+    margin: 0 0 var(--spacing-md, 1rem) 0;
+    color: var(--heading-color, var(--primary-dark, #0056b3));
+    font-size: 1.8rem;
 
     @media (max-width: 767.98px) {
       text-align: center;
-
-      &::after {
-        margin-left: auto;
-        margin-right: auto;
-      }
+      font-size: 1.6rem;
     }
   }
 
@@ -23,15 +22,16 @@
     text-align: left;
     max-width: none;
     margin: 0;
-    padding-left: var(--spacing-lg);
+    padding-left: var(--spacing-lg, 1.5rem);
     border-left: 3px solid var(--primary-color);
-    padding-left: calc(var(--spacing-lg) - 3px);
+    color: var(--text-color);
+    font-size: 1rem;
+    line-height: 1.7;
 
     @media (max-width: 767.98px) {
-      padding-left: var(--spacing-md);
+      padding-left: 0;
       border-left: none;
-
-      text-align: center;
+      text-align: justify;
       max-width: 75ch;
       margin-left: auto;
       margin-right: auto;
