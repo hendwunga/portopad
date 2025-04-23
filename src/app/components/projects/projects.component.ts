@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 
 interface Project {
   title: string;
@@ -7,6 +14,9 @@ interface Project {
   role: string;
   details: string[];
   githubUrl: string;
+  imageUrl: string;
+  isExpanded?: boolean;
+  id?: string;
 }
 
 @Component({
@@ -15,6 +25,32 @@ interface Project {
   imports: [CommonModule],
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss'],
+  animations: [
+    trigger('expandCollapse', [
+      state(
+        'false',
+        style({
+          height: '0px',
+          opacity: 0,
+          overflow: 'hidden',
+          'padding-top': '0',
+          'margin-top': '0',
+          'border-top': 'none',
+        })
+      ),
+      state(
+        'true',
+        style({
+          height: '*',
+          opacity: 1,
+          'padding-top': 'var(--spacing-md, 1rem)',
+          'border-top': '1px solid var(--border-color)',
+          'margin-top': 'var(--spacing-md, 1rem)',
+        })
+      ),
+      transition('false <=> true', animate('300ms ease-in-out')),
+    ]),
+  ],
 })
 export class ProjectsComponent implements OnInit {
   allProjects: Project[] = [
@@ -31,10 +67,10 @@ export class ProjectsComponent implements OnInit {
         'Implemented GitHub Flow for version control.',
       ],
       githubUrl: 'https://github.com/hendrowunga/DifabelZone.git',
+      imageUrl: 'assets/images/project-agri-store.png',
     },
     {
-      title:
-        'RESTful API Backend for DifabelZone Batik e-Commerce (Yogyakarta)',
+      title: 'REST API Backend for DifabelZone Batik e-Commerce (Yogyakarta)',
       year: 2023,
       role: 'Backend Engineer (Spring Boot & System Design)',
       details: [
@@ -46,10 +82,11 @@ export class ProjectsComponent implements OnInit {
         'Contributed to an inclusive e-commerce system empowering local disabled artisans.',
       ],
       githubUrl: 'https://github.com/hendrowunga/DifabelZone.git',
+      imageUrl: 'assets/projects/RestApi.png',
     },
     {
       title: 'Monolithic e-Commerce Platform for Batik DifabelZone',
-      year: 2025,
+      year: 2024,
       role: 'System Design & Backend Development',
       details: [
         'Engineered a Laravel-based e-Commerce platform to support disabled artisans in Bantul, Indonesia.',
@@ -59,20 +96,21 @@ export class ProjectsComponent implements OnInit {
         'Aligned software engineering with the mission of digital inclusion and social impact.',
       ],
       githubUrl: 'https://github.com/hendrowunga/batik-difabelzone.git',
+      imageUrl: 'assets/projects/DifabelZone.png',
     },
-
     {
-      title: 'The Opportunistic Network Environment Simulation',
-      year: 2025,
+      title: 'Opportunistic Network Environment Simulation',
+      year: 2024,
       role: 'DTN Protocol Developer & Simulation Engineer',
       details: [
         'Developed and customized Delay Tolerant Network (DTN) routing protocols such as Epidemic, Spray and Wait, Prophet, and PeopleRank.',
-        'Implemented advanced Decision Engines (e.g., PeopleRankCombined, SprayAndFocusDuration) within ONE Simulator using Java.',
-        'Integrated real-world datasets (e.g., Haggle3, Reality) and mobility models for realistic scenario testing.',
-        'Refactored simulator components to support modular routing decision logic and extensibility.',
-        'Automated batch simulation runs and organized output reports for comparative analysis.',
+        'Implemented advanced Decision Engines within ONE Simulator using Java.',
+        'Integrated real-world datasets (e.g., Haggle3, Reality) and mobility models.',
+        'Refactored simulator components for modularity and extensibility.',
+        'Automated batch simulation runs and organized output reports.',
       ],
       githubUrl: 'https://github.com/hendrowunga/the-one.git',
+      imageUrl: 'assets/projects/theOne.png',
     },
   ];
 
@@ -81,6 +119,11 @@ export class ProjectsComponent implements OnInit {
   showAll = false;
 
   ngOnInit(): void {
+    this.allProjects = this.allProjects.map((project, index) => ({
+      ...project,
+      isExpanded: false,
+      id: this.generateSafeId(project.title, index),
+    }));
     this.updateDisplayedProjects();
   }
 
@@ -99,5 +142,23 @@ export class ProjectsComponent implements OnInit {
 
   get shouldShowLoadMoreButton(): boolean {
     return this.allProjects.length > this.displayLimit && !this.showAll;
+  }
+
+  toggleDetails(project: Project): void {
+    project.isExpanded = !project.isExpanded;
+  }
+
+  private generateSafeId(title: string, index: number): string {
+    const safeTitle = title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+    return `project-details-${safeTitle}-${index}`;
+  }
+
+  handleImageError(event: Event): void {
+    const element = event.target as HTMLImageElement;
+    element.src = 'assets/logos/placeholder-project.svg';
+    element.classList.add('image-error');
   }
 }

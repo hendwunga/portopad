@@ -15,6 +15,7 @@ import {
 import { HeaderComponent } from './components/header/header.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { AboutComponent } from './components/about/about.component';
+import { EducationComponent } from './components/education/education.component';
 import { SkillsComponent } from './components/skills/skills.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { CertificationsComponent } from './components/certifications/certifications.component';
@@ -33,6 +34,7 @@ import { Subscription } from 'rxjs';
     HeaderComponent,
     HeroComponent,
     AboutComponent,
+    EducationComponent,
     SkillsComponent,
     ProjectsComponent,
     CertificationsComponent,
