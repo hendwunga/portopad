@@ -8,6 +8,12 @@ h2 {
   text-align: center;
   margin-bottom: var(--spacing-lg);
   margin-top: 0;
+  color: var(--heading-color, var(--primary-dark, #0056b3));
+  font-size: 1.8rem;
+
+  @media (max-width: 767.98px) {
+    font-size: 1.6rem;
+  }
 }
 
 .certification-grid {
@@ -42,6 +48,7 @@ h2 {
     font-size: 1.25rem;
     color: var(--primary-dark);
     line-height: 1.4;
+    margin-top: 0;
   }
 
   .certification-meta,
@@ -51,6 +58,7 @@ h2 {
     color: var(--text-color);
     opacity: 0.9;
     margin-bottom: var(--spacing-sm);
+    margin-top: 0;
   }
 
   .certification-instructors {
@@ -64,12 +72,11 @@ h2 {
   }
 
   .certification-link-wrapper {
-    margin-top: auto;
+    margin-top: auto; // Dorong link ke bawah
     padding-top: var(--spacing-sm);
     text-align: center;
   }
 }
-
 .show-all-container {
   text-align: center;
   margin-top: var(--spacing-lg);
