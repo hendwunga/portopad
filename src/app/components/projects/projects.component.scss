@@ -10,13 +10,17 @@ h2 {
   margin-bottom: var(--spacing-lg, 1.5rem);
   margin-top: 0;
   color: var(--heading-color, var(--primary-dark, #0056b3));
+  font-weight: 600;
 }
-
 .project-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-lg, 1.5rem);
   align-items: start;
+
+  @media (max-width: 991.98px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
   @media (max-width: 767.98px) {
     grid-template-columns: 1fr;
@@ -25,8 +29,8 @@ h2 {
 }
 
 .project-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
+  background: var(--card-bg, #1f2833);
+  border: 1px solid var(--border-color, #45a29e);
   box-shadow: var(--card-shadow);
   border-radius: 12px;
   padding: var(--spacing-lg, 1.5rem);
@@ -43,12 +47,13 @@ h2 {
 
   .project-image {
     width: 100%;
-    height: 200px;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
+    display: block;
     border-radius: 6px;
     margin-bottom: var(--spacing-md, 1rem);
-    background-color: var(--image-placeholder-bg, #eee);
-    border: 1px solid var(--border-color);
+    background-color: var(--image-placeholder-bg, #c5c6c7);
+    cursor: pointer;
 
     &.image-error {
       object-fit: contain;
@@ -58,8 +63,8 @@ h2 {
   h4 {
     margin-top: 0;
     margin-bottom: var(--spacing-sm, 0.5rem);
-    font-size: 1.25rem;
-    color: var(--primary-color);
+    font-size: 1.15rem;
+    color: var(--primary-color, #66fcf1);
     text-align: center;
     font-weight: 600;
     word-break: break-word;
@@ -68,6 +73,8 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-grow: 0;
+    flex-shrink: 0;
   }
 
   .details-button {
@@ -77,38 +84,47 @@ h2 {
     width: fit-content;
     padding: var(--spacing-xs, 0.25rem) var(--spacing-md, 1rem);
     font-size: 0.9rem;
-    border: 1px solid var(--primary-color);
+    border: 1px solid var(--primary-color, #66fcf1);
     background-color: transparent;
-    color: var(--primary-color);
+    color: var(--primary-color, #66fcf1);
     cursor: pointer;
     border-radius: 50px;
     transition: background-color var(--transition-speed, 0.3s) ease,
       color var(--transition-speed, 0.3s) ease;
+    flex-shrink: 0;
 
     &:hover,
     &:focus {
-      background-color: var(--primary-color);
-      color: var(--button-outline-hover-text-color, white);
+      background-color: var(--primary-color, #66fcf1);
+      color: var(--button-outline-hover-text-color, #0b0c10);
       outline: none;
     }
     &:focus-visible {
-      outline: 2px solid var(--primary-color);
+      outline: 2px solid var(--primary-color, #66fcf1);
       outline-offset: 1px;
     }
+  }
+
+  .expandable-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
   }
 
   .project-role {
     font-size: 0.9rem;
     font-weight: 600;
-    color: var(--text-color-secondary, var(--text-color));
+    color: var(--text-color-secondary, var(--text-color, #c5c6c7));
     opacity: 0.8;
     margin-bottom: var(--spacing-md, 1rem);
     text-align: left;
+    flex-shrink: 0;
+    padding-top: var(--spacing-sm);
   }
 
   .project-details {
     margin-bottom: var(--spacing-md, 1rem);
-    flex-grow: 1;
 
     ul,
     li {
@@ -121,17 +137,17 @@ h2 {
       margin-bottom: var(--spacing-xs, 0.25rem);
       padding-left: 1.4em;
       position: relative;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       opacity: 0.9;
       line-height: 1.5;
-      color: var(--text-color);
+      color: var(--text-color, #c5c6c7);
 
       &::before {
         content: "▹";
         position: absolute;
         left: 0;
         top: 0.1em;
-        color: var(--primary-color);
+        color: var(--primary-color, #66fcf1);
         font-weight: bold;
         display: inline-block;
         width: 1em;
@@ -143,25 +159,28 @@ h2 {
     margin-top: auto;
     padding-top: var(--spacing-sm, 0.5rem);
     text-align: center;
+    flex-shrink: 0;
 
     .styled-link-button {
       display: inline-block;
       padding: var(--spacing-sm, 0.5rem) var(--spacing-lg, 1.5rem);
-      background-color: var(--primary-color);
-      color: var(--button-primary-text-color, white);
+      background-color: var(--primary-color, #66fcf1);
+      color: var(--button-primary-text-color, #0b0c10);
       text-decoration: none;
       border-radius: 50px;
       transition: background-color var(--transition-speed, 0.3s) ease;
       border: none;
       cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
 
       &:hover,
       &:focus {
-        background-color: var(--primary-dark);
+        background-color: var(--primary-dark, #45a29e);
         outline: none;
       }
       &:focus-visible {
-        outline: 2px solid var(--primary-dark);
+        outline: 2px solid var(--primary-dark, #45a29e);
         outline-offset: 2px;
       }
     }
@@ -176,9 +195,9 @@ h2 {
 .btn.outline {
   cursor: pointer;
   padding: var(--spacing-sm, 0.5rem) var(--spacing-lg, 1.5rem);
-  border: 1px solid var(--primary-color);
+  border: 1px solid var(--primary-color, #66fcf1);
   background-color: transparent;
-  color: var(--primary-color);
+  color: var(--primary-color, #66fcf1);
   border-radius: 50px;
   transition: background-color var(--transition-speed, 0.3s) ease,
     color var(--transition-speed, 0.3s) ease;
@@ -187,12 +206,75 @@ h2 {
 
   &:hover,
   &:focus {
-    background-color: var(--primary-color);
-    color: var(--button-outline-hover-text-color, white);
+    background-color: var(--primary-color, #66fcf1);
+    color: var(--button-outline-hover-text-color, #0b0c10);
     outline: none;
   }
   &:focus-visible {
-    outline: 2px solid var(--primary-color);
+    outline: 2px solid var(--primary-color, #66fcf1);
     outline-offset: 2px;
+  }
+}
+
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  cursor: pointer;
+  padding: 2rem;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  cursor: default;
+  display: flex;
+
+  img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+  }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background-color: var(--card-bg, #1f2833);
+  color: var(--text-color, #c5c6c7);
+  border: 1px solid var(--border-color, #45a29e);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1051;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+
+  &:hover,
+  &:focus {
+    background-color: var(--primary-color, #66fcf1);
+    color: var(--button-primary-text-color, #0b0c10);
+    outline: none;
+    transform: scale(1.1);
+    border-color: var(--primary-color, #66fcf1);
   }
 }
