@@ -1,53 +1,65 @@
 :host {
   display: block;
-  padding-top: var(--spacing-xl);
-  padding-bottom: var(--spacing-xl);
+  padding-top: var(--spacing-xl, 3rem);
+  padding-bottom: var(--spacing-xl, 3rem);
   background-color: var(--section-bg, var(--bg-color));
+
+  @media (max-width: 767.98px) {
+    padding-top: var(--spacing-lg, 1.5rem);
+    padding-bottom: var(--spacing-lg, 1.5rem);
+  }
 }
 
 h2 {
   text-align: center;
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg, 1.5rem);
   margin-top: 0;
   color: var(--heading-color, var(--primary-dark, #0056b3));
   font-size: 1.8rem;
 
   @media (max-width: 767.98px) {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md, 1rem);
   }
 }
 
 h3 {
-  margin-top: var(--spacing-lg);
-  margin-bottom: var(--spacing-md);
+  margin-top: var(--spacing-lg, 1.5rem);
+  margin-bottom: var(--spacing-md, 1rem);
   color: var(--primary-color);
   font-weight: 600;
   font-size: 1.4rem;
   text-align: left;
+  padding-left: var(--spacing-xs, 0.25rem);
 
   @media (max-width: 767.98px) {
     text-align: center;
+    font-size: 1.25rem;
+    padding-left: 0;
+    margin-top: var(--spacing-md, 1rem);
+    margin-bottom: var(--spacing-sm, 0.5rem);
   }
 }
 
 .certification-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--spacing-lg);
+  gap: var(--spacing-lg, 1.5rem);
   align-items: start;
+
   @media (max-width: 767.98px) {
     grid-template-columns: 1fr;
-    gap: var(--spacing-md);
+    gap: var(--spacing-md, 1rem);
   }
 }
 
 .certification-card {
   background: var(--card-bg);
   border-radius: 12px;
-  padding: var(--spacing-lg);
+  padding: var(--spacing-lg, 1.5rem);
   box-shadow: var(--card-shadow);
-  transition: transform var(--transition-speed) ease,
-    box-shadow var(--transition-speed) ease;
+  transition: transform var(--transition-speed, 0.3s) ease,
+    box-shadow var(--transition-speed, 0.3s) ease;
   display: flex;
   flex-direction: column;
   border: 1px solid var(--border-color);
@@ -58,29 +70,42 @@ h3 {
     box-shadow: var(--card-hover-shadow);
   }
 
+  @media (max-width: 767.98px) {
+    padding: var(--spacing-md, 1rem);
+    border-radius: 10px;
+  }
+
   h4 {
-    margin-bottom: var(--spacing-sm);
-    font-size: 1.25rem;
+    margin-bottom: var(--spacing-sm, 0.5rem);
+    font-size: 1.15rem;
     color: var(--primary-dark);
     line-height: 1.4;
     margin-top: 0;
     font-weight: 600;
     text-align: left;
+
+    @media (max-width: 767.98px) {
+      font-size: 1.1rem;
+    }
   }
 
   .certification-meta,
   .certification-instructors {
     font-size: 0.9rem;
-    line-height: 1.6;
-    color: var(--text-color);
+    line-height: 1.5;
+    color: var(--text-color-secondary, var(--text-color));
     opacity: 0.9;
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs, 0.25rem);
     margin-top: 0;
     text-align: left;
+
+    @media (max-width: 767.98px) {
+      font-size: 0.85rem;
+    }
   }
 
   .certification-instructors {
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-md, 1rem);
   }
 
   strong {
@@ -91,7 +116,7 @@ h3 {
 
   .certification-link-wrapper {
     margin-top: auto;
-    padding-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm, 0.5rem);
     text-align: center;
   }
 
@@ -105,6 +130,7 @@ h3 {
     font-weight: 500;
     transition: background-color 0.3s ease;
     border: 1px solid var(--primary-color);
+    font-size: 0.9rem;
 
     &:hover,
     &:focus {
@@ -116,12 +142,21 @@ h3 {
       outline: 2px solid var(--primary-dark);
       outline-offset: 2px;
     }
+
+    @media (max-width: 767.98px) {
+      padding: 0.4rem 0.9rem;
+      font-size: 0.85rem;
+    }
   }
 }
 
 .show-all-container {
   text-align: center;
-  margin-top: var(--spacing-lg);
+  margin-top: var(--spacing-lg, 1.5rem);
+
+  @media (max-width: 767.98px) {
+    margin-top: var(--spacing-md, 1rem);
+  }
 }
 
 .btn.outline {
@@ -145,5 +180,10 @@ h3 {
   &:focus-visible {
     outline: 2px solid var(--primary-color);
     outline-offset: 2px;
+  }
+
+  @media (max-width: 767.98px) {
+    padding: var(--spacing-xs, 0.4rem) var(--spacing-md, 1rem);
+    font-size: 0.9rem;
   }
 }
