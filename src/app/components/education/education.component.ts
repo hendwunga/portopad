@@ -22,19 +22,19 @@ interface EducationEntry {
 export class EducationComponent {
   educationHistory: EducationEntry[] = [
     {
-      institution: 'Universitas Sanata Dharma',
+      institution: 'Sanata Dharma University',
       degree: 'S.Kom',
-      major: 'Teknik Informatika',
+      major: 'Informatics Engineering',
       years: '2022 - Present',
       location: 'Yogyakarta, Indonesia',
       focus: 'Backend Development & DevOps Engineering',
       gpa: '3.16 / 4.00',
-      thesisTitle: '-',
+      thesisTitle: '--',
     },
     {
       institution: 'SMA Negeri 1 Bajawa',
-      degree: 'Lulusan',
-      major: 'Ilmu Pengetahuan Alam',
+      degree: 'Graduate',
+      major: 'Natural Science',
       years: '2018 - 2021',
       location: 'Bajawa, Indonesia',
     },
