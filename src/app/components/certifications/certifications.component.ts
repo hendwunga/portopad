@@ -14,7 +14,7 @@ interface Certification {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './certifications.component.html',
-  styleUrls: ['./certifications.component.scss'], // Menggunakan SCSS yang Anda berikan
+  styleUrls: ['./certifications.component.scss'],
 })
 export class CertificationsComponent implements OnInit {
   professionalCertifications: Certification[] = [
