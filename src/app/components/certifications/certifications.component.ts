@@ -54,50 +54,50 @@ export class CertificationsComponent implements OnInit {
 
   organizationCertifications: Certification[] = [
     {
-      title: 'Himpunan Mahasiswa Informatika',
-      provider: 'Universitas Sanata Dharma',
+      title: 'Informatics Student Organization',
+      provider: 'Sanata Dharma University',
       completedDate: 'Nov 2023',
-      instructors: ['Universitas Sanata Dharma'],
+      instructors: ['Sanata Dharma University'],
       certificateUrl:
         'https://drive.google.com/file/d/16GMJAy0L-5EutaHbSwxCcGdWhDxPC3Wt/view?usp=sharing',
     },
     {
-      title: 'Webinar: How to Become a DevOps Engineer',
-      provider: 'Himpunan Mahasiswa Informatika',
+      title: 'Webinars: How to Become a DevOps Engineer',
+      provider: 'Informatics Student Organization',
       completedDate: 'Okt 2022',
-      instructors: ['Himpunan Mahasiswa Informatika'],
+      instructors: ['Informatics Student Organization'],
       certificateUrl:
         'https://drive.google.com/file/d/1yg-L_NvxtEmcHTkdjv-WOQflL5I0Xcf0/view?usp=sharing',
     },
     {
-      title: 'Informatika Belajar ',
-      provider: 'Himpunan Mahasiswa Informatika',
+      title: 'Informatics Learning ',
+      provider: 'Informatics Student Organization',
       completedDate: 'Nov 2022',
-      instructors: ['Himpunan Mahasiswa Informatika'],
+      instructors: ['Informatics Student Organization'],
       certificateUrl:
         'https://drive.google.com/file/d/1XJaUyPg92rfOOF7Njx4IgQQcAuKJfvVh/view?usp=sharing',
     },
     {
-      title: 'Webinar Mengenal Metaverse ',
-      provider: 'Himpunan Mahasiswa Informatika',
+      title: 'Metaverse Webinar ',
+      provider: 'Informatics Student Organization',
       completedDate: 'Sept 2022',
-      instructors: ['Himpunan Mahasiswa Informatika'],
+      instructors: ['Informatics Student Organization'],
       certificateUrl:
         'https://drive.google.com/file/d/1XJaUyPg92rfOOF7Njx4IgQQcAuKJfvVh/view?usp=sharing',
     },
     {
-      title: 'Sertifikat Kepanitiaan Pekan Olahraga',
-      provider: 'Himpunan Mahasiswa Informatika',
+      title: 'Sports Week Committee',
+      provider: 'Informatics Student Organization',
       completedDate: 'April 2023',
-      instructors: ['Himpunan Mahasiswa Informatika'],
+      instructors: ['Informatics Student Organization'],
       certificateUrl:
         'https://drive.google.com/file/d/1BIx23G-B6VfUUDXVuUupsjAcOSbMrn4b/view?usp=sharing',
     },
     {
-      title: 'Kepanitian Pemilihan Umum',
-      provider: 'Fakultas Sains dan Teknologi',
+      title: 'General Election Committee',
+      provider: 'Faculty of Science and Technology',
       completedDate: 'Nov 2023',
-      instructors: ['Fakultas Sains dan Teknologi'],
+      instructors: ['Faculty of Science and Technology'],
       certificateUrl:
         'https://drive.google.com/file/d/1PvbUty0XiByNbRpHxKG7bQKtyA2Xxduq/view?usp=sharing',
     },
