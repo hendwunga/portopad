@@ -71,7 +71,8 @@ export class ProjectsComponent implements OnInit {
         'Managed CI/CD pipeline with GitHub Actions.',
         'Implemented GitHub Flow for version control.',
       ],
-      githubUrl: 'https://github.com/hendrowunga/DifabelZone.git',
+      githubUrl:
+        'https://github.com/hendrowunga/online-agricultural-store-backend.git',
       imageUrl: 'assets/images/project-agri-store.png',
     },
     {
