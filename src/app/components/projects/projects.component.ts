@@ -73,7 +73,7 @@ export class ProjectsComponent implements OnInit {
       ],
       githubUrl:
         'https://github.com/hendrowunga/online-agricultural-store-backend.git',
-      imageUrl: 'assets/images/project-agri-store.png',
+      imageUrl: 'assets/logos/placeholder-project.svg',
     },
     {
       title: 'REST API Backend for DifabelZone Batik e-Commerce (Yogyakarta)',
