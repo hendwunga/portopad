@@ -1,12 +1,26 @@
 <section id="gallery" class="container content-section">
   <h2>{{ galleryTitle }}</h2>
   <div class="photo-grid">
-    <div class="photo-item card-base" *ngFor="let image of images">
+    <!-- Add (click) handler to the photo-item div -->
+    <div class="photo-item card-base" *ngFor="let image of images"
+      (click)="openModal(image)">
       <img [src]="image.src" [alt]="image.alt" loading="lazy">
       <div class="photo-details">
         <h5 class="photo-title">{{ image.title }}</h5>
         <p class="photo-description">{{ image.description }}</p>
       </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <img [src]="selectedImage?.src" [alt]="selectedImage?.alt"
+        class="modal-image">
+      <div class="modal-details" *ngIf="selectedImage">
+        <h5 class="modal-title">{{ selectedImage.title }}</h5>
+        <p class="modal-description">{{ selectedImage.description }}</p>
+      </div>
+      <button class="close-button" (click)="closeModal()">×</button>
     </div>
   </div>
 </section>

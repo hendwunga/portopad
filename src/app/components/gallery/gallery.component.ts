@@ -17,6 +17,10 @@ interface GalleryImage {
 })
 export class GalleryComponent {
   galleryTitle = 'My Activity';
+
+  isModalOpen = false;
+  selectedImage: GalleryImage | null = null;
+
   images: GalleryImage[] = [
     {
       src: 'assets/activity/hmif.JPG',
@@ -40,4 +44,16 @@ export class GalleryComponent {
         'Volunteering as part of the organizing committee for the campus IT Day event.',
     },
   ];
+
+  openModal(image: GalleryImage): void {
+    this.selectedImage = image;
+    this.isModalOpen = true;
+    document.body.classList.add('modal-open');
+  }
+
+  closeModal(): void {
+    this.isModalOpen = false;
+    this.selectedImage = null;
+    document.body.classList.remove('modal-open');
+  }
 }
