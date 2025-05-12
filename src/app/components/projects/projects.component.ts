@@ -60,20 +60,22 @@ interface Project {
 export class ProjectsComponent implements OnInit {
   allProjects: Project[] = [
     {
-      title: 'Online Agricultural Store, NTT',
-      year: 2022,
+      title: 'Full Stack E-commerce Backend',
+      year: 2025,
       role: 'Backend Developer',
       details: [
-        'Designed database architecture (inventory, transactions, users).',
-        'Built performant & secure backend APIs with Spring Boot.',
-        'Utilized Docker for consistent development environments.',
-        'Documented APIs using Swagger for clarity.',
-        'Managed CI/CD pipeline with GitHub Actions.',
-        'Implemented GitHub Flow for version control.',
+        'Designed and implemented relational database schema (users, products, orders).',
+        'Developed secure and RESTful APIs using Spring Boot and Spring Data JPA.',
+        'Configured CORS to enable frontend-backend communication.',
+        'Documented REST APIs with Swagger/OpenAPI for easy consumption.',
+        'Applied DTO and service-layer architecture for clean code separation.',
+        'Containerized the backend application using Docker for easy deployment.',
+        'Managed CI/CD pipeline with GitHub Actions for automated builds.',
+        'Adopted GitHub Flow for collaborative version control.',
       ],
       githubUrl:
-        'https://github.com/hendrowunga/online-agricultural-store-backend.git',
-      imageUrl: 'assets/logos/placeholder-project.svg',
+        'https://github.com/hendrowunga/spring-boot-ecommerce-backend.git',
+      imageUrl: 'assets/projects/FullStackSpringBoot.png',
     },
     {
       title: 'REST API Backend for DifabelZone Batik e-Commerce (Yogyakarta)',
