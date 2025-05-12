@@ -43,6 +43,14 @@ export class CertificationsComponent implements OnInit {
         'https://www.udemy.com/certificate/UC-1f4f0336-a850-47dc-9490-c243d8cc66ea/',
     },
     {
+      title: 'Full Stack: Angular and Java Spring Boot E-Commerce Website',
+      provider: 'Udemy',
+      completedDate: 'May 2025',
+      instructors: ['Chad Darby', 'Harinath Kuntamukkala'],
+      certificateUrl:
+        'https://www.udemy.com/certificate/UC-d4439859-9957-4b62-b4f7-99244ec43f04/',
+    },
+    {
       title: 'GAMMAFEST 2024 : Data Science Competition (DSC)',
       provider: 'Gamma Sigma Beta IPB University',
       completedDate: 'Mei 2024',
