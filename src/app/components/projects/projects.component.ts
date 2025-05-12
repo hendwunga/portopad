@@ -60,22 +60,40 @@ interface Project {
 export class ProjectsComponent implements OnInit {
   allProjects: Project[] = [
     {
-      title: 'Full Stack E-commerce Backend',
+      title: 'E-commerce Backend API',
       year: 2025,
       role: 'Backend Developer',
       details: [
         'Designed and implemented relational database schema (users, products, orders).',
         'Developed secure and RESTful APIs using Spring Boot and Spring Data JPA.',
-        'Configured CORS to enable frontend-backend communication.',
-        'Documented REST APIs with Swagger/OpenAPI for easy consumption.',
-        'Applied DTO and service-layer architecture for clean code separation.',
-        'Containerized the backend application using Docker for easy deployment.',
+        'Integrated Okta OAuth 2.0 for authentication and authorization.',
+        'Implemented Stripe payment gateway for secure order transactions.',
+        'Documented APIs with Swagger/OpenAPI for easy consumption.',
+        'Containerized the backend with Docker for consistent deployment.',
         'Managed CI/CD pipeline with GitHub Actions for automated builds.',
         'Adopted GitHub Flow for collaborative version control.',
       ],
       githubUrl:
         'https://github.com/hendrowunga/spring-boot-ecommerce-backend.git',
       imageUrl: 'assets/projects/FullStackSpringBoot.png',
+    },
+
+    {
+      title: 'E-commerce Frontend',
+      year: 2025,
+      role: 'Frontend Developer',
+      details: [
+        'Built responsive and dynamic UI using Angular and Angular Material.',
+        'Integrated Okta OAuth 2.0 for user authentication flow.',
+        'Integrated Stripe Checkout for secure and seamless payments.',
+        'Consumed backend REST APIs to manage products, cart, and orders.',
+        'Implemented state management and routing with Angular services and Router.',
+        'Optimized frontend performance with lazy loading and modular structure.',
+        'Adopted GitHub Flow for collaborative version control.',
+      ],
+      githubUrl:
+        'https://github.com/hendrowunga/spring-boot-ecommerce-frontend.git',
+      imageUrl: 'assets/projects/FullStackFrontendAngular.png',
     },
     {
       title: 'REST API Backend for DifabelZone Batik e-Commerce (Yogyakarta)',
