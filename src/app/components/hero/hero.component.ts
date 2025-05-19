@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 export class HeroComponent {
   isModalOpen = false;
 
-  profileImageUrl = 'assets/logos/profil.JPG';
+  profileImageUrl = 'assets/logos/gitPf.jpeg';
 
   openImage(): void {
     this.isModalOpen = true;
