@@ -57,14 +57,20 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: var(--spacing-xl, 3rem);
+  gap: var(
+    --spacing-xxl,
+    15rem
+  ); // Contoh: Menggunakan spacing-xxl (jika ada) atau nilai 5rem
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
 
   @media (max-width: 991.98px) {
     flex-direction: column;
-    gap: var(--spacing-lg, 2rem);
+    gap: var(
+      --spacing-lg,
+      2rem
+    ); // Ini adalah jarak VERTIKAL untuk mobile (biarkan saja)
     max-width: 700px;
     text-align: center;
   }
@@ -100,8 +106,8 @@
 
 .profile-pic {
   width: 350px;
-  height: 500px;
-  border-radius: 50px;
+  height: 500px; // <-- Ukuran Default/Desktop (saat ini non-persegi)
+  border-radius: 50px; // border-radius untuk default/desktop
   object-fit: cover;
   border: 7px solid var(--bg-color, #ffffff);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
@@ -119,26 +125,29 @@
       0 0 20px 6px var(--primary-glow, rgba(0, 191, 166, 0.3));
   }
 
+  // --- Media query untuk layar sampai 991.98px (Tablet & Ponsel Landscape) ---
   @media (max-width: 991.98px) {
     width: 260px;
-    height: 260px;
-    border-radius: 18px;
+    height: 300px; // <-- Tingkatkan tinggi di sini (contoh: dari 260px menjadi 300px)
+    border-radius: 18px; // border-radius untuk breakpoint ini
   }
+
+  // --- Media query untuk layar sampai 767.98px (Ponsel Besar & Tablet Potrait) ---
   @media (max-width: 767.98px) {
     width: 200px;
-    height: 200px;
-    border-radius: 14px;
+    height: 240px; // <-- Tingkatkan tinggi di sini (contoh: dari 200px menjadi 240px)
+    border-radius: 14px; // border-radius untuk breakpoint ini
     &:hover {
-      transform: scale(
-        1
-      ); // Menonaktifkan scale hover di layar kecil jika diinginkan
+      transform: scale(1);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
     }
   }
+
+  // --- Media query untuk layar sampai 575.98px (Ponsel Kecil) ---
   @media (max-width: 575.98px) {
     width: 170px;
-    height: 170px;
-    border-radius: 12px;
+    height: 210px; // <-- Tingkatkan tinggi di sini (contoh: dari 170px menjadi 210px)
+    border-radius: 12px; // border-radius untuk breakpoint ini
     &:hover {
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     }
