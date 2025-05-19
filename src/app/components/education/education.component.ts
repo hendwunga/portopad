@@ -28,7 +28,7 @@ export class EducationComponent {
       years: '2022 - Present',
       location: 'Yogyakarta, Indonesia',
       focus: 'Backend Development & DevOps Engineering',
-      gpa: '3.16 / 4.00',
+      gpa: '3.13 / 4.00',
       thesisTitle: '--',
     },
     {
@@ -36,7 +36,7 @@ export class EducationComponent {
       degree: 'Graduate',
       major: 'Natural Science',
       years: '2018 - 2021',
-      location: 'Bajawa, Indonesia',
+      location: 'Nusa Tenggara Timur, Indonesia',
     },
   ];
 }
