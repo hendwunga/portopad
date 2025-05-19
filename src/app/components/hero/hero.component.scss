@@ -99,9 +99,9 @@
 }
 
 .profile-pic {
-  width: 375px;
-  height: 515px;
-  border-radius: 24px;
+  width: 350px;
+  height: 500px;
+  border-radius: 50px;
   object-fit: cover;
   border: 7px solid var(--bg-color, #ffffff);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
@@ -109,7 +109,7 @@
   opacity: 0;
   animation-name: subtleCardFallIn;
   animation-duration: 0.9s;
-  animation-delay: 0.1s;
+  animation-delay: 0.5s;
   animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
   animation-fill-mode: forwards;
 
