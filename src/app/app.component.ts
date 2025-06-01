@@ -57,4 +57,6 @@ import { ModalComponent } from './services/shared/modal.component';
     `,
   ],
 })
-export class AppComponent {}
+export class AppComponent {
+  public title = 'portopad';
+}
