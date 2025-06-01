@@ -42,7 +42,8 @@ header.scrolled {
 .nav-list {
   display: flex;
   list-style: none;
-  gap: var(--space-6);
+  // gap: var(--space-10); /* Sesuaikan gap seperti diskusi sebelumnya jika perlu */
+  gap: 80px; /* Sesuaikan gap seperti diskusi sebelumnya jika perlu */
 }
 
 .nav-list a {
@@ -98,15 +99,18 @@ header.scrolled {
   color: var(--primary-color);
 }
 
+/* By default, mobile nav toggle is hidden on larger screens */
 .mobile-nav-toggle {
   display: none;
 }
 
 @media (max-width: 768px) {
+  /* Show the mobile nav toggle on small screens */
   .mobile-nav-toggle {
     display: flex;
   }
 
+  /* Hide the main nav on small screens by default (it will be shown when .active class is added) */
   .main-nav {
     position: fixed;
     top: 70px;
@@ -143,5 +147,10 @@ header.scrolled {
 
   header.mobile-nav-open {
     background-color: var(--card-bg);
+  }
+
+  /* --- Tambahkan aturan ini untuk menyembunyikan tombol tema di mobile --- */
+  .theme-toggle {
+    display: none;
   }
 }

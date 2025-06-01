@@ -64,7 +64,6 @@ export class HeroComponent implements OnInit {
 
   // Sample profile image (replace with your own)
   profileImage = 'assets/logos/gitPf.jpeg';
-  // profileImage = 'assets/logos/profil.JPG';
 
   constructor(private readonly modalService: ModalService) {}
 

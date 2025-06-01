@@ -115,14 +115,16 @@
 }
 
 .profile-image {
-  width: 450px;
-  height: 450px;
-  border-radius: 50%;
+  width: 400px;
+  height: 550px;
+  /* border-radius: 50%; <-- Baris ini dihapus */
+  border-radius: 20px; /* <-- Tambahkan baris ini untuk sudut membulat */
   object-fit: cover;
   border: 5px solid var(--card-bg);
   box-shadow: var(--box-shadow);
   cursor: pointer;
   transition: transform var(--transition-speed) var(--transition-timing);
+  /* box-shadow: var(--box-shadow); -- Duplicated */
 }
 
 .profile-image:hover {
@@ -226,7 +228,7 @@
 @media (max-width: 576px) {
   .profile-image {
     width: 280px;
-    height: 280px;
+    height: 350px;
   }
 
   .hero-cta {

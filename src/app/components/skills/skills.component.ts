@@ -15,8 +15,8 @@ import {
   // New icons from the brands pack (if available in free tier)
   faJava,
   faLaravel,
-  // faKubernetes, // Icon for Kubernetes (Available in free brands)
-  // faJetBrains, // Icon for JetBrains (Available in free brands)
+  // faKubernetes, // Icon for Kubernetes (Available in free brands - but check free tier)
+  // faJetBrains, // Icon for JetBrains (REQUIRES FONT AWESOME PRO) <-- Dikomen/Dihapus
   faLinux, // Icon for Linux (Available in free brands)
   faWindows, // Icon for Windows (Available in free brands)
   faBootstrap, // Icon for Bootstrap (Available in free brands)
@@ -70,25 +70,25 @@ export class SkillsComponent {
   faHtml5 = faHtml5;
   faCss3Alt = faCss3Alt;
   faJs = faJs;
-  faAngular = faAngular;
+  faAngular = faAngular; // Or faJs if specifically targeting AngularJS? faAngular seems fine.
   faNode = faNode;
   faGit = faGit;
   faNpm = faNpm;
   faDocker = faDocker;
   faJava = faJava;
   faLaravel = faLaravel;
-  // faKubernetes = faKubernetes;
-  // faJetBrains = faJetBrains;
+  // faKubernetes = faKubernetes; // Check if this is truly free
+  // faJetBrains = faJetBrains; // <-- Dihapus/Dikomen
   faLinux = faLinux;
   faWindows = faWindows;
-  faBootstrap = faBootstrap; // Declare the new Bootstrap icon
+  faBootstrap = faBootstrap;
   faDatabase = faDatabase;
   faServer = faServer;
-  faToolbox = faToolbox; // Declare the new Toolbox icon
-  faCogs = faCogs; // Declare the new Cogs icon
-  faVial = faVial; // Declare the new Vial icon
-  faFileCode = faFileCode; // Declare the new FileCode icon
-  faCode = faCode; // Declare the new Code icon
+  faToolbox = faToolbox;
+  faCogs = faCogs;
+  faVial = faVial;
+  faFileCode = faFileCode;
+  faCode = faCode;
 
   skills: Skill[] = [
     // Backend Skills
@@ -102,10 +102,7 @@ export class SkillsComponent {
     { name: 'RESTful APIs', icon: this.faServer, category: 'backend' }, // Using faServer for APIs
     { name: 'JUnit', icon: this.faVial, category: 'backend' }, // Using faVial for testing framework
 
-    // Frontend Skills (Assuming you still want these based on your original code)
-    // Keep only the ones relevant to your experience if you have them.
-    // For a backend focus, maybe keep HTML, CSS, JS, Bootstrap, and Angular/AngularJS if applicable.
-    // Let's keep the core web techs + Bootstrap + AngularJS from your list.
+    // Frontend Skills
     { name: 'HTML5', icon: this.faHtml5, category: 'frontend' },
     { name: 'CSS3', icon: this.faCss3Alt, category: 'frontend' },
     { name: 'JavaScript', icon: this.faJs, category: 'frontend' },
@@ -115,7 +112,7 @@ export class SkillsComponent {
     // Tools
     { name: 'SQL Developer', icon: this.faToolbox, category: 'tools' }, // Using faToolbox
     { name: 'Docker', icon: this.faDocker, category: 'tools' },
-    // { name: 'Kubernetes', icon: this.faKubernetes, category: 'tools' },
+    // { name: 'Kubernetes', icon: this.faKubernetes, category: 'tools' }, // Perlu cek apakah ini free
     { name: 'Postman', icon: this.faToolbox, category: 'tools' }, // Using faToolbox
     { name: 'GitHub Actions', icon: this.faGit, category: 'tools' }, // Using faGit
     { name: 'NGINX', icon: this.faServer, category: 'tools' }, // Using faServer for NGINX
@@ -123,8 +120,8 @@ export class SkillsComponent {
     { name: 'Apache Maven', icon: this.faCogs, category: 'tools' }, // Using faCogs
     { name: 'NPM', icon: this.faNpm, category: 'tools' },
     { name: 'OpenAPI', icon: this.faFileCode, category: 'tools' }, // Using faFileCode
-    // { name: 'IntelliJ IDEA', icon: this.faJetBrains, category: 'tools' },
-    { name: 'VS Code', icon: this.faCode, category: 'tools' }, // Using faCode
+    { name: 'IntelliJ IDEA', icon: this.faToolbox, category: 'tools' }, // Mengganti ikon JetBrains dengan faToolbox
+    { name: 'VS Code', icon: this.faCode, category: 'tools' },
 
     // Other Skills (Operating Systems)
     { name: 'Linux', icon: this.faLinux, category: 'other' },

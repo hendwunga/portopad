@@ -8,20 +8,6 @@
       content="Professional portfolio showcasing skills, projects, and achievements">
     <base href="/">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <script>
-      (function() {
-        function applyTheme(theme) {
-          if (theme === 'dark') {
-            document.documentElement.classList.add('dark-mode');
-          } else {
-            document.documentElement.classList.remove('dark-mode');
-          }
-        }
-        let preferredTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        applyTheme(preferredTheme);
-      })();
-    </script>
-
   </head>
   <body>
     <app-root></app-root>
