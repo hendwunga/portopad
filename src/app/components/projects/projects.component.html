@@ -1,54 +1,143 @@
-<section id="projects" class="content-section">
+<section id="projects" class="projects">
   <div class="container">
-    <h2>My Projects</h2>
-    <div class="project-grid">
-      <div class="project-card"
-        *ngFor="let project of displayedProjects; let i = index">
-        <img class="project-image"
-          [src]="project.imageUrl"
-          [alt]="project.title + ' Screenshot'"
-          (click)="showImageInLightbox(project.imageUrl)"
-          (error)="handleImageError($event)">
-        <h4>{{ project.title }} ({{ project.year }})</h4>
-        <button class="btn outline details-button"
-          (click)="toggleDetails(project)"
-          [attr.aria-expanded]="project.isExpanded"
-          [attr.aria-controls]="project.id">
-          {{ project.isExpanded ? 'Hide Details' : 'Show Details' }}
-        </button>
-        <div class="project-details-collapsible"
-          [id]="project.id"
-          [@expandCollapse]="project.isExpanded ? 'true' : 'false'">
-          <p class="project-role"><strong>Role:</strong> {{ project.role }}</p>
-          <ul class="project-details">
-            <li *ngFor="let detail of project.details">{{ detail }}</li>
-          </ul>
-          <div class="project-links">
-            <a [href]="project.githubUrl"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="styled-link-button">
-              View on GitHub
-            </a>
+    <h2 class="section-title">Projects</h2>
+
+    <div class="filters">
+      <button
+        *ngFor="let filter of filters"
+        class="filter-btn"
+        [class.active]="activeFilter === filter.value"
+        (click)="setFilter(filter.value)">
+        {{ filter.label }}
+      </button>
+    </div>
+
+    <div class="projects-grid">
+      <div
+        *ngFor="let project of filteredProjects"
+        class="project-card"
+        [class.featured]="project.featured">
+        <div class="project-thumbnail">
+          <!-- Using NgOptimizedImage requires `width` and `height` or `fill` -->
+          <img
+            [ngSrc]="project.thumbnail"
+            [alt]="project.title"
+            width="400"
+            height="250"
+            (click)="openProjectDetails(project)" />
+        </div>
+        <div class="project-info">
+          <h3 class="project-title">{{ project.title }}</h3>
+          <p class="project-description">
+            {{ project.description | slice : 0 : 100
+            }}{{ project.description.length > 100 ? '...' : '' }}
+          </p>
+          <div class="project-technologies">
+            <span *ngFor="let tech of project.technologies.slice(0, 3)">{{
+              tech
+              }}</span>
+            <span *ngIf="project.technologies.length > 3">+{{
+              project.technologies.length - 3 }}</span>
+          </div>
+          <div class="project-actions">
+            <button
+              class="btn btn-primary"
+              (click)="openProjectDetails(project)">
+              View Details
+            </button>
+            <div class="project-links">
+              <a
+                *ngIf="project.githubUrl"
+                [href]="project.githubUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="project-link"
+                aria-label="GitHub repository">
+                <fa-icon [icon]="faGithub"></fa-icon>
+              </a>
+              <a
+                *ngIf="project.liveUrl"
+                [href]="project.liveUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="project-link"
+                aria-label="Live site">
+                <fa-icon [icon]="faChrome"></fa-icon>
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="show-all-container" *ngIf="shouldShowLoadMoreButton">
-      <button class="btn outline" (click)="loadAllProjects()">
-        All Projects
-      </button>
+  </div>
+
+  <!-- Project Details Modal -->
+  <!--
+     NOTE: The original code rendered the modal structure directly within this component.
+     A common pattern is for a ModalService to render a separate ModalComponent
+     into a global overlay. If you use that pattern, remove this entire div.
+     However, based on your original inline template, this is where it lived.
+  -->
+  <div *ngIf="selectedProject" class="project-modal-overlay">
+    <div class="project-modal">
+      <div class="project-modal-gallery">
+        <div class="main-image">
+          <!-- Note: NgOptimizedImage is less common in modals/dynamic content
+               unless carefully managed. Using standard <img> here. -->
+          <img
+            [src]="selectedProject.images[currentImageIndex]"
+            [alt]="selectedProject.title" />
+        </div>
+        <div class="image-thumbnails">
+          <div
+            *ngFor="let image of selectedProject.images; let i = index"
+            class="thumbnail"
+            [class.active]="i === currentImageIndex"
+            (click)="setCurrentImage(i)">
+            <img [src]="image" [alt]="selectedProject.title + ' thumbnail'" />
+          </div>
+        </div>
+      </div>
+
+      <div class="project-modal-content">
+        <h3>{{ selectedProject.title }}</h3>
+        <p class="full-description">{{ selectedProject.description }}</p>
+
+        <div class="tech-stack">
+          <h4>Technologies</h4>
+          <div class="tech-tags">
+            <span *ngFor="let tech of selectedProject.technologies">{{
+              tech
+              }}</span>
+          </div>
+        </div>
+
+        <div class="project-modal-links">
+          <a
+            *ngIf="selectedProject.githubUrl"
+            [href]="selectedProject.githubUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline">
+            <fa-icon [icon]="faGithub" class="btn-icon"></fa-icon>
+            GitHub Repository
+          </a>
+          <a
+            *ngIf="selectedProject.liveUrl"
+            [href]="selectedProject.liveUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary">
+            <fa-icon [icon]="faLink" class="btn-icon"></fa-icon>
+            Live Preview
+          </a>
+        </div>
+        <!-- Add a close button -->
+        <button class="modal-close-btn" (click)="closeProjectDetails()"
+          aria-label="Close modal">
+          <fa-icon [icon]="faTimes"></fa-icon>
+        </button>
+      </div>
     </div>
   </div>
 </section>
-
-<div class="lightbox-overlay"
-  *ngIf="selectedImageUrl"
-  (click)="closeLightbox()"
-  [@fadeInOut]>
-  <div class="lightbox-content" (click)="$event.stopPropagation()">
-    <button class="lightbox-close" (click)="closeLightbox()"
-      aria-label="Close image view">×</button>
-    <img [src]="selectedImageUrl" alt="Enlarged project image">
-  </div>
-</div>

@@ -1,59 +1,159 @@
-<section id="contact" class="container content-section">
-  <h2>Get In Touch</h2>
-  <p>I'm currently open to new opportunities. Feel free to reach out!</p>
-  <div class="contact-icon-links">
-    <a href="mailto:hendrowunga073@gmail.com"
-      class="contact-link"
-      aria-label="Email Hendro Wunga"
-      title="Email Hendro Wunga">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round">
-        <path
-          d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-        <polyline points="22,6 12,13 2,6"></polyline>
-      </svg>
-    </a>
-    <a href="https://www.linkedin.com/in/hendrowunga/"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="contact-link"
-      aria-label="Hendro Wunga's LinkedIn Profile"
-      title="LinkedIn">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round">
-        <path
-          d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-        <rect x="2" y="9" width="4" height="12"></rect>
-        <circle cx="4" cy="4" r="2"></circle>
-      </svg>
-    </a>
-    <a href="https://github.com/hendrowunga"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="contact-link"
-      aria-label="Hendro Wunga's GitHub Profile"
-      title="GitHub">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round">
-        <path
-          d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-      </svg>
-    </a>
-    <a href="https://www.tiktok.com/@hend_tech"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="contact-link"
-      aria-label="Hendro Wunga's TikTok Profile"
-      title="TikTok">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round">
-        <path
-          d="M16.5 4a4.5 4.5 0 1 0-6.71 4.07V16.5a4.5 4.5 0 1 0 4.5-4.5H12V8.07A4.5 4.5 0 1 0 16.5 4z"></path>
-      </svg>
-    </a>
+<section id="contact" class="contact">
+  <div class="container">
+    <h2 class="section-title">Contact Me</h2>
+
+    <div class="contact-content">
+      <div class="contact-info">
+        <h3>Get in Touch</h3>
+        <p>
+          I'm always open to new opportunities, collaborations,
+          or just a
+          friendly chat. Feel free to reach out using any of the
+          methods
+          below.
+        </p>
+
+        <div class="contact-details">
+          <div class="contact-item">
+            <span class="contact-icon">
+              <fa-icon [icon]="faMapMarkerAlt"></fa-icon>
+            </span>
+            <div>
+              <h4>Location</h4>
+              <p>Sleman, Yogyakarta, Indonesia</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-icon">
+              <fa-icon [icon]="faPhone"></fa-icon>
+            </span>
+            <div>
+              <h4>Phone</h4>
+              <p>+62 852 1733 1968</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-icon">
+              <fa-icon [icon]="faEnvelope"></fa-icon>
+            </span>
+            <div>
+              <h4>Email</h4>
+              <p>hendrowunga073&#64;gmail.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrapper">
+        <h3>Send a Message</h3>
+        <!-- Hapus (ngSubmit)="onSubmit()" dari tag form -->
+        <form [formGroup]="contactForm" class="contact-form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
+              placeholder="Your Name"
+              [class.invalid]="
+                   nameControl.invalid &&
+                   (nameControl.dirty || nameControl.touched)
+                 " />
+            <div
+              *ngIf="
+                   nameControl.invalid &&
+                   (nameControl.dirty || nameControl.touched)
+                 "
+              class="error-message">
+              <span
+                *ngIf="nameControl.errors?.['required']">Name
+                is required</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              placeholder="Your Email"
+              [class.invalid]="
+                   emailControl.invalid &&
+                   (emailControl.dirty || emailControl.touched)
+                 " />
+            <div
+              *ngIf="
+                   emailControl.invalid &&
+                   (emailControl.dirty || emailControl.touched)
+                 "
+              class="error-message">
+              <span
+                *ngIf="emailControl.errors?.['required']">Email
+                is required</span>
+              <span
+                *ngIf="emailControl.errors?.['email']">Please
+                enter a valid email</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input
+              type="text"
+              id="subject"
+              formControlName="subject"
+              placeholder="Subject" />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea
+              id="message"
+              formControlName="message"
+              rows="5"
+              placeholder="Your Message"
+              [class.invalid]="
+                   messageControl.invalid &&
+                   (messageControl.dirty || messageControl.touched)
+                 "></textarea>
+            <div
+              *ngIf="
+                   messageControl.invalid &&
+                   (messageControl.dirty || messageControl.touched)
+                 "
+              class="error-message">
+              <span
+                *ngIf="messageControl.errors?.['required']">Message
+                is required</span>
+            </div>
+          </div>
+
+          <!-- Ganti tombol submit dengan link <a> -->
+          <a
+             [href]="mailtoLink"
+             class="btn btn-primary"
+             [class.disabled]="contactForm.invalid"
+             (click)="handleMailtoClick($event)"
+             aria-label="Send message via email client"
+             title="Send message via email client">
+             <fa-icon [icon]="faPaperPlane" class="btn-icon"></fa-icon>
+             Send Message
+          </a>
+
+          <!-- Hapus blok pesan submit -->
+          <!--
+          <div
+            *ngIf="submitMessage"
+            class="submit-message"
+            [class.success]="submitSuccess">
+            {{ submitMessage }}
+          </div>
+          -->
+        </form>
+      </div>
+    </div>
   </div>
 </section>

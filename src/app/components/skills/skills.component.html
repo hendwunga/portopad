@@ -1,11 +1,27 @@
-<section id="skills" class="container content-section">
-  <h2>My Skills</h2>
-  <div class="all-skills-container">
-    <div class="skill-item" *ngFor="let skill of allSkills"
-      [title]="skill.name" tabindex="0">
-      <img [src]="skill.iconUrl" [alt]="skill.altText"
-        class="skill-icon-img">
-      <span class="skill-name">{{ skill.name }}</span>
+<section id="skills" class="skills">
+  <div class="container">
+    <h2 class="section-title">Skills & Expertise</h2>
+
+    <div class="skills-categories">
+      <button
+        *ngFor="let category of categories"
+        class="category-btn"
+        [class.active]="selectedCategory === category.value"
+        (click)="filterByCategory(category.value)">
+        {{ category.label }}
+      </button>
+    </div>
+
+    <div class="skills-grid">
+      <div
+        *ngFor="let skill of filteredSkills"
+        class="skill-card"
+        [ngClass]="'category-' + skill.category">
+        <div class="skill-icon">
+          <fa-icon [icon]="skill.icon"></fa-icon>
+        </div>
+        <h3 class="skill-name">{{ skill.name }}</h3>
+      </div>
     </div>
   </div>
 </section>
