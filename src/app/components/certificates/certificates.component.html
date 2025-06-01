@@ -1,0 +1,40 @@
+<section id="certificates" class="certificates">
+     <div class="container">
+          <h2 class="section-title">Certificates</h2>
+
+          <div class="certificate-filters">
+               <button
+                    *ngFor="let filter of filters"
+                    class="filter-btn"
+                    [class.active]="activeFilter === filter.value"
+                    (click)="setFilter(filter.value)">
+                    {{ filter.label }}
+               </button>
+          </div>
+
+          <div class="certificates-grid">
+               <a
+                    *ngFor="let certificate of filteredCertificates"
+                    class="certificate-card"
+                    [href]="certificate.credentialUrl || certificate.imageUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    [attr.aria-label]="'View Certificate: ' + certificate.name">
+                    <div class="certificate-icon">
+                         <fa-icon [icon]="faCertificate"></fa-icon>
+                    </div>
+                    <div class="certificate-info">
+                         <h3 class="certificate-name">{{ certificate.name
+                              }}</h3>
+                         <p class="certificate-issuer">{{ certificate.issuer
+                              }}</p>
+                         <p class="certificate-date">{{ certificate.date }}</p>
+                         <span class="view-btn">
+                              <fa-icon [icon]="faExternalLinkAlt"></fa-icon>
+                              View Certificate
+                         </span>
+                    </div>
+               </a>
+          </div>
+     </div>
+</section>

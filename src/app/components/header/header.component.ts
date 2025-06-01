@@ -1,36 +1,56 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {
+  faMoon,
+  faSun,
+  faBars,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons';
 import { ThemeService } from '../../services/theme.service';
-import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FontAwesomeModule],
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit {
-  isDarkMode$: Observable<'light' | 'dark'>;
-  isMobileMenuOpen = false;
+  scrolled = false;
+  isDarkTheme = false;
+  isMobileNavOpen = false;
 
-  constructor(private themeService: ThemeService) {
-    this.isDarkMode$ = this.themeService.isDarkTheme;
+  // Font Awesome icons
+  faMoon = faMoon;
+  faSun = faSun;
+  faBars = faBars;
+  faTimes = faTimes;
+
+  constructor(private readonly themeService: ThemeService) {}
+
+  ngOnInit(): void {
+    this.themeService.currentTheme$.subscribe((theme) => {
+      this.isDarkTheme = theme === 'dark';
+    });
+
+    // Check initial scroll position
+    this.checkScroll();
   }
 
-  ngOnInit(): void {}
+  @HostListener('window:scroll')
+  checkScroll(): void {
+    this.scrolled = window.scrollY > 10;
+  }
 
   toggleTheme(): void {
     this.themeService.toggleTheme();
   }
 
-  toggleMobileMenu(): void {
-    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  toggleMobileNav(): void {
+    this.isMobileNavOpen = !this.isMobileNavOpen;
   }
 
-  closeMobileMenu(): void {
-    if (this.isMobileMenuOpen) {
-      this.isMobileMenuOpen = false;
-    }
+  closeMobileNav(): void {
+    this.isMobileNavOpen = false;
   }
 }

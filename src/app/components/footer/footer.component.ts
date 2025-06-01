@@ -1,16 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {
+  faGithub,
+  faLinkedin,
+  faTwitter,
+} from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-footer',
+  standalone: true,
+  imports: [CommonModule, FontAwesomeModule],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
 })
-export class FooterComponent implements OnInit {
-  currentYear: number;
+export class FooterComponent {
+  faGithub = faGithub;
+  faLinkedin = faLinkedin;
+  faTwitter = faTwitter;
 
-  constructor() {
-    this.currentYear = new Date().getFullYear();
+  get currentYear(): number {
+    return new Date().getFullYear();
   }
-
-  ngOnInit(): void {}
 }

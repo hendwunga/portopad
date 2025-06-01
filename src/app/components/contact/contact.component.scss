@@ -1,76 +1,181 @@
-:host {
-  display: block;
-  padding-top: var(--spacing-xl);
-  padding-bottom: var(--spacing-xl);
+
+.contact {
+  background-color: var(--background-color);
+  padding: var(--section-padding); // Add section padding
+  margin-top: var(--section-spacing-vertical, 80px);
 }
 
-h2 {
+.section-title {
   text-align: center;
-  margin-bottom: var(--spacing-lg);
-  margin-top: 0;
-  color: var(--heading-color, var(--primary-dark, #0056b3));
-  font-size: 1.8rem;
-
-  @media (max-width: 767.98px) {
-    font-size: 1.6rem;
-  }
+  margin-bottom: var(--space-8);
 }
 
-p {
-  text-align: center;
-  max-width: 75ch;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: var(--spacing-lg);
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: var(--space-10);
 }
 
-.contact-icon-links {
+.contact-info h3,
+.contact-form-wrapper h3 {
+  margin-bottom: var(--space-4);
+  position: relative;
+  display: inline-block;
+}
+
+.contact-info h3::after,
+.contact-form-wrapper h3::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: var(--primary-color);
+}
+
+.contact-info p {
+  margin-bottom: var(--space-6);
+  color: var(--text-muted);
+}
+
+.contact-details {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: var(--spacing-lg);
-
-  @media (max-width: 767.98px) {
-    gap: var(--spacing-md);
-  }
-  @media (max-width: 575.98px) {
-    gap: var(--spacing-sm);
-  }
+  flex-direction: column;
+  gap: var(--space-4);
 }
 
-.contact-link {
-  display: inline-flex;
+.contact-item {
+  display: flex;
+  align-items: center;
+}
+
+.contact-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-color);
-  text-decoration: none;
-  padding: var(--spacing-sm);
+  background-color: var(--primary-glow);
+  color: var(--primary-color);
   border-radius: 50%;
-  transition: background-color var(--transition-speed) ease,
-    color var(--transition-speed) ease;
+  margin-right: var(--space-4);
+  flex-shrink: 0; /* Prevent icon from shrinking */
+}
 
-  svg {
-    width: 28px;
-    height: 28px;
-    stroke: var(--primary-color);
-    transition: stroke var(--transition-speed) ease;
-    display: block;
-    fill: none;
-    @media (max-width: 767.98px) {
-      width: 24px;
-      height: 24px;
-    }
-  }
+.contact-item h4 {
+  margin-bottom: var(--space-1);
+  font-size: 1.125rem;
+}
 
-  &:hover {
-    background-color: var(--border-color);
-    svg {
-      stroke: var(--primary-dark);
-    }
-  }
+.contact-item p {
+  margin-bottom: 0;
+}
 
-  @media (max-width: 767.98px) {
-    padding: var(--spacing-xs);
+.contact-form-wrapper {
+  background-color: var(--card-bg);
+  padding: var(--space-8);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: var(--space-2);
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: var(--space-3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  background-color: var(
+    --background-color
+  ); /* Use background-color for form inputs */
+  color: var(--text-color);
+  font-family: var(--font-family);
+  transition: border-color var(--transition-speed) var(--transition-timing);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.form-group input.invalid,
+.form-group textarea.invalid {
+  border-color: var(--error-color);
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 0.875rem;
+  margin-top: var(--space-1);
+}
+
+.btn.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color var(--transition-speed) var(--transition-timing);
+}
+
+.btn.btn-primary:hover:not(:disabled) {
+  background-color: var(--primary-dark);
+}
+
+.btn.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-icon {
+  font-size: 1.1em; /* Adjust icon size relative to button text */
+}
+
+/* Tambahkan gaya untuk link yang terlihat disabled */
+.contact-form a.btn.disabled {
+  opacity: 0.6; // Kurangi opacity
+  cursor: not-allowed; // Ubah kursor
+  pointer-events: none; // Pastikan klik diabaikan, ini juga penting untuk event handler di TS
+}
+
+// .submit-message {
+//   margin-top: var(--space-4);
+//   padding: var(--space-3);
+//   border-radius: var(--border-radius-sm);
+//   background-color: var(--error-color); /* Default to error background */
+//   color: white;
+//   text-align: center;
+// }
+
+// .submit-message.success {
+//   background-color: var(--success-color);
+// }
+
+@media (max-width: 992px) {
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
   }
 }

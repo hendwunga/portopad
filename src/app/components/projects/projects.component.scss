@@ -1,280 +1,364 @@
-:host {
-  display: block;
-  padding-top: var(--spacing-xl, 3rem);
-  padding-bottom: var(--spacing-xl, 3rem);
-  background-color: var(--section-bg, var(--bg-color, #f8f9fa));
+.projects {
+  background-color: var(--background-color);
+  padding: var(--section-padding) 0; // Assuming a variable for section padding
 }
 
-h2 {
+.section-title {
   text-align: center;
-  margin-bottom: var(--spacing-lg, 1.5rem);
-  margin-top: 0;
-  color: var(--heading-color, var(--primary-dark, #0056b3));
-  font-weight: 600;
+  margin-bottom: var(--space-10); // Use appropriate spacing variable
 }
-.project-grid {
+
+.filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-10);
+}
+
+.filter-btn {
+  background-color: var(--card-bg);
+  border: none;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-speed) var(--transition-timing);
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: var(--font-size-base); // Assuming a base font size variable
+}
+
+.filter-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.filter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow);
+}
+
+.projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-lg, 1.5rem);
-  align-items: start;
-
-  @media (max-width: 991.98px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 767.98px) {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-md, 1rem);
-  }
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-6);
 }
 
 .project-card {
-  background: var(--card-bg, #1f2833);
-  border: 1px solid var(--border-color, #45a29e);
-  box-shadow: var(--card-shadow);
-  border-radius: 12px;
-  padding: var(--spacing-lg, 1.5rem);
-  transition: transform var(--transition-speed, 0.3s) ease,
-    box-shadow var(--transition-speed, 0.3s) ease;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  transition: transform var(--transition-speed) var(--transition-timing);
+  height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.project-card.featured {
+  border: 2px solid var(--primary-color);
+  position: relative;
+}
+
+.project-card.featured::before {
+  content: "Featured";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  z-index: 1;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-thumbnail {
+  height: 200px;
   overflow: hidden;
-
-  &:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--card-hover-shadow);
-  }
-
-  .project-image {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    display: block;
-    border-radius: 6px;
-    margin-bottom: var(--spacing-md, 1rem);
-    background-color: var(--image-placeholder-bg, #c5c6c7);
-    cursor: pointer;
-
-    &.image-error {
-      object-fit: contain;
-    }
-  }
-
-  h4 {
-    margin-top: 0;
-    margin-bottom: var(--spacing-sm, 0.5rem);
-    font-size: 1.15rem;
-    color: var(--primary-color, #66fcf1);
-    text-align: center;
-    font-weight: 600;
-    word-break: break-word;
-    hyphens: auto;
-    min-height: 2.5em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 0;
-    flex-shrink: 0;
-  }
-
-  .details-button {
-    margin-top: var(--spacing-sm, 0.5rem);
-    margin-bottom: var(--spacing-md, 1rem);
-    align-self: center;
-    width: fit-content;
-    padding: var(--spacing-xs, 0.25rem) var(--spacing-md, 1rem);
-    font-size: 0.9rem;
-    border: 1px solid var(--primary-color, #66fcf1);
-    background-color: transparent;
-    color: var(--primary-color, #66fcf1);
-    cursor: pointer;
-    border-radius: 50px;
-    transition: background-color var(--transition-speed, 0.3s) ease,
-      color var(--transition-speed, 0.3s) ease;
-    flex-shrink: 0;
-
-    &:hover,
-    &:focus {
-      background-color: var(--primary-color, #66fcf1);
-      color: var(--button-outline-hover-text-color, #0b0c10);
-      outline: none;
-    }
-    &:focus-visible {
-      outline: 2px solid var(--primary-color, #66fcf1);
-      outline-offset: 1px;
-    }
-  }
-
-  .expandable-content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-  }
-
-  .project-role {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--text-color-secondary, var(--text-color, #c5c6c7));
-    opacity: 0.8;
-    margin-bottom: var(--spacing-md, 1rem);
-    text-align: left;
-    flex-shrink: 0;
-    padding-top: var(--spacing-sm);
-  }
-
-  .project-details {
-    margin-bottom: var(--spacing-md, 1rem);
-
-    ul,
-    li {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    li {
-      margin-bottom: var(--spacing-xs, 0.25rem);
-      padding-left: 1.4em;
-      position: relative;
-      font-size: 0.9rem;
-      opacity: 0.9;
-      line-height: 1.5;
-      color: var(--text-color, #c5c6c7);
-
-      &::before {
-        content: "▹";
-        position: absolute;
-        left: 0;
-        top: 0.1em;
-        color: var(--primary-color, #66fcf1);
-        font-weight: bold;
-        display: inline-block;
-        width: 1em;
-      }
-    }
-  }
-
-  .project-links {
-    margin-top: auto;
-    padding-top: var(--spacing-sm, 0.5rem);
-    text-align: center;
-    flex-shrink: 0;
-
-    .styled-link-button {
-      display: inline-block;
-      padding: var(--spacing-sm, 0.5rem) var(--spacing-lg, 1.5rem);
-      background-color: var(--primary-color, #66fcf1);
-      color: var(--button-primary-text-color, #0b0c10);
-      text-decoration: none;
-      border-radius: 50px;
-      transition: background-color var(--transition-speed, 0.3s) ease;
-      border: none;
-      cursor: pointer;
-      font-size: 0.9rem;
-      font-weight: 500;
-
-      &:hover,
-      &:focus {
-        background-color: var(--primary-dark, #45a29e);
-        outline: none;
-      }
-      &:focus-visible {
-        outline: 2px solid var(--primary-dark, #45a29e);
-        outline-offset: 2px;
-      }
-    }
-  }
 }
 
-.show-all-container {
-  text-align: center;
-  margin-top: var(--spacing-lg, 1.5rem);
-}
-
-.btn.outline {
+.project-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
   cursor: pointer;
-  padding: var(--spacing-sm, 0.5rem) var(--spacing-lg, 1.5rem);
-  border: 1px solid var(--primary-color, #66fcf1);
-  background-color: transparent;
-  color: var(--primary-color, #66fcf1);
-  border-radius: 50px;
-  transition: background-color var(--transition-speed, 0.3s) ease,
-    color var(--transition-speed, 0.3s) ease;
-  font-weight: 500;
-  font-size: 1rem;
-
-  &:hover,
-  &:focus {
-    background-color: var(--primary-color, #66fcf1);
-    color: var(--button-outline-hover-text-color, #0b0c10);
-    outline: none;
-  }
-  &:focus-visible {
-    outline: 2px solid var(--primary-color, #66fcf1);
-    outline-offset: 2px;
-  }
 }
 
-.lightbox-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.85);
+.project-thumbnail img:hover {
+  transform: scale(1.05);
+}
+
+.project-info {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.project-title {
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-xl); // Use appropriate font size variable
+  color: var(--heading-color); // Assuming a heading color variable
+}
+
+.project-description {
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
+  flex-grow: 1;
+  font-size: var(--font-size-base);
+}
+
+.project-technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.project-technologies span {
+  background-color: var(--primary-glow);
+  color: var(--primary-color);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.project-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto; /* Push actions to the bottom */
+}
+
+.project-links {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.project-link {
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1050;
-  cursor: pointer;
-  padding: 2rem;
+  background-color: var(--background-color);
+  border-radius: 50%;
+  color: var(--text-color);
+  transition: all var(--transition-speed) var(--transition-timing);
+  font-size: 1rem;
 }
 
-.lightbox-content {
-  position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
-  cursor: default;
-  display: flex;
+.project-link:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
 
-  img {
-    display: block;
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-    border-radius: 4px;
+/* Modal styles */
+// Overlay for the modal
+.project-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; // Ensure it's above everything
+  padding: var(--space-4); // Add some padding for smaller screens
+  overflow-y: auto; // Allow scrolling if content is too tall
+}
+
+.project-modal {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: var(--space-6);
+  width: 100%;
+  max-width: 900px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  position: relative; // Needed for close button positioning
+  max-height: 95vh; // Limit height
+  overflow-y: auto; // Allow scrolling inside the modal content
+}
+
+.project-modal-gallery {
+  width: 100%;
+}
+
+.main-image {
+  margin-bottom: var(--space-4);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+
+.main-image img {
+  width: 100%;
+  height: auto; // Let height adjust
+  object-fit: cover;
+  display: block; // Remove extra space below img
+}
+
+.image-thumbnails {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  padding-bottom: var(--space-2); // Add padding for scrollbar if needed
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: var(--primary-color) var(--background-color); /* For Firefox */
+}
+
+/* Custom scrollbar for Webkit */
+.image-thumbnails::-webkit-scrollbar {
+  height: 8px;
+}
+
+.image-thumbnails::-webkit-scrollbar-track {
+  background: var(--background-color);
+  border-radius: 4px;
+}
+
+.image-thumbnails::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  border: 2px solid var(--background-color);
+}
+
+.thumbnail {
+  width: 80px;
+  height: 50px;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity var(--transition-speed) var(--transition-timing),
+    border var(--transition-speed) var(--transition-timing);
+  flex-shrink: 0;
+  border: 2px solid transparent; // Add border for active state
+}
+
+.thumbnail.active {
+  opacity: 1;
+  border-color: var(--primary-color);
+}
+.thumbnail:hover {
+  opacity: 1;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block; // Remove extra space below img
+}
+
+.tech-stack {
+  margin: var(--space-4) 0;
+}
+
+.tech-stack h4 {
+  margin-bottom: var(--space-2);
+  color: var(--heading-color);
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tech-tags span {
+  background-color: var(--primary-glow);
+  color: var(--primary-color);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.875rem;
+}
+
+.full-description {
+  line-height: 1.6;
+  margin-bottom: var(--space-4);
+  color: var(--text-color);
+  font-size: var(--font-size-base);
+}
+
+.project-modal-links {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: var(--space-4); // Use spacing variable
+  right: var(--space-4); // Use spacing variable
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.5rem; // Slightly larger icon
+  cursor: pointer;
+  z-index: 1; // Ensure it's clickable
+  transition: color var(--transition-speed) var(--transition-timing);
+}
+
+.modal-close-btn:hover {
+  color: var(--primary-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .project-modal {
+    grid-template-columns: 1fr;
+    padding: var(--space-5); // Adjust padding
+    gap: var(--space-5); // Adjust gap
+  }
+
+  .project-modal-gallery {
+    order: 1; // Move gallery above content on smaller screens
+  }
+
+  .project-modal-content {
+    order: 2;
+  }
+
+  .modal-close-btn {
+    top: var(--space-3);
+    right: var(--space-3);
+    font-size: 1.25rem; // Smaller icon on mobile
   }
 }
 
-.lightbox-close {
-  position: absolute;
-  top: -15px;
-  right: -15px;
-  background-color: var(--card-bg, #1f2833);
-  color: var(--text-color, #c5c6c7);
-  border: 1px solid var(--border-color, #45a29e);
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  font-size: 1.8rem;
-  font-weight: 300;
-  line-height: 1;
-  text-align: center;
-  cursor: pointer;
-  padding: 0;
-  z-index: 1051;
-  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+@media (max-width: 576px) {
+  .projects-grid {
+    grid-template-columns: 1fr; // Stack cards on very small screens
+  }
 
-  &:hover,
-  &:focus {
-    background-color: var(--primary-color, #66fcf1);
-    color: var(--button-primary-text-color, #0b0c10);
-    outline: none;
-    transform: scale(1.1);
-    border-color: var(--primary-color, #66fcf1);
+  .project-modal {
+    padding: var(--space-4); // Further reduce padding
+    gap: var(--space-4); // Further reduce gap
+  }
+
+  .project-modal-links {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .project-card .project-info {
+    padding: var(--space-3); // Adjust card padding
+  }
+
+  .filter-btn {
+    padding: var(--space-2) var(--space-3); // Adjust filter button padding
   }
 }
