@@ -1,0 +1,119 @@
+@import url("/home/endos/Documents/VisualStudioCode/portopad/src/styles.scss"); // Assuming you have variables like --space-X, --transition-speed, etc.
+
+.certificates {
+  background-color: var(--background-color);
+  padding: var(--section-padding);
+  margin-top: var(--section-spacing-vertical, 80px);
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: var(--space-10);
+}
+
+.certificate-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-10);
+}
+
+.filter-btn {
+  background-color: var(--card-bg);
+  border: none;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-speed) var(--transition-timing);
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: var(--font-size-base); // Assuming a base font size variable
+}
+
+.filter-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.filter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow);
+}
+
+.certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-6);
+}
+
+.certificate-card {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: var(--space-6);
+  display: flex;
+  align-items: center;
+  box-shadow: var(--box-shadow);
+  transition: transform var(--transition-speed) var(--transition-timing);
+  cursor: pointer;
+
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.certificate-card:hover {
+  transform: translateY(-5px);
+}
+
+.certificate-icon {
+  font-size: 2.5rem;
+  margin-right: var(--space-4);
+  color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.certificate-info {
+  flex-grow: 1;
+}
+
+.certificate-name {
+  margin-bottom: var(--space-1);
+  font-size: 1.125rem;
+}
+
+.certificate-issuer {
+  color: var(--text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.certificate-date {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-bottom: var(--space-2);
+}
+
+.view-btn {
+  background-color: transparent;
+  border: none;
+  color: var(--primary-color);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: 0.875rem;
+  transition: color var(--transition-speed) var(--transition-timing);
+  text-decoration: none;
+}
+
+.certificate-card:hover .view-btn {
+  color: var(--primary-dark);
+}
+
+@media (max-width: 576px) {
+  .certificates-grid {
+    grid-template-columns: 1fr;
+  }
+  .certificate-card {
+    padding: var(--space-4);
+  }
+}
