@@ -11,6 +11,7 @@ import { CertificatesComponent } from './components/certificates/certificates.co
 import { ActivityComponent } from './components/activity/activity.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ModalComponent } from './services/shared/modal.component';
+import { MediaComponent } from './components/media/media.component';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,7 @@ import { ModalComponent } from './services/shared/modal.component';
     ProjectsComponent,
     CertificatesComponent,
     ActivityComponent,
+    MediaComponent,
     ContactComponent,
     ModalComponent,
   ],
@@ -38,6 +40,7 @@ import { ModalComponent } from './services/shared/modal.component';
       <app-projects></app-projects>
       <app-certificates></app-certificates>
       <app-activity></app-activity>
+      <app-media></app-media>
       <app-contact></app-contact>
     </main>
     <app-footer></app-footer>

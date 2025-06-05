@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  padding-top: 70px;
+  padding-top: 70px; /* Sesuaikan jika ada fixed header */
   overflow: hidden;
 }
 
@@ -14,10 +14,17 @@
   left: 0;
   right: 0;
   bottom: 0;
+  /* Gunakan variabel tema jika ada */
   background: linear-gradient(
     45deg,
-    rgba(59, 130, 246, 0.1),
-    rgba(20, 184, 166, 0.1)
+    rgba(var(--primary-rgb, 59, 130, 246), 0.1),
+    /* Contoh: gunakan variabel rgb */
+      rgba(var(--secondary-rgb, 20, 184, 166), 0.1)
+      /* Contoh: gunakan variabel rgb */
+      // Atau tetap pakai warna hardcode jika sesuai
+    // 45deg,
+    // rgba(59, 130, 246, 0.1),
+    // rgba(20, 184, 166, 0.1)
   );
   z-index: -1;
 }
@@ -26,59 +33,103 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-8) 0;
+  padding: var(--space-8, 2rem) 0; /* Padding vertikal, 0 horizontal */
+  width: 100%; /* Ambil lebar penuh container parent */
+  max-width: var(--container-width, 1200px); /* Max width dari tema/global */
+  margin: 0 auto; /* Pusatkan container */
+  padding: 0 var(--space-4, 1rem); /* Padding horizontal */
 }
 
 .hero-content {
   max-width: 600px;
-  margin-right: var(--space-8);
+  margin-right: var(--space-8, 2rem);
+  flex-shrink: 0; /* Konten tidak menyusut di desktop */
 }
 
 .hero-title {
   font-size: 3.5rem;
   font-weight: 700;
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-3, 0.75rem);
   line-height: 1.1;
+  color: var(--heading-color, #000); /* Warna judul dari tema */
 }
 
 .highlight {
   color: var(--primary-color);
   position: relative;
-}
-
-.highlight::after {
-  content: "";
-  position: absolute;
-  bottom: 5px;
-  left: 0;
-  width: 100%;
-  height: 8px;
-  background-color: var(--primary-glow);
-  z-index: -1;
+  /* Gaya untuk garis bawah highlight */
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 5px; /* Sesuaikan posisi garis */
+    left: 0;
+    width: 100%;
+    height: 8px; /* Ketebalan garis */
+    background-color: var(
+      --primary-glow,
+      rgba(0, 191, 166, 0.3)
+    ); /* Warna glow dari tema */
+    z-index: -1;
+  }
 }
 
 .hero-subtitle {
   font-size: 1.5rem;
-  color: var(--text-muted);
-  margin-bottom: var(--space-4);
+  color: var(--text-muted, #666); /* Warna muted dari tema */
+  margin-bottom: var(--space-4, 1rem);
+  font-weight: 400;
 }
 
 .hero-description {
   font-size: 1.125rem;
-  margin-bottom: var(--space-6);
-  color: var(--text-color);
+  margin-bottom: var(--space-6, 1.5rem);
+  color: var(--text-color, #333); /* Warna teks dari tema */
   line-height: 1.6;
 }
 
 .hero-cta {
   display: flex;
-  gap: var(--space-4);
-  margin-bottom: var(--space-6);
+  gap: var(--space-4, 1rem);
+  margin-bottom: var(--space-6, 1.5rem);
+  flex-wrap: wrap; /* Agar tombol wrap di layar kecil */
+  .btn {
+    /* Sesuaikan dengan gaya button Anda yang didefinisikan di tempat lain */
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs, 0.5rem);
+    padding: var(--space-2, 0.5rem) var(--space-4, 1rem);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all var(--transition-speed) ease;
+    .btn-icon {
+      font-size: 1rem;
+    }
+  }
+  .btn-primary {
+    background-color: var(--primary-color, #007bff);
+    color: var(--primary-text-color, white);
+    border: 1px solid var(--primary-color, #007bff);
+    &:hover {
+      background-color: var(--primary-dark, #0056b3);
+      border-color: var(--primary-dark, #0056b3);
+    }
+  }
+  .btn-outline {
+    border: 1px solid var(--border-color, #ccc);
+    background-color: transparent;
+    color: var(--text-color, #333);
+    &:hover {
+      background-color: var(--border-color, #eee);
+    }
+  }
 }
 
 .social-links {
   display: flex;
-  gap: var(--space-4);
+  gap: var(--space-4, 1rem);
+  /* Hapus margin-top di sini jika sudah diatur di Hero CTA atau elemen sebelumnya */
+  // margin-top: var(--space-6, 1.5rem); /* Contoh margin-top */
 }
 
 .social-links a {
@@ -88,47 +139,57 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--card-bg);
-  color: var(--text-color);
-  font-size: 1.25rem;
+  background-color: var(--card-bg, #fff); /* Latar belakang dari tema */
+  color: var(--text-color, #333); /* Warna ikon default dari tema */
+  font-size: 1.5rem; /* Ukuran ikon Font Awesome */
   transition: all var(--transition-speed) var(--transition-timing);
-  box-shadow: var(--box-shadow);
+  box-shadow: var(
+    --box-shadow,
+    0 2px 5px rgba(0, 0, 0, 0.1)
+  ); /* Shadow dari tema */
+  outline: none;
 
-  // Style for the inline SVGs
-  svg {
-    width: 24px;
-    height: 24px;
-    stroke: currentColor; // Use the parent's color
+  /* Gaya untuk Font Awesome ikon di dalamnya */
+  fa-icon {
+    /* Ukuran diatur oleh font-size parent */
+    svg {
+      fill: currentColor; /* Warisi warna dari parent */
+      width: 1em; /* Pastikan ukuran fixed relatif font size */
+      height: 1em; /* Pastikan ukuran fixed relatif font size */
+    }
   }
 }
 
 .social-links a:hover,
 .social-links a:focus {
-  transform: translateY(-3px);
-  color: var(--primary-color);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px); /* Efek hover naik */
+  color: var(--primary-color, #007bff); /* Warna ikon hover dari tema */
+  box-shadow: var(
+    --box-shadow-hover,
+    0 5px 15px rgba(0, 0, 0, 0.15)
+  ); /* Shadow hover dari tema */
 }
 
 .hero-image {
   position: relative;
+  flex-shrink: 0; /* Gambar tidak menyusut */
 }
 
 .profile-image {
   width: 400px;
   height: 550px;
-  /* border-radius: 50%; <-- Baris ini dihapus */
-  border-radius: 20px; /* <-- Tambahkan baris ini untuk sudut membulat */
+  border-radius: 20px;
   object-fit: cover;
-  border: 5px solid var(--card-bg);
-  box-shadow: var(--box-shadow);
+  border: 5px solid var(--card-bg, #fff); /* Border dari tema */
+  box-shadow: var(--box-shadow, 0 2px 5px rgba(0, 0, 0, 0.1));
   cursor: pointer;
   transition: transform var(--transition-speed) var(--transition-timing);
-  /* box-shadow: var(--box-shadow); -- Duplicated */
 }
 
 .profile-image:hover {
-  transform: scale(1.05);
+  transform: scale(
+    1.03
+  ); /* Kurangi sedikit efek scale hover agar tidak terlalu besar */
 }
 
 .scroll-down {
@@ -136,6 +197,7 @@
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 1; /* Pastikan di atas overlay */
 }
 
 .chevron {
@@ -166,7 +228,7 @@
   top: 0;
   height: 100%;
   width: 50%;
-  background: var(--primary-color);
+  background: var(--primary-color); /* Warna chevron dari tema */
 }
 
 .chevron:before {
@@ -198,41 +260,75 @@
   }
 }
 
+/* Responsive Adjustments */
 @media (max-width: 992px) {
   .hero-container {
     flex-direction: column;
     text-align: center;
+    padding: var(--space-6, 1.5rem) var(--space-4, 1rem); /* Kurangi padding */
   }
 
   .hero-content {
     margin-right: 0;
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-6, 1.5rem);
     order: 2;
+    max-width: 100%; /* Ambil lebar penuh di layar kecil */
   }
 
   .hero-image {
     order: 1;
-    margin-bottom: var(--space-8);
-  }
-
-  .hero-cta,
-  .social-links {
-    justify-content: center;
+    margin-bottom: var(--space-6, 1.5rem);
   }
 
   .hero-title {
     font-size: 2.5rem;
   }
+
+  .hero-subtitle {
+    font-size: 1.3rem;
+  }
+  .hero-description {
+    font-size: 1rem;
+    max-width: none; /* Jangan batasi lebar di layar kecil */
+  }
+
+  .hero-cta,
+  .social-links {
+    justify-content: center; /* Pusatkan tombol dan ikon sosial */
+  }
+
+  .profile-image {
+    width: 300px; /* Sesuaikan ukuran gambar di tablet */
+    height: auto; /* Biarkan tinggi auto */
+    max-height: 400px; /* Batasi tinggi */
+  }
 }
 
 @media (max-width: 576px) {
+  .hero {
+    padding-top: 50px;
+  } /* Kurangi padding atas */
+  .hero-container {
+    padding: var(--space-4, 1rem);
+  } /* Kurangi padding lebih lanjut */
+  .hero-title {
+    font-size: 2rem;
+  }
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  .hero-description {
+    font-size: 0.9rem;
+  }
+
   .profile-image {
-    width: 280px;
-    height: 350px;
+    width: 250px; /* Sesuaikan ukuran gambar di ponsel */
+    height: auto;
+    max-height: 300px;
   }
 
   .hero-cta {
     flex-direction: column;
-    gap: var(--space-3);
+    gap: var(--space-3, 0.75rem);
   }
 }
