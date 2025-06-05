@@ -1,32 +1,22 @@
 import { Component } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faGithub, faChrome } from '@fortawesome/free-brands-svg-icons';
 import {
-  // Icons from the original list that are still relevant
-  faGithub, // Keep for GitHub links
-  faChrome, // Keep for Live Preview links
-
-  // Icons potentially needed for modal links if not using solid
-  // faJava, faLaravel, faDocker, faKubernetes, faJetBrains, faLinux, faWindows, faBootstrap, faAngularjs // Example brand icons
-} from '@fortawesome/free-brands-svg-icons';
-import {
-  // Icons from the original list that are still relevant
-  faLink, // Keep for Live Preview button
-  faDatabase, // Keep for database icon
-
-  // Add or keep relevant solid icons for technologies if not using brands
-  faServer, // Generic for backend/APIs
-  faToolbox, // Generic for tools
-  faCogs, // Generic for build/configuration (Gradle, Maven)
-  faVial, // Generic for testing (JUnit)
-  faFileCode, // Generic for code/specifications (OpenAPI)
-  faCode, // Generic code icon (Kotlin, VS Code)
-  faTimes, // Import faTimes for modal close button
+  faLink,
+  faDatabase,
+  faServer,
+  faToolbox,
+  faCogs,
+  faVial,
+  faFileCode,
+  faCode,
+  faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { ModalService } from '../../services/shared/modal.service';
-// import { ModalComponent } from '../../services/shared/modal.component'; // This import was commented out in the original, keep it commented or remove if not directly used in this component.
 
+// Update interface Project untuk menyertakan 'simulasi' dalam tipe 'category'
 interface Project {
   id: number;
   title: string;
@@ -35,7 +25,8 @@ interface Project {
   technologies: string[];
   githubUrl?: string;
   liveUrl?: string;
-  category: 'web' | 'mobile' | 'design' | 'other';
+  // Tambahkan 'simulasi' ke tipe kategori yang valid
+  category: 'web' | 'mobile' | 'design' | 'other' | 'simulasi';
   images: string[];
   featured: boolean;
 }
@@ -53,16 +44,21 @@ export class ProjectsComponent {
   faLink = faLink;
   faTimes = faTimes;
 
+  // Tambahkan filter 'Simulasi' ke daftar filters
   filters = [
     { value: 'all', label: 'All' },
     { value: 'web', label: 'Web' },
     { value: 'mobile', label: 'Mobile' },
     { value: 'design', label: 'Design' },
+    { value: 'simulasi', label: 'Simulasi' }, // Filter baru
     { value: 'other', label: 'Other' },
   ];
 
-  activeFilter = 'all';
-  selectedProject: Project | null = null; // This is used for displaying the modal content
+  // Update tipe activeFilter untuk menyertakan 'simulasi'
+  activeFilter: 'all' | 'web' | 'mobile' | 'design' | 'other' | 'simulasi' =
+    'all';
+
+  selectedProject: Project | null = null;
   currentImageIndex = 0;
 
   projects: Project[] = [
@@ -90,7 +86,6 @@ export class ProjectsComponent {
       ],
       githubUrl:
         'https://github.com/hendrowunga/spring-boot-ecommerce-backend.git',
-      // liveUrl: 'https://example.com',
       category: 'web',
       images: [
         'assets/projects/FullStackSpringBoot.png',
@@ -150,7 +145,6 @@ export class ProjectsComponent {
       ],
 
       githubUrl: 'https://github.com/hendrowunga/batik-difabelzone.git',
-      // liveUrl: 'https://example.com',
       category: 'web',
       images: ['assets/projects/RestApi.png', 'assets/projects/RestApi.png'],
       featured: false,
@@ -176,7 +170,6 @@ export class ProjectsComponent {
 
       githubUrl: 'https://github.com/hendrowunga/batik-difabelzone.git',
 
-      // liveUrl: 'https://example.com',
       category: 'web',
       images: [
         'assets/projects/DifabelZone.png',
@@ -185,8 +178,7 @@ export class ProjectsComponent {
       featured: false,
     },
 
-    // Start
-
+    // Project "Opportunistic Network Environment Simulation" diubah kategorinya
     {
       id: 5,
       title: 'Opportunistic Network Environment Simulation',
@@ -208,10 +200,10 @@ export class ProjectsComponent {
 
       githubUrl: 'https://github.com/hendrowunga/the-one-pitt.git',
 
-      // liveUrl: 'https://example.com',
-      category: 'other',
+      // Kategori diubah menjadi 'simulasi'
+      category: 'simulasi',
       images: ['assets/projects/theOne.png', 'assets/projects/theOne.png'],
-      featured: true,
+      featured: true, // Pertahankan featured jika perlu
     },
 
     {
@@ -238,7 +230,6 @@ export class ProjectsComponent {
       githubUrl:
         'https://github.com/hendrowunga/Java-Naive-Bayes-Classifier.git',
 
-      // liveUrl: 'https://example.com',
       category: 'other',
       images: [
         'assets/projects/NaviBayes.png',
@@ -269,7 +260,6 @@ export class ProjectsComponent {
 
       githubUrl: 'https://github.com/hendrowunga/JavaProbabilityStats',
 
-      // liveUrl: 'https://example.com',
       category: 'other',
       images: [
         'assets/projects/javaProbability.png',
@@ -298,7 +288,6 @@ export class ProjectsComponent {
 
       githubUrl: 'https://github.com/hendrowunga/SpringBoot-security',
 
-      // liveUrl: 'https://example.com',
       category: 'web',
       images: [
         'assets/projects/springSecurity.png',
@@ -327,7 +316,6 @@ export class ProjectsComponent {
 
       githubUrl: 'https://github.com/hendrowunga/SpringBoot-refreshtoken',
 
-      // liveUrl: 'https://example.com',
       category: 'web',
       images: [
         'assets/projects/refresh_token.png',
@@ -348,7 +336,6 @@ export class ProjectsComponent {
       thumbnail: 'assets/projects/calculator.png',
       technologies: ['Java', 'Java Swing', 'GUI', 'Basic Arithmetic'],
       githubUrl: 'https://github.com/hendrowunga/Calculator_Application',
-      // liveUrl: 'https://example.com',
       category: 'mobile',
       images: [
         'assets/projects/calculator.png',
@@ -356,7 +343,30 @@ export class ProjectsComponent {
       ],
       featured: false,
     },
-    // end
+    {
+      id: 11, // ID unik
+      title: 'Java Hidden Markov Models (HMM) Implementation',
+      description:
+        'A basic Java implementation of Hidden Markov Models (HMM). Supports model and data reading, Viterbi and Forward-Backward algorithms, and prediction estimation.',
+      thumbnail: 'assets/projects/hmm1.jpg', // Path ke thumbnail proyek HMM
+      technologies: [
+        'Java',
+        'Hidden Markov Models (HMM)',
+        'Viterbi Algorithm',
+        'Forward-Backward Algorithm',
+        'Probability',
+      ],
+      githubUrl: 'https://github.com/hendrowunga/java-hmm.git', // Link GitHub Anda
+      // liveUrl: Jika ada demo live
+      category: 'other', // Kategori 'other' cocok, atau 'simulasi' jika lebih fokus ke simulasi data
+      images: [
+        'assets/projects/hmm1.jpg',
+        'assets/projects/hmm2.png',
+        'assets/projects/hmm3.png',
+        // Tambahkan path screenshot lainnya jika ada
+      ],
+      featured: false, // Sesuaikan jika ingin ditampilkan sebagai unggulan
+    },
   ];
 
   constructor(private readonly modalService: ModalService) {}
@@ -371,31 +381,22 @@ export class ProjectsComponent {
   }
 
   setFilter(filter: string): void {
-    this.activeFilter = filter;
+    // Menggunakan type assertion untuk memastikan filter adalah tipe yang benar
+    this.activeFilter = filter as
+      | 'all'
+      | 'web'
+      | 'mobile'
+      | 'design'
+      | 'other'
+      | 'simulasi';
   }
 
+  // Metode untuk membuka modal (menggunakan ModalService eksternal)
   openProjectDetails(project: Project): void {
-    this.currentImageIndex = 0;
-    // Assuming your ModalService handles opening a modal component,
-    // and you might pass data to it, including the selected project details.
-    // The actual modal rendering `<div *ngIf="selectedProject" ...>`
-    // was part of this component's *inline* template.
-    // If the modal is handled by a service and a separate component,
-    // you would remove the inline modal HTML from this component's template.
-    // For the purpose of *splitting the provided code*, I will move the modal HTML
-    // but note that a real-world scenario might put the modal HTML elsewhere.
-    // However, the original code *did* render the modal HTML conditionally within this component.
-    // Let's stick to splitting the *provided* code as-is.
-    this.selectedProject = project; // Set selected project for local modal display
-  }
-
-  // This method would likely be called by a close button in the modal HTML
-  closeProjectDetails(): void {
-    this.selectedProject = null;
-    this.currentImageIndex = 0;
-  }
-
-  setCurrentImage(index: number): void {
-    this.currentImageIndex = index;
+    this.modalService.openModal('project-details', {
+      title: project.title, // Judul modal header
+      isLarge: true, // Jika modal proyek ingin ukuran besar
+      projectDetails: project, // Data proyek lengkap untuk ditampilkan di modal
+    });
   }
 }

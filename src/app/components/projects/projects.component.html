@@ -3,6 +3,7 @@
     <h2 class="section-title">Projects</h2>
 
     <div class="filters">
+      <!-- Loop melalui array filters yang sudah diperbarui -->
       <button
         *ngFor="let filter of filters"
         class="filter-btn"
@@ -18,13 +19,13 @@
         class="project-card"
         [class.featured]="project.featured">
         <div class="project-thumbnail">
-          <!-- Using NgOptimizedImage requires `width` and `height` or `fill` -->
           <img
             [ngSrc]="project.thumbnail"
             [alt]="project.title"
             width="400"
             height="250"
-            (click)="openProjectDetails(project)" />
+            loading="lazy"
+            (click)="openProjectDetails(project)" /> <!-- Panggil metode openProjectDetails -->
         </div>
         <div class="project-info">
           <h3 class="project-title">{{ project.title }}</h3>
@@ -42,7 +43,7 @@
           <div class="project-actions">
             <button
               class="btn btn-primary"
-              (click)="openProjectDetails(project)">
+              (click)="openProjectDetails(project)"> <!-- Panggil metode openProjectDetails -->
               View Details
             </button>
             <div class="project-links">
@@ -71,73 +72,7 @@
     </div>
   </div>
 
-  <!-- Project Details Modal -->
-  <!--
-     NOTE: The original code rendered the modal structure directly within this component.
-     A common pattern is for a ModalService to render a separate ModalComponent
-     into a global overlay. If you use that pattern, remove this entire div.
-     However, based on your original inline template, this is where it lived.
-  -->
-  <div *ngIf="selectedProject" class="project-modal-overlay">
-    <div class="project-modal">
-      <div class="project-modal-gallery">
-        <div class="main-image">
-          <!-- Note: NgOptimizedImage is less common in modals/dynamic content
-               unless carefully managed. Using standard <img> here. -->
-          <img
-            [src]="selectedProject.images[currentImageIndex]"
-            [alt]="selectedProject.title" />
-        </div>
-        <div class="image-thumbnails">
-          <div
-            *ngFor="let image of selectedProject.images; let i = index"
-            class="thumbnail"
-            [class.active]="i === currentImageIndex"
-            (click)="setCurrentImage(i)">
-            <img [src]="image" [alt]="selectedProject.title + ' thumbnail'" />
-          </div>
-        </div>
-      </div>
+  <!-- Hapus struktur Modal Project Details dari sini -->
+  <!-- Struktur modal sekarang berada di ModalComponent.html -->
 
-      <div class="project-modal-content">
-        <h3>{{ selectedProject.title }}</h3>
-        <p class="full-description">{{ selectedProject.description }}</p>
-
-        <div class="tech-stack">
-          <h4>Technologies</h4>
-          <div class="tech-tags">
-            <span *ngFor="let tech of selectedProject.technologies">{{
-              tech
-              }}</span>
-          </div>
-        </div>
-
-        <div class="project-modal-links">
-          <a
-            *ngIf="selectedProject.githubUrl"
-            [href]="selectedProject.githubUrl"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-outline">
-            <fa-icon [icon]="faGithub" class="btn-icon"></fa-icon>
-            GitHub Repository
-          </a>
-          <a
-            *ngIf="selectedProject.liveUrl"
-            [href]="selectedProject.liveUrl"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-primary">
-            <fa-icon [icon]="faLink" class="btn-icon"></fa-icon>
-            Live Preview
-          </a>
-        </div>
-        <!-- Add a close button -->
-        <button class="modal-close-btn" (click)="closeProjectDetails()"
-          aria-label="Close modal">
-          <fa-icon [icon]="faTimes"></fa-icon>
-        </button>
-      </div>
-    </div>
-  </div>
 </section>

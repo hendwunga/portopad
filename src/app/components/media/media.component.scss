@@ -1,0 +1,202 @@
+.media-gallery-section {
+  background-color: var(--background-color);
+  padding: var(--section-padding, 80px 20px);
+  margin-top: var(--section-spacing-vertical, 80px);
+}
+
+.media-gallery-section .container {
+   max-width: var(--container-width, 1200px);
+   margin: 0 auto;
+   padding: 0 var(--space-4, 1rem);
+}
+
+.media-gallery-section .section-title {
+    text-align: center;
+    margin-bottom: var(--space-10, 4rem);
+    color: var(--heading-color, #000);
+ }
+
+.gallery-filters {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-10);
+}
+.filter-btn {
+   background-color: var(--card-bg); border: 1px solid var(--border-color, #eee); padding: var(--space-2) var(--space-4); border-radius: var(--border-radius); cursor: pointer; transition: all var(--transition-speed, 0.3s) var(--transition-timing, ease-in-out); color: var(--text-color); font-weight: 500; font-size: 0.9rem; outline: none;
+   &:hover { transform: translateY(-2px); box-shadow: var(--box-shadow, 0 2px 5px rgba(0,0,0,0.1)); }
+   &.active { background-color: var(--primary-color); color: var(--primary-text-color, white); border-color: var(--primary-color); }
+   &:focus-visible { box-shadow: 0 0 0 3px var(--primary-color-translucent, rgba(0, 123, 255, 0.5)); }
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-6);
+}
+
+.media-card {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+  transition: transform var(--transition-speed) var(--transition-timing), box-shadow var(--transition-speed) var(--transition-timing);
+  display: flex; flex-direction: column;
+}
+
+.media-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow-hover, 0 5px 15px rgba(0,0,0,0.15));
+}
+
+.media-thumbnail {
+  position: relative; width: 100%; height: 200px; overflow: hidden;
+  border-top-left-radius: var(--border-radius); border-top-right-radius: var(--border-radius);
+  flex-shrink: 0;
+}
+
+.thumbnail-image {
+  display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;
+}
+
+.thumbnail-video-container {
+    position: relative; width: 100%; height: 100%; background-color: black;
+}
+
+.play-icon-overlay {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex; justify-content: center; align-items: center;
+    opacity: 0;
+    transition: opacity var(--transition-speed) var(--transition-timing);
+     .media-card:hover & { opacity: 1; }
+     fa-icon { font-size: 3rem; color: white; }
+}
+
+.media-info {
+  padding: var(--space-4); text-align: center; flex-grow: 1;
+  display: flex; flex-direction: column;
+}
+
+.media-title {
+  font-weight: 600; font-size: 1.125rem; margin-bottom: var(--space-2); color: var(--heading-color, #000);
+}
+
+.media-year {
+  color: var(--text-muted); font-size: 0.875rem; margin-bottom: var(--space-2);
+}
+
+.media-description-short {
+   color: var(--text-color); font-size: 0.9rem; margin-top: var(--space-2); line-height: 1.4; flex-grow: 1;
+}
+
+
+/* --- Gaya Modal Media Viewer (Internal ke komponen ini) --- */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 2000;
+  overflow-y: auto; padding: var(--space-4, 1rem);
+}
+
+.modal-content {
+  background-color: var(--card-bg, #fff);
+  padding: var(--space-4, 1rem);
+  border-radius: var(--border-radius, 8px);
+  max-width: 90%;
+  max-height: 95vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: var(--box-shadow-lg, 0 10px 20px rgba(0,0,0,0.2));
+}
+
+.media-viewer-content {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.viewer-media-area {
+   position: relative; width: 100%; background-color: var(--background-color, #f8f9fa);
+   margin-bottom: var(--space-4, 1rem);
+}
+
+.viewer-image {
+  display: block; width: 100%; height: auto;
+  max-height: 80vh;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.viewer-video-container {
+  position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: black;
+  /* Gaya opsional untuk video TikTok vertikal */
+  /* & iframe { width: 100%; height: 100%; } */
+  /* &.tiktok-video { padding-bottom: 177.78%; } // Contoh rasio 9:16 */
+}
+
+.viewer-video {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+}
+
+.viewer-info-area {
+   padding: 0 var(--space-4, 1rem) var(--space-4, 1rem);
+   text-align: center;
+}
+
+.viewer-title {
+   font-size: 1.5rem; font-weight: 700; color: var(--heading-color, #000); margin-bottom: var(--space-2);
+}
+
+.viewer-year { font-size: 1rem; color: var(--text-muted, #666); margin-bottom: var(--space-2); }
+
+.viewer-description {
+   font-size: 1rem; color: var(--text-color, #333); line-height: 1.6; margin-top: var(--space-3);
+}
+
+.viewer-navigation {
+  position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%);
+  display: flex; justify-content: space-between; padding: 0 var(--space-4);
+  pointer-events: none; z-index: 10;
+}
+
+.nav-btn {
+  width: 48px; height: 48px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.9);
+  border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: var(--text-color, #333); transition: all var(--transition-speed) var(--transition-timing);
+  pointer-events: auto; box-shadow: var(--box-shadow-sm, 0 1px 3px rgba(0,0,0,0.1)); outline: none;
+  fa-icon { font-size: 1.5rem; }
+}
+
+.nav-btn:hover { background-color: white; transform: scale(1.1); box-shadow: var(--box-shadow, 0 2px 5px rgba(0,0,0,0.15)); }
+.nav-btn:focus-visible { box-shadow: 0 0 0 3px var(--primary-color-translucent, rgba(0, 123, 255, 0.5)); }
+
+.close-button {
+  position: absolute; top: var(--space-3, 0.75rem); right: var(--space-3, 0.75rem);
+  background: none; border: none; font-size: 2rem; cursor: pointer;
+  color: var(--text-muted, #666);
+  transition: color var(--transition-speed, 0.3s) ease;
+  z-index: 10;
+  &:hover { color: var(--text-color, #333); }
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+   .modal-content { max-width: 95%; }
+   .media-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: var(--space-4); }
+   .media-thumbnail { height: 180px; }
+   .play-icon-overlay fa-icon { font-size: 2.5rem; }
+   .media-info { padding: var(--space-3); }
+   .media-title { font-size: 1.3rem; }
+   .media-year { font-size: 0.9rem; }
+   .media-description-short { font-size: 0.9rem; }
+   .nav-btn { width: 40px; height: 40px; fa-icon { font-size: 1.3rem; } }
+   .viewer-navigation { padding: 0 var(--space-2); }
+    .viewer-title { font-size: 1.3rem; }
+    .viewer-year { font-size: 0.9rem; }
+    .viewer-description { font-size: 0.9rem; }
+    .close-button { font-size: 1.5rem; top: var(--space-2, 0.5rem); right: var(--space-2, 0.5rem); }
+}
