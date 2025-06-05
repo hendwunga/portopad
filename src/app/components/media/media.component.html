@@ -1,0 +1,117 @@
+<section id="media" class="media-gallery-section">
+  <div class="container">
+    <h2 class="section-title">Media Gallery</h2>
+
+    <div class="gallery-filters">
+      <button
+        *ngFor="let filter of filters"
+        class="filter-btn"
+        [class.active]="activeFilter === filter.value"
+        (click)="setFilter(filter.value)">
+        {{ filter.label }}
+      </button>
+    </div>
+
+    <div class="media-grid" @galleryAnimation>
+      <div *ngFor="let item of filteredMediaItems; let i = index"
+           class="media-card"
+           (click)="openMediaModal(item)">
+        <div class="media-thumbnail">
+           <ng-container [ngSwitch]="item.type">
+             <img
+               *ngSwitchCase="'image'"
+               [ngSrc]="item.thumbnailUrl || item.url || 'assets/placeholder-image.jpg'"
+               [alt]="item.title"
+               width="400"
+               height="300"
+               loading="lazy"
+               class="thumbnail-image"
+             />
+             <div *ngSwitchCase="'video'" class="thumbnail-video-container">
+                <img
+                  [ngSrc]="item.thumbnailUrl || 'assets/placeholder-video.jpg'"
+                  [alt]="item.title + ' Thumbnail'"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  class="thumbnail-image"
+                />
+                 <div class="play-icon-overlay">
+                    <fa-icon [icon]="item.videoProvider === 'youtube' ? faYoutube : item.videoProvider === 'tiktok' ? faTiktok : faInstagram"></fa-icon>
+                 </div>
+             </div>
+           </ng-container>
+        </div>
+
+        <div class="media-info">
+           <h3 class="media-title">{{ item.title }}</h3>
+           <p class="media-year">{{ item.year }}</p>
+           <p class="media-description-short" *ngIf="item.description">
+             {{ item.description }}
+           </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === Modal Media Viewer (Internal) === -->
+  <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeMediaModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div *ngIf="selectedMediaItem" class="media-viewer-content">
+
+         <div class="viewer-media-area">
+           <ng-container [ngSwitch]="selectedMediaItem.type">
+             <img
+               *ngSwitchCase="'image'"
+               [ngSrc]="selectedMediaItem.url || 'assets/placeholder-image.jpg'"
+               [alt]="selectedMediaItem.title"
+               loading="eager"
+               class="viewer-image"
+               width="1000"
+               height="800"  
+             />
+             <div *ngSwitchCase="'video'" class="viewer-video-container">
+               <iframe
+                 *ngIf="getSafeVideoEmbedUrl(selectedMediaItem) as videoUrl"
+                 [src]="videoUrl"
+                 frameborder="0"
+                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                 allowfullscreen
+                 class="viewer-video">
+               </iframe>
+               <p *ngIf="!getSafeVideoEmbedUrl(selectedMediaItem)">Could not load video.</p>
+             </div>
+           </ng-container>
+         </div>
+
+         <div class="viewer-info-area">
+           <h3 class="viewer-title">{{ selectedMediaItem.title }}</h3>
+           <p class="viewer-year">{{ selectedMediaItem.year }}</p>
+           <p class="viewer-description" *ngIf="selectedMediaItem.description">
+             {{ selectedMediaItem.description }}
+           </p>
+         </div>
+
+         <div class="viewer-navigation">
+            <button
+              *ngIf="hasPrevious"
+              class="nav-btn prev"
+              (click)="showPrevious()"
+              aria-label="Previous media">
+              <fa-icon [icon]="faChevronLeft"></fa-icon>
+            </button>
+            <button
+              *ngIf="hasNext"
+              class="nav-btn next"
+              (click)="showNext()"
+              aria-label="Next media">
+              <fa-icon [icon]="faChevronRight"></fa-icon>
+            </button>
+          </div>
+           <button class="close-button" (click)="closeMediaModal()">×</button>
+     </div>
+    </div>
+  </div>
+  <!-- =================================================== -->
+
+</section>
