@@ -1,39 +1,52 @@
 import { Component } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common'; // Pastikan NgOptimizedImage diimpor
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faGithub, faChrome } from '@fortawesome/free-brands-svg-icons';
 import {
   faLink,
-  faDatabase,
-  faServer,
-  faToolbox,
-  faCogs,
-  faVial,
-  faFileCode,
-  faCode,
+  faDatabase, // Tetap impor jika digunakan di tempat lain
+  faServer, // Tetap impor jika digunakan di tempat lain
+  faToolbox, // Tetap impor jika digunakan di tempat lain
+  faCogs, // Tetap impor jika digunakan di tempat lain
+  faVial, // Tetap impor jika digunakan di tempat lain
+  faFileCode, // Tetap impor jika digunakan di tempat lain
+  faCode, // Tetap impor jika digunakan di tempat lain
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { ModalService } from '../../services/shared/modal.service';
+import { ModalService } from '../../services/shared/modal.service'; // Pastikan path ini benar
 
-// Update interface Project untuk menyertakan 'simulasi' dalam tipe 'category'
+// --- DEFINE TIPE KATEGORI BARU ---
+// Union type untuk semua nilai kategori yang mungkin, termasuk 'all'
+type ProjectCategory =
+  | 'all'
+  | 'backend'
+  | 'frontend'
+  | 'algorithms'
+  | 'networking'
+  | 'simulasi'
+  | 'desktop'
+  | 'design'; // Sertakan 'design' jika Anda berencana menggunakannya
+
+// --- UPDATE INTERFACE PROJECT ---
 interface Project {
   id: number;
   title: string;
   description: string;
-  thumbnail: string;
+  thumbnail: string; // Gunakan NgOptimizedImage untuk ini di template HTML
   technologies: string[];
   githubUrl?: string;
   liveUrl?: string;
-  // Tambahkan 'simulasi' ke tipe kategori yang valid
-  category: 'web' | 'mobile' | 'design' | 'other' | 'simulasi';
-  images: string[];
+  // Gunakan ProjectCategory (tanpa 'all' karena 'all' bukan kategori proyek)
+  category: Exclude<ProjectCategory, 'all'>;
+  images: string[]; // Gunakan NgOptimizedImage untuk gambar di modal
   featured: boolean;
 }
 
 @Component({
   selector: 'app-projects',
   standalone: true,
+  // Tambahkan NgOptimizedImage ke imports
   imports: [CommonModule, FontAwesomeModule, NgOptimizedImage],
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss'],
@@ -44,23 +57,26 @@ export class ProjectsComponent {
   faLink = faLink;
   faTimes = faTimes;
 
-  // Tambahkan filter 'Simulasi' ke daftar filters
-  filters = [
+  // --- UPDATE DAFTAR FILTER DENGAN KATEGORI BARU ---
+  filters: { value: ProjectCategory; label: string }[] = [
     { value: 'all', label: 'All' },
-    { value: 'web', label: 'Web' },
-    { value: 'mobile', label: 'Mobile' },
-    { value: 'design', label: 'Design' },
-    { value: 'simulasi', label: 'Simulasi' }, // Filter baru
-    { value: 'other', label: 'Other' },
+    { value: 'backend', label: 'Backend' },
+    { value: 'algorithms', label: 'Algorithms & Tools' },
+    { value: 'simulasi', label: 'Simulation (ONE)' },
+    { value: 'networking', label: 'Networking (GNS3)' },
+    { value: 'desktop', label: 'Desktop' },
+    { value: 'frontend', label: 'Frontend' },
+
+    // { value: 'design', label: 'Design' }, // Komen/Hapus jika tidak ada proyek design
   ];
 
-  // Update tipe activeFilter untuk menyertakan 'simulasi'
-  activeFilter: 'all' | 'web' | 'mobile' | 'design' | 'other' | 'simulasi' =
-    'all';
+  // --- UPDATE TIPE activeFilter ---
+  activeFilter: ProjectCategory = 'all';
 
   selectedProject: Project | null = null;
   currentImageIndex = 0;
 
+  // --- UPDATE DATA PROYEK DENGAN KATEGORI BARU ---
   projects: Project[] = [
     {
       id: 1,
@@ -86,7 +102,7 @@ export class ProjectsComponent {
       ],
       githubUrl:
         'https://github.com/hendrowunga/spring-boot-ecommerce-backend.git',
-      category: 'web',
+      category: 'backend', // Kategori diperbarui dari 'web'
       images: [
         'assets/projects/sw1.png',
         'assets/projects/sw2.png',
@@ -120,7 +136,7 @@ export class ProjectsComponent {
 
       githubUrl:
         'https://github.com/hendrowunga/spring-boot-ecommerce-frontend.git',
-      category: 'web',
+      category: 'frontend', // Kategori diperbarui dari 'web'
       images: [
         'assets/projects/f2.png',
         'assets/projects/f3.png',
@@ -141,7 +157,7 @@ export class ProjectsComponent {
         'Implemented API documentation and testing using Swagger and Postman. ' +
         'Adopted GitHub Flow for version control and collaborative development. ' +
         'Contributed to an inclusive e-commerce system empowering local disabled artisans.',
-      thumbnail: 'assets/projects/RestApi.png',
+      thumbnail: 'assets/projects/dz1.png',
       technologies: [
         'Spring Boot',
         'REST API',
@@ -152,8 +168,13 @@ export class ProjectsComponent {
       ],
 
       githubUrl: 'https://github.com/hendrowunga/batik-difabelzone.git',
-      category: 'web',
-      images: ['assets/projects/RestApi.png', 'assets/projects/RestApi.png'],
+
+      category: 'backend', // Kategori diperbarui dari 'web'
+      images: [
+        'assets/projects/dz1.png',
+        'assets/projects/dz2.png',
+        'assets/projects/dz3.png',
+      ],
       featured: false,
     },
     {
@@ -177,7 +198,7 @@ export class ProjectsComponent {
 
       githubUrl: 'https://github.com/hendrowunga/batik-difabelzone.git',
 
-      category: 'web',
+      category: 'backend', // Kategori diperbarui dari 'web' (tetap backend karena fokusnya kuat di backend)
       images: [
         'assets/projects/DifabelZone.png',
         'assets/projects/DifabelZone.png',
@@ -185,7 +206,6 @@ export class ProjectsComponent {
       featured: false,
     },
 
-    // Project "Opportunistic Network Environment Simulation" diubah kategorinya
     {
       id: 5,
       title: 'Opportunistic Network Environment Simulation',
@@ -207,10 +227,9 @@ export class ProjectsComponent {
 
       githubUrl: 'https://github.com/hendrowunga/the-one-pitt.git',
 
-      // Kategori diubah menjadi 'simulasi'
-      category: 'simulasi',
+      category: 'simulasi', // Kategori tetap 'simulasi'
       images: ['assets/projects/theOne.png', 'assets/projects/theOne.png'],
-      featured: true, // Pertahankan featured jika perlu
+      featured: true,
     },
 
     {
@@ -230,14 +249,14 @@ export class ProjectsComponent {
         'Java',
         'Naive Bayes',
         'Laplace Smoothing',
-        'CLI',
+        'CLI', // Command Line Interface
         'Machine Learning (Basic)',
       ],
 
       githubUrl:
         'https://github.com/hendrowunga/Java-Naive-Bayes-Classifier.git',
 
-      category: 'other',
+      category: 'algorithms', // Kategori diperbarui dari 'other'
       images: [
         'assets/projects/NaviBayes.png',
         'assets/projects/NaviBayes.png',
@@ -267,7 +286,7 @@ export class ProjectsComponent {
 
       githubUrl: 'https://github.com/hendrowunga/JavaProbabilityStats',
 
-      category: 'other',
+      category: 'algorithms', // Kategori diperbarui dari 'other'
       images: [
         'assets/projects/javaProbability.png',
         'assets/projects/javaProbability.png',
@@ -291,11 +310,12 @@ export class ProjectsComponent {
         'JWT',
         'Email Verification',
         'REST API',
+        'Maven',
       ],
 
       githubUrl: 'https://github.com/hendrowunga/SpringBoot-security',
 
-      category: 'web',
+      category: 'backend', // Kategori diperbarui dari 'web'
       images: [
         'assets/projects/springSecurity.png',
         'assets/projects/springSecurity.png',
@@ -312,21 +332,26 @@ export class ProjectsComponent {
         'Integrated a refresh token mechanism to allow for seamless and secure user session renewal. ' +
         'Focused on efficient user session management by enabling the acquisition of new access tokens using refresh tokens. ' +
         'Provided a practical implementation of JWT access and refresh token patterns in a Spring Boot environment.',
-      thumbnail: 'assets/projects/refresh_token.png',
+      thumbnail: 'assets/projects/rt1.png',
       technologies: [
         'Spring Boot',
         'JWT',
         'Access Token',
         'Refresh Token',
         'Authentication System',
+        'Maven',
+        'PostgreSQL',
       ],
 
       githubUrl: 'https://github.com/hendrowunga/SpringBoot-refreshtoken',
 
-      category: 'web',
+      category: 'backend', // Kategori diperbarui dari 'web'
       images: [
-        'assets/projects/refresh_token.png',
-        'assets/projects/refresh_token.png',
+        'assets/projects/rt1.png',
+        'assets/projects/rt2.png',
+        'assets/projects/rt3.png',
+        'assets/projects/rt4.png',
+        'assets/projects/rt5.png',
       ],
       featured: false,
     },
@@ -343,7 +368,7 @@ export class ProjectsComponent {
       thumbnail: 'assets/projects/calculator.png',
       technologies: ['Java', 'Java Swing', 'GUI', 'Basic Arithmetic'],
       githubUrl: 'https://github.com/hendrowunga/Calculator_Application',
-      category: 'mobile',
+      category: 'desktop', // Kategori diperbarui dari 'mobile'
       images: [
         'assets/projects/calculator.png',
         'assets/projects/calculator.png',
@@ -355,7 +380,7 @@ export class ProjectsComponent {
       title: 'Java Hidden Markov Models (HMM) Implementation',
       description:
         'A basic Java implementation of Hidden Markov Models (HMM). Supports model and data reading, Viterbi and Forward-Backward algorithms, and prediction estimation.',
-      thumbnail: 'assets/projects/hmm1.jpg', // Path ke thumbnail proyek HMM
+      thumbnail: 'assets/projects/hmm1.jpg',
       technologies: [
         'Java',
         'Hidden Markov Models (HMM)',
@@ -363,17 +388,96 @@ export class ProjectsComponent {
         'Forward-Backward Algorithm',
         'Probability',
       ],
-      githubUrl: 'https://github.com/hendrowunga/java-hmm.git', // Link GitHub Anda
-      // liveUrl: Jika ada demo live
-      category: 'other', // Kategori 'other' cocok, atau 'simulasi' jika lebih fokus ke simulasi data
+      githubUrl: 'https://github.com/hendrowunga/java-hmm.git',
+      category: 'algorithms', // Kategori diperbarui dari 'other'
       images: [
         'assets/projects/hmm1.jpg',
         'assets/projects/hmm2.png',
         'assets/projects/hmm3.png',
-        // Tambahkan path screenshot lainnya jika ada
       ],
-      featured: false, // Sesuaikan jika ingin ditampilkan sebagai unggulan
+      featured: false,
     },
+
+    // --- TAMBAHKAN DATA UNTUK PROYEK MICROSERVICE DAN GNS3 DI SINI ---
+
+    {
+      id: 12,
+      title: 'Spring Boot Microservices Architecture Demonstration', // Judul profesional
+      description:
+        'A demonstration project implementing a microservices architecture using Spring Boot. ' +
+        'This project showcases essential microservices components, including an API Gateway for unified access, ' +
+        'a Discovery Server (Eureka) for dynamic service registration and discovery, ' +
+        'and a Config Server for centralized configuration management. ' +
+        'It features example microservices (such as Student and School services as depicted) ' + // Sesuai diagram
+        'interacting with dedicated, containerized databases (via Docker). ' +
+        'The architecture also integrates Zipkin for distributed tracing and observability, ' +
+        'providing practical insight into microservice structure and implementation.',
+      thumbnail: 'assets/projects/ms1.png', // Path relatif yang benar
+      technologies: [
+        'Spring Boot',
+        'Microservices Architecture',
+        'API Gateway',
+        'Eureka (Discovery)',
+        'Config Server',
+        'REST API',
+        'Docker',
+        'Zipkin',
+        'Maven',
+        'PostgreSQL',
+      ],
+      githubUrl: 'https://github.com/hendrowunga/SpringBoot-microservice.git', // URL GitHub Anda
+      category: 'backend', // Kategori backend
+      images: ['assets/projects/ms1.png', 'assets/projects/ms1.png'],
+      featured: false, // Sesuai keinginan
+    },
+
+    {
+      id: 13,
+      title: 'E-commerce Backend API (Spring Security, JPA, JWT)', // Judul lebih spesifik
+      description:
+        'A comprehensive backend API for an e-commerce platform, developed using the Spring Boot framework. ' +
+        'It provides core functionalities for managing users, products, and orders, built with a focus on security and data persistence.\n\n' +
+        'Key Features:\n' +
+        '- User management (Registration, Login, and verification)\n' +
+        '- Product management (APIs for adding, removing, and updating products)\n' +
+        '- Order management (APIs for viewing and managing user orders)\n\n' +
+        'Utilizes **Spring Security** and **JWT** for robust authentication and authorization, ' +
+        '**Spring Data JPA** for efficient database interactions (using Hibernate), ' +
+        'and includes comprehensive testing coverage with **JUnit 5** and **MockMvc**.',
+      thumbnail: 'assets/projects/mos1.png',
+      technologies: [
+        'Spring Boot',
+        'Spring Security',
+        'Spring Data JPA',
+        'JWT',
+        'JUnit 5',
+        'MockMvc',
+        'MySQL',
+        'Gradle',
+      ],
+      githubUrl: 'https://github.com/hendrowunga/SpringBoot-monolithic.git',
+      category: 'backend',
+      images: [
+        'assets/projects/mos1.png',
+        'assets/projects/mos2.png',
+        'assets/projects/mos3.png',
+        'assets/projects/mos4.png',
+      ],
+      featured: false,
+    },
+    // {
+    //   id: 13, // ID unik baru
+    //   title: 'Network Configuration on GNS3',
+    //   description: 'Configuration and simulation of network topologies using GNS3...',
+    //   thumbnail: 'assets/projects/gns3-thumb.png', // Ganti path
+    //   technologies: ['GNS3', 'Cisco IOS', 'Routing Protocols (OSPF, EIGRP)', 'Networking Concepts'], // Contoh teknologi
+    //   githubUrl: 'https://github.com/your-username/your-gns3-configs', // Ganti URL jika konfigurasi disimpan
+    //   category: 'networking', // Masuk kategori 'networking'
+    //   images: ['assets/projects/gns3-ss1.png', 'assets/projects/gns3-ss2.png'], // Screenshot modal
+    //   featured: false, // Sesuaikan
+    // },
+
+    // ------------------------------------------------------------------
   ];
 
   constructor(private readonly modalService: ModalService) {}
@@ -387,23 +491,26 @@ export class ProjectsComponent {
     );
   }
 
-  setFilter(filter: string): void {
-    // Menggunakan type assertion untuk memastikan filter adalah tipe yang benar
-    this.activeFilter = filter as
-      | 'all'
-      | 'web'
-      | 'mobile'
-      | 'design'
-      | 'other'
-      | 'simulasi';
+  // --- UPDATE TIPE PARAMETER setFilter ---
+  setFilter(filter: ProjectCategory): void {
+    this.activeFilter = filter;
   }
 
   // Metode untuk membuka modal (menggunakan ModalService eksternal)
   openProjectDetails(project: Project): void {
     this.modalService.openModal('project-details', {
-      title: project.title, // Judul modal header
-      isLarge: true, // Jika modal proyek ingin ukuran besar
-      projectDetails: project, // Data proyek lengkap untuk ditampilkan di modal
+      title: project.title,
+      isLarge: true,
+      projectDetails: project,
     });
   }
+
+  // Metode untuk menutup modal (jika Anda memiliki modal di dalam komponen ini seperti sebelumnya)
+  // Jika Anda menggunakan ModalService eksternal, Anda mungkin tidak memerlukan metode closeModal di sini
+  // kecuali jika ModalService Anda memanggil metode ini.
+  // Jika modal HTML ada di ProjectsComponent template:
+  // closeModal(): void {
+  //    this.selectedProject = null;
+  //    this.currentImageIndex = 0;
+  // }
 }
