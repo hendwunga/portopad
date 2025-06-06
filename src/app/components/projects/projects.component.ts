@@ -74,7 +74,7 @@ export class ProjectsComponent {
         'Containerized the backend with Docker for consistent deployment. ' +
         'Managed CI/CD pipeline with GitHub Actions for automated builds. ' +
         'Adopted GitHub Flow for collaborative version control.',
-      thumbnail: 'assets/projects/FullStackSpringBoot.png',
+      thumbnail: 'assets/projects/sw1.png',
       technologies: [
         'Spring Boot',
         'Spring Data JPA',
@@ -88,8 +88,11 @@ export class ProjectsComponent {
         'https://github.com/hendrowunga/spring-boot-ecommerce-backend.git',
       category: 'web',
       images: [
-        'assets/projects/FullStackSpringBoot.png',
-        'assets/projects/FullStackSpringBoot.png',
+        'assets/projects/sw1.png',
+        'assets/projects/sw2.png',
+        'assets/projects/sw3.png',
+        'assets/projects/sw41.png',
+        'assets/projects/sw42.png',
       ],
       featured: false,
     },
@@ -104,7 +107,7 @@ export class ProjectsComponent {
         'Implemented state management and routing with Angular services and Router. ' +
         'Optimized frontend performance with lazy loading and modular structure. ' +
         'Adopted GitHub Flow for collaborative version control.',
-      thumbnail: 'assets/projects/FullStackFrontendAngular.png',
+      thumbnail: 'assets/projects/f1.png',
       technologies: [
         'Angular',
         'Angular Material',
@@ -119,8 +122,12 @@ export class ProjectsComponent {
         'https://github.com/hendrowunga/spring-boot-ecommerce-frontend.git',
       category: 'web',
       images: [
-        'assets/projects/FullStackFrontendAngular.png',
-        'assets/projects/FullStackFrontendAngular.png',
+        'assets/projects/f2.png',
+        'assets/projects/f3.png',
+        'assets/projects/f4.png',
+        'assets/projects/f5.png',
+        'assets/projects/f6.png',
+        'assets/projects/f7.png',
       ],
       featured: false,
     },
