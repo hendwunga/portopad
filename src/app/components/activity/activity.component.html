@@ -1,25 +1,25 @@
 <section id="activity" class="activity">
-     <div class="container">
-          <h2 class="section-title">Academic & Project Activities</h2>
+  <div class="container">
+    <h2 class="section-title">Academic & Project Activities</h2>
 
-          <div class="timeline">
-               <div
-                    *ngFor="let activity of activities; let i = index"
-                    class="timeline-item"
-                    [class.right]="i % 2 !== 0">
-                    <div class="timeline-content">
-                         <div class="timeline-year">{{ activity.year }}</div>
-                         <h3 class="timeline-title">{{ activity.title }}</h3>
-                         <p class="timeline-description">{{ activity.description
-                              }}</p>
-                         <a
-                              *ngIf="activity.link"
-                              [href]="activity.link"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              class="timeline-link">Learn more</a>
-                    </div>
-               </div>
-          </div>
-     </div>
+    <div class="timeline">
+      <div
+        *ngFor="let activity of sortedActivities; let i = index"
+        class="timeline-item"
+        [class.right]="i % 2 !== 0">
+        <div class="timeline-content">
+          <div class="timeline-year">{{ activity.year }}</div>
+          <h3 class="timeline-title">{{ activity.title }}</h3>
+          <p class="timeline-description">{{ activity.description
+            }}</p>
+          <a
+            *ngIf="activity.link"
+            [href]="activity.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="timeline-link">Learn more</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
