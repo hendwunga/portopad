@@ -58,9 +58,9 @@ interface Skill {
 export class SkillsComponent {
   categories = [
     { value: 'all', label: 'All' },
-    { value: 'frontend', label: 'Frontend' },
     { value: 'backend', label: 'Backend' },
     { value: 'tools', label: 'Tools' },
+    { value: 'frontend', label: 'Frontend' },
     { value: 'other', label: 'Other' },
   ];
 
