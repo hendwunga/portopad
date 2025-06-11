@@ -14,7 +14,7 @@ interface Activity {
 @Component({
   selector: 'app-activity',
   standalone: true,
-  imports: [CommonModule, FaIconComponent], // Pastikan FaIconComponent diimpor jika dipakai di HTML
+  imports: [CommonModule], // FaIconComponent removed as it is not used in the template
   templateUrl: './activity.component.html',
   styleUrls: ['./activity.component.scss'],
 })
