@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  CommonModule,
-  NgOptimizedImage,
-} from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
@@ -25,18 +22,18 @@ import {
   stagger,
 } from '@angular/animations';
 
- interface MediaItem {
-   id: number;
-   type: 'image' | 'video';
-   title: string;
-   description?: string;
-   url?: string;
-   thumbnailUrl?: string;
-   videoProvider?: 'youtube' | 'tiktok' | 'instagram-reel';
-   videoId?: string;
-   year: string;
-   category: 'events' | 'projects' | 'personal';
- }
+interface MediaItem {
+  id: number;
+  type: 'image' | 'video';
+  title: string;
+  description?: string;
+  url?: string;
+  thumbnailUrl?: string;
+  videoProvider?: 'youtube' | 'tiktok' | 'instagram-reel';
+  videoId?: string;
+  year: string;
+  category: 'events' | 'projects' | 'personal';
+}
 
 @Component({
   selector: 'app-media',
@@ -88,47 +85,51 @@ export class MediaComponent implements OnInit {
     {
       id: 2,
       type: 'image',
-      title: 'Poster Competition',
-      url: 'assets/images/poster-competition.jpg',
-      year: '2022',
-      description: 'Hasil desain poster untuk tantangan UI/UX.',
-      thumbnailUrl: 'assets/images/poster-competition-thumb.jpg',
-      category: 'projects',
+      title: 'Data Science Competition at Gammafest 2024',
+      url: 'assets/activity/Gammafest.png',
+      thumbnailUrl: 'assets/activity/Gammafest.png',
+      year: '2024',
+      description:
+        'Partisipasi dalam lomba data science pada ajang Gammafest 2024, yang menantang peserta untuk menganalisis data dan menyusun solusi berbasis machine learning. Kompetisi ini menjadi wadah pengembangan keterampilan analisis data, pemodelan statistik, dan pemecahan masalah berbasis teknologi.',
+      category: 'events',
     },
+
     {
       id: 3,
       type: 'image',
-      title: 'Workshop Documentation',
-      url: 'assets/images/workshop-doc.jpg',
-      year: '2023',
-      description: 'Foto saat memfasilitasi workshop web development.',
-      thumbnailUrl: 'assets/images/workshop-doc-thumb.jpg',
-      category: 'events',
-    },
-    // Contoh video TikTok
-    {
-      id: 4, // Ubah ID jika perlu
-      type: 'video',
-      title: 'Project Feature Showcase (TikTok)',
-      videoProvider: 'tiktok',
-      videoId: 'TIKTOK_VIDEO_ID_ANDA_DI_SINI', // Ganti dengan ID video TikTok (angka di URL)
+      title: 'Exploring IT Infrastructure at PT Kanisius',
+      url: 'assets/activity/pt1.png',
+      thumbnailUrl: 'assets/activity/pt2.png',
       year: '2024',
-      description: 'Showcase singkat fitur terbaru dari proyek.',
-      thumbnailUrl: 'assets/media/thumbnails/tiktok-showcase-thumb.jpg', // Thumbnail khusus
-      category: 'projects',
-    },
-    {
-      id: 5, // Ubah ID jika perlu
-      type: 'image',
-      title: 'Hackathon Team Photo',
-      url: 'assets/media/images/hackathon-team.jpg',
-      year: '2022',
-      description: 'Foto tim setelah memenangkan hackathon.',
-      thumbnailUrl: 'assets/media/thumbnails/event-thumb2.jpg',
+      description:
+        'Kunjungan industri ke PT Kanisius untuk mempelajari penerapan sistem informasi, infrastruktur jaringan, dan workflow digital dalam mendukung operasional percetakan modern. Mahasiswa mendapatkan wawasan langsung tentang integrasi teknologi dalam dunia industri.',
       category: 'events',
     },
+
+    // Contoh video TikTok
+    // {
+    //   id: 4, // Ubah ID jika perlu
+    //   type: 'video',
+    //   title: 'Project Feature Showcase (TikTok)',
+    //   videoProvider: 'tiktok',
+    //   videoId: 'TIKTOK_VIDEO_ID_ANDA_DI_SINI', // Ganti dengan ID video TikTok (angka di URL)
+    //   year: '2024',
+    //   description: 'Showcase singkat fitur terbaru dari proyek.',
+    //   thumbnailUrl: 'assets/media/thumbnails/tiktok-showcase-thumb.jpg', // Thumbnail khusus
+    //   category: 'projects',
+    // },
+    // {
+    //   id: 5, // Ubah ID jika perlu
+    //   type: 'image',
+    //   title: 'Hackathon Team Photo',
+    //   url: 'assets/media/images/hackathon-team.jpg',
+    //   year: '2022',
+    //   description: 'Foto tim setelah memenangkan hackathon.',
+    //   thumbnailUrl: 'assets/media/thumbnails/event-thumb2.jpg',
+    //   category: 'events',
+    // },
     {
-      id: 6, // Berikan ID unik yang belum digunakan
+      id: 4, // Berikan ID unik yang belum digunakan
       type: 'video', // Sesuaikan jika ini screenshot (type: 'image')
       title: 'Proyek Jaringan: RIP Routing + Security', // Judul proyek
       videoProvider: 'tiktok',
@@ -140,29 +141,49 @@ export class MediaComponent implements OnInit {
       category: 'projects', // Kategori: Proyek
     },
     // Contoh Instagram Reel
+    // {
+    //   id: 7, // Ubah ID jika perlu
+    //   type: 'video',
+    //   title: 'Coding Timelapse (Instagram Reel)',
+    //   videoProvider: 'instagram-reel', // Tandai sebagai Instagram Reel
+    //   videoId: 'INSTAGRAM_REEL_ID_ANDA_DI_SINI', // Ganti dengan ID Reel (bagian dari URL)
+    //   year: '2024',
+    //   description: 'Timelapse singkat sesi coding.',
+    //   thumbnailUrl: 'assets/media/thumbnails/instagram-reel-thumb.jpg', // Thumbnail khusus
+    //   category: 'personal',
+    // },
     {
-      id: 7, // Ubah ID jika perlu
-      type: 'video',
-      title: 'Coding Timelapse (Instagram Reel)',
-      videoProvider: 'instagram-reel', // Tandai sebagai Instagram Reel
-      videoId: 'INSTAGRAM_REEL_ID_ANDA_DI_SINI', // Ganti dengan ID Reel (bagian dari URL)
-      year: '2024',
-      description: 'Timelapse singkat sesi coding.',
-      thumbnailUrl: 'assets/media/thumbnails/instagram-reel-thumb.jpg', // Thumbnail khusus
+      id: 5,
+      type: 'image',
+      title: 'Website E-commerce Batik DifabelZone',
+      url: 'assets/media/projekInfo.jpg',
+      thumbnailUrl: 'assets/media/projekInfo.jpg',
+      year: '2023',
+      description:
+        'Dokumentasi proyek pengembangan website E-commerce untuk Batik DifabelZone, sebuah inisiatif sosial yang memberdayakan pengrajin difabel di Yogyakarta. Tim mengembangkan platform digital untuk memperluas jangkauan pemasaran produk batik lokal melalui integrasi fitur katalog, pembayaran online, dan sistem manajemen pesanan.',
+      category: 'projects',
+    },
+    {
+      id: 6,
+      type: 'image',
+      title: 'Aktif di HMIF - Divisi Kaderisasi',
+      url: 'assets/activity/hmif.JPG',
+      thumbnailUrl: 'assets/activity/hmif.JPG',
+      year: '2022',
+      description:
+        'Berperan aktif dalam Himpunan Mahasiswa Informatika (HMIF) sebagai anggota Divisi Kaderisasi, yang fokus pada pengembangan karakter, kepemimpinan, dan pelatihan kader bagi mahasiswa baru. Terlibat dalam perencanaan serta pelaksanaan program pembinaan dan kegiatan internal organisasi.',
       category: 'personal',
     },
     {
-      id: 8, // Berikan ID unik yang belum digunakan
-      type: 'image', // Ini adalah gambar
-      title: 'Website E-commerce Batik DifabelZone', // Judul proyek/dokumentasi
-      // Gunakan URL gambar utama
-      url: 'assets/media/projekInfo.jpg', // Sesuaikan path
-      // Gunakan URL thumbnail (bisa sama dengan url jika tidak ada thumbnail terpisah)
-      thumbnailUrl: 'assets/media/projekInfo.jpg', // Sesuaikan path
-      year: '2023', // Sesuaikan tahun proyek ini berlangsung
+      id: 7,
+      type: 'image',
+      title: 'Kegiatan Sosial Peduli Kasih ke Panti Asuhan',
+      url: 'assets/activity/pdk.jpg',
+      thumbnailUrl: 'assets/activity/pdk.jpg',
+      year: '2022',
       description:
-        'Foto dokumentasi tim proyek Informatika dalam pengerjaan website E-commerce Batik DifabelZone di Jogja.', // Deskripsi yang lebih terstruktur
-      category: 'projects', // Kategori: Proyek
+        "Partisipasi dalam kegiatan sosial 'Peduli Kasih' melalui kunjungan ke panti asuhan. Kegiatan ini bertujuan untuk menumbuhkan kepedulian sosial serta membagikan bantuan dan kebahagiaan kepada anak-anak panti melalui berbagai aktivitas interaktif dan edukatif.",
+      category: 'personal',
     },
   ];
 
