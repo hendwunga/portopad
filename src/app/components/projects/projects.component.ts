@@ -436,14 +436,14 @@ export class ProjectsComponent {
       title: 'E-commerce Backend API (Spring Security, JPA, JWT)', // Judul lebih spesifik
       description:
         'A comprehensive backend API for an e-commerce platform, developed using the Spring Boot framework. ' +
-        'It provides core functionalities for managing users, products, and orders, built with a focus on security and data persistence.\n\n' +
-        'Key Features:\n' +
-        '- User management (Registration, Login, and verification)\n' +
-        '- Product management (APIs for adding, removing, and updating products)\n' +
-        '- Order management (APIs for viewing and managing user orders)\n\n' +
-        'Utilizes **Spring Security** and **JWT** for robust authentication and authorization, ' +
-        '**Spring Data JPA** for efficient database interactions (using Hibernate), ' +
-        'and includes comprehensive testing coverage with **JUnit 5** and **MockMvc**.',
+        'It provides core functionalities for managing users, products, and orders, built with a focus on security and data persistence.' +
+        'Key Features:' +
+        '- User management (Registration, Login, and verification)' +
+        '- Product management (APIs for adding, removing, and updating products)' +
+        '- Order management (APIs for viewing and managing user orders)' +
+        'Utilizes Spring Security and JWT for robust authentication and authorization, ' +
+        'Spring Data JPA for efficient database interactions (using Hibernate), ' +
+        'and includes comprehensive testing coverage with JUnit 5 and MockMvc.',
       thumbnail: 'assets/projects/mos1.png',
       technologies: [
         'Spring Boot',
@@ -478,6 +478,105 @@ export class ProjectsComponent {
     // },
 
     // ------------------------------------------------------------------
+
+    // ... (setelah proyek dengan id: 13) ...
+
+    {
+      id: 14,
+      title: 'Ant Colony Optimization for Traveling Salesman Problem (TSP)',
+      description:
+        'Mengimplementasikan algoritma metaheuristik Ant Colony Optimization (ACO) untuk menemukan solusi efisien untuk Traveling Salesman Problem (TSP). Proyek ini mensimulasikan bagaimana koloni semut secara kolektif menemukan jalur terpendek, menunjukkan penerapan algoritma yang terinspirasi dari alam untuk masalah optimasi NP-hard.',
+      thumbnail: 'assets/projects/tsp1.png', // GANTI: Visualisasi jalur terpendek
+      technologies: [
+        'Python',
+        'Ant Colony Optimization',
+        'Heuristics',
+        'Graph Theory',
+        'Optimization',
+      ],
+      githubUrl:
+        'https://github.com/hendrowunga/ML-Learning-Path/tree/main/src/classical_algorithms/Tsp-ACO',
+      category: 'algorithms',
+      images: ['assets/projects/tsp1.png'], // GANTI: gambar hasil dan grafik konvergensi
+      featured: true, // Sangat direkomendasikan untuk jadi unggulan
+    },
+    {
+      id: 15,
+      title: 'Hill Climbing Algorithm for Local Search Optimization',
+      description:
+        'Implementasi algoritma pencarian lokal Hill Climbing. Algoritma ini secara iteratif bergerak menuju solusi yang lebih baik dengan membuat perubahan kecil pada solusi saat ini. Proyek ini berfungsi sebagai demonstrasi dasar dari algoritma optimasi heuristik yang sederhana namun efektif.',
+      thumbnail: 'assets/projects/hc1.png', // GANTI: Visualisasi ruang pencarian atau grafik
+      technologies: [
+        'Java',
+        'Hill Climbing',
+        'Local Search',
+        'Heuristics',
+        'Optimization',
+      ],
+      githubUrl:
+        'https://github.com/hendrowunga/ML-Learning-Path/tree/main/src/classical_algorithms/Hill_Climbing',
+      category: 'algorithms',
+      images: ['assets/projects/hc1.png'], // GANTI: gambar hasil atau grafik konvergensi
+      featured: false,
+    },
+
+    {
+      id: 16,
+      title: 'Job Shop Scheduling using Particle Swarm Optimization (PSO)',
+      description:
+        'Penerapan Job Shop Scheduling Problem (JSSP) yang diselesaikan menggunakan metaheuristik Particle Swarm Optimization (PSO). Proyek ini menunjukkan bagaimana teknik optimasi populasi dapat digunakan untuk menjelajahi ruang solusi yang kompleks dan menemukan jadwal yang mendekati optimal.',
+      thumbnail: 'assets/projects/jssp1.png', // GANTI: Visualisasi pergerakan partikel atau grafik konvergensi
+      technologies: [
+        'Python',
+        'Particle Swarm Optimization',
+        'Job Shop Scheduling',
+        'Metaheuristics',
+      ],
+      githubUrl:
+        'https://github.com/hendrowunga/ML-Learning-Path/tree/main/src/classical_algorithms/job_shop_scheduling',
+      category: 'algorithms',
+      images: [
+        'assets/projects/jssp1.png',
+        'assets/projects/jssp3.png',
+        'assets/projects/jssp2.png',
+        'assets/projects/jssp4.png',
+      ],
+      featured: true, // Kandidat bagus untuk jadi unggulan karena menggunakan PSO
+    },
+
+    {
+      id: 17, // ID UNIK BARU
+      title: 'Book Social Network API',
+      description:
+        'A comprehensive backend API for a book-centric social networking platform, built with Spring Boot. ' +
+        'This project enables users to register, manage their book collections, and interact by sharing and borrowing books from each other.\n\n' +
+        'Key features include:' +
+        '- Secure Authentication: JWT-based security (Access & Refresh Tokens) with email account activation.' +
+        '- Full RESTful API: Complete CRUD operations for books with response pagination.' +
+        '- Social Interaction Logic: A full lifecycle for borrowing, returning, and approving book transactions.' +
+        '- Containerized Environment: The entire development setup (PostgreSQL, MailDev) is managed with Docker Compose for consistency and ease of setup.',
+      thumbnail: 'assets/projects/sb3.png',
+      technologies: [
+        'Spring Boot',
+        'Spring Security',
+        'JWT',
+        'PostgreSQL',
+        'Spring Data JPA',
+        'Docker',
+        'Docker Compose',
+        'REST API',
+      ],
+      githubUrl:
+        'https://github.com/hendrowunga/SpringBoot-Book-Social-Networking.git',
+      category: 'backend', // Kategori yang sangat sesuai
+      images: [
+        'assets/projects/sb3.png',
+        'assets/projects/sb1.png',
+        'assets/projects/sb0.png',
+        'assets/projects/sb2.png',
+      ],
+      featured: true, // WAJIB, ini adalah proyek unggulan yang sangat kuat!
+    },
   ];
 
   constructor(private readonly modalService: ModalService) {}
