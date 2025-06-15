@@ -62,7 +62,7 @@ export class ProjectsComponent {
     { value: 'all', label: 'All' },
     { value: 'backend', label: 'Backend' },
     { value: 'algorithms', label: 'Algorithms & Tools' },
-    { value: 'simulasi', label: 'Simulation (ONE)' },
+    { value: 'simulasi', label: 'Simulation' },
     { value: 'networking', label: 'Networking (GNS3)' },
     { value: 'desktop', label: 'Desktop' },
     { value: 'frontend', label: 'Frontend' },
@@ -576,6 +576,41 @@ export class ProjectsComponent {
         'assets/projects/sb2.png',
       ],
       featured: true, // WAJIB, ini adalah proyek unggulan yang sangat kuat!
+    },
+    {
+      id: 18, // ID unik baru
+      title:
+        'Comparative Analysis of Monte Carlo Efficiency in Computational Finance',
+      description:
+        'A comprehensive research project based on the paper "Monte Carlo scalable algorithms for Computational Finance". ' +
+        "This work began by replicating the paper's scalable parallel algorithms, followed by a critical analysis that identified key limitations in its financial methodology. " +
+        'To address these, the project was extended with three major enhancements:\n\n' +
+        '1. **Variance Reduction Techniques:** Implemented Antithetic Variates to demonstrate a significant reduction in statistical error, a standard industry practice omitted from the original paper.\n' +
+        '2. **Advanced Financial Modeling:** Applied the algorithms to price Asian Options, a path-dependent derivative with no analytical solution, showcasing a more relevant and challenging use case.\n' +
+        '3. **Quasi-Monte Carlo (QMC) Comparison:** Developed a pricer using Sobol sequences and performed a comparative analysis of convergence rates, proving the superior efficiency of QMC for this problem class.',
+      thumbnail: 'assets/projects/convergence_mc_vs_qmc.png',
+      technologies: [
+        'Python',
+        'NumPy',
+        'SciPy',
+        'Matplotlib',
+        'Pandas',
+        'Multiprocessing',
+        'Monte Carlo Simulation',
+        'Quasi-Monte Carlo (Sobol)',
+        'Variance Reduction',
+        'Computational Finance',
+      ],
+      githubUrl:
+        'https://github.com/hendrowunga/montecarlo-scalable-finance.git',
+      liveUrl:
+        'https://www.sciencedirect.com/science/article/pii/S1877050911002432',
+      category: 'simulasi',
+      images: [
+          'assets/projects/convergence_mc_vs_qmc.png', // Ganti dengan nama file Anda
+        'assets/projects/variance_reduction_comparison.png', // Ganti dengan nama file Anda
+      ],
+      featured: true, // WAJIB! Proyek ini menunjukkan keahlian riset dan analisis mendalam.
     },
   ];
 
