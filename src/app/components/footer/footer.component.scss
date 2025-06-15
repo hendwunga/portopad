@@ -1,93 +1,49 @@
 :host {
   display: block;
-  background-color: var(--card-bg);
-  padding: var(--space-12) 0 var(--space-6);
-  color: var(--text-color);
-  border-top: 1px solid var(--border-color);
-  margin-top: var(--section-spacing-vertical, 80px);
+  // Pertahankan gaya background dan warna teks
+  background-color: var(--card-bg); /* Menggunakan variabel tema */
+  color: var(--text-color); /* Menggunakan variabel tema */
+  padding: var(--space-6) 0; /* Sesuaikan padding vertical, bisa lebih kecil */
+  border-top: 1px solid var(--border-color); /* Menggunakan variabel tema */
+  margin-top: var(--section-spacing-vertical, 80px); /* Jarak dari section di atas */
+  text-align: center; /* Tambahkan ini untuk memusatkan konten block/inline-block di host */
 }
 
 .container {
    max-width: var(--container-width, 1200px);
    margin: 0 auto;
    padding: 0 var(--space-4, 1rem);
+   /* text-align: center; <-- Bisa di sini atau di :host */
 }
 
-.footer-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--space-8);
-  margin-bottom: var(--space-8);
+/* Kontainer baru untuk elemen yang ingin dirata-tengah */
+.footer-centered-content {
+    display: flex; /* Menggunakan flexbox */
+    flex-direction: column; /* Susun elemen secara vertikal */
+    align-items: center; /* Pusatkan item secara horizontal */
+    gap: var(--space-4); /* Jarak antara hak cipta dan ikon sosial */
+    /* Atau jika Anda ingin jarak lebih besar */
+    /* gap: var(--space-6); */
 }
 
-.footer-title {
-  margin-bottom: var(--space-3);
-  font-size: 1.5rem; /* Contoh ukuran */
-  color: var(--heading-color); /* Contoh warna */
+
+/* Gaya untuk teks hak cipta (Sekarang langsung di dalam footer-centered-content) */
+.copyright {
+  margin-top: 0; /* Pastikan tidak ada margin-top default */
+  margin-bottom: 0; /* Pastikan tidak ada margin-bottom default (gap di parent flex sudah mengatur jarak) */
+  color: var(--text-muted); /* Menggunakan variabel tema untuk teks muted */
+  font-size: 0.9rem; /* Ukuran font, sesuaikan jika perlu */
 }
 
-.footer-description {
-  color: var(--text-muted);
-  max-width: 300px;
-  font-size: 1rem; /* Contoh ukuran */
-}
 
-.footer-links h4,
-.footer-contact h4 {
-  margin-bottom: var(--space-4);
-  position: relative;
-  display: inline-block;
-  font-size: 1.2rem; /* Contoh ukuran */
-  color: var(--heading-color); /* Contoh warna */
-}
-
-.footer-links h4::after,
-.footer-contact h4::after {
-  content: "";
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 30px;
-  height: 2px;
-  background-color: var(--primary-color);
-}
-
-.footer-links ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-links li {
-  margin-bottom: var(--space-2);
-}
-
-.footer-links a {
-  color: var(--text-muted);
-  text-decoration: none;
-  transition: color var(--transition-speed, 0.3s) var(--transition-timing, ease-in-out);
-  font-size: 1rem; /* Contoh ukuran */
-  display: inline-block; /* Agar padding/margin vertikal bisa di apply jika perlu */
-}
-
-.footer-links a:hover,
-.footer-links a:focus {
-  color: var(--primary-color);
-}
-
-.footer-contact p {
-  margin-bottom: var(--space-2);
-  color: var(--text-muted);
-  font-size: 1rem; /* Contoh ukuran */
-  word-break: break-word;
-}
-
+/* Gaya untuk kontainer ikon sosial */
 .social-links {
-  display: flex;
-  gap: var(--space-4);
-  margin-top: var(--space-4);
-  /* Tambahkan justify-content: center; jika ingin ikon sosial di tengah */
-  /* justify-content: center; */
+  display: flex; /* Biarkan flexbox */
+  justify-content: center; /* Pastikan ikon rata tengah di dalam kontainernya */
+  align-items: center;
+  gap: var(--space-4); /* Jarak antar ikon */
+  margin-top: 0; /* Hapus margin-top lama */
+  margin-bottom: 0; /* Hapus margin-bottom lama */
 }
 
 /* Gaya untuk link ikon sosial */
@@ -97,13 +53,11 @@
   transition: color var(--transition-speed, 0.3s) var(--transition-timing, ease-in-out);
   outline: none; /* Hapus outline default */
 
-  /* Gaya untuk Font Awesome ikon di dalamnya */
   fa-icon {
-      /* Ukuran sudah diatur oleh font-size parent */
       svg {
-         fill: currentColor; /* Warisi warna dari parent */
-         width: 1em; /* Pastikan ukuran fixed relatif font size */
-         height: 1em; /* Pastikan ukuran fixed relatif font size */
+         fill: currentColor;
+         width: 1em;
+         height: 1em;
       }
   }
 }
@@ -118,37 +72,24 @@
 }
 
 
-.copyright {
-  text-align: center;
-  padding-top: var(--space-6);
-  border-top: 1px solid var(--border-color);
-  color: var(--text-muted);
-  font-size: 0.875rem;
-}
+/* Hapus semua gaya lama yang tidak terpakai */
+/* .footer-content, .footer-brand, .footer-title, .footer-description, */
+/* .footer-links, .footer-links h4, .footer-links h4::after, .footer-links ul, .footer-links li, .footer-links a */
+/* .footer-contact, .footer-contact h4, .footer-contact h4::after, .footer-contact p */
+/* .copyright (gunakan gaya baru di atas) */
+
 
 @media (max-width: 768px) {
-  .footer {
-    padding: var(--space-8) 0 var(--space-4);
-  }
+  /* Media query bisa disederhanakan atau dihapus jika layout flexbox sudah responsif */
+  /* .footer { padding: var(--space-8) 0 var(--space-4); } */
+  /* .footer-content { grid-template-columns: 1fr; gap: var(--space-6); } */
 
-  .footer-content {
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
+  /* Gaya pemusatan di flexbox sudah menangani ini */
+  /* .footer-brand, .footer-links, .footer-contact { text-align: center; } */
+  /* .footer-links h4::after, .footer-contact h4::after { left: 50%; transform: translateX(-50%); } */
 
-  /* Pusatkan semua blok di layar kecil */
-  .footer-brand, .footer-links, .footer-contact {
-      text-align: center;
-  }
-  /* Jika blok rata tengah, garis ::after juga harus rata tengah */
-  .footer-links h4::after,
-  .footer-contact h4::after {
-      left: 50%;
-      transform: translateX(-50%);
-  }
-
-  /* Pusatkan ikon sosial di layar kecil */
-  .social-links {
-      justify-content: center;
-  }
+  /* Gaya justify-content: center di social-links sudah menangani ini */
+  /* .social-links { justify-content: center; } */
 }
+
+/* Hapus media query lain yang tidak terpakai jika ada */
