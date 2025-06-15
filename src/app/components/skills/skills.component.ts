@@ -11,6 +11,7 @@ import {
   faGit,
   faNpm,
   faDocker,
+  faPython,
 
   // New icons from the brands pack (if available in free tier)
   faJava,
@@ -89,13 +90,15 @@ export class SkillsComponent {
   faVial = faVial;
   faFileCode = faFileCode;
   faCode = faCode;
+  faPython = faPython;
 
   skills: Skill[] = [
     // Backend Skills
     { name: 'Java', icon: this.faJava, category: 'backend' },
-    { name: 'Spring Boot', icon: this.faServer, category: 'backend' }, // Using faServer as a stand-in for Spring Boot
+    { name: 'Python', icon: this.faPython, category: 'backend' },
     { name: 'Kotlin', icon: this.faCode, category: 'backend' }, // Using faCode for Kotlin
     { name: 'Laravel', icon: this.faLaravel, category: 'backend' },
+    { name: 'Spring Boot', icon: this.faServer, category: 'backend' }, // Using faServer as a stand-in for Spring Boot
     { name: 'MySQL', icon: this.faDatabase, category: 'backend' },
     { name: 'PostgreSQL', icon: this.faDatabase, category: 'backend' }, // Using faDatabase for PostgreSQL
     { name: 'MongoDB', icon: this.faDatabase, category: 'backend' }, // Using faDatabase for MongoDB
@@ -103,10 +106,10 @@ export class SkillsComponent {
     { name: 'JUnit', icon: this.faVial, category: 'backend' }, // Using faVial for testing framework
 
     // Frontend Skills
+    { name: 'AngularJS', icon: this.faAngular, category: 'frontend' }, // Using faAngular icon for AngularJS
+    { name: 'JavaScript', icon: this.faJs, category: 'frontend' },
     { name: 'HTML5', icon: this.faHtml5, category: 'frontend' },
     { name: 'CSS3', icon: this.faCss3Alt, category: 'frontend' },
-    { name: 'JavaScript', icon: this.faJs, category: 'frontend' },
-    { name: 'AngularJS', icon: this.faAngular, category: 'frontend' }, // Using faAngular icon for AngularJS
     { name: 'Bootstrap', icon: this.faBootstrap, category: 'frontend' },
 
     // Tools
@@ -115,11 +118,11 @@ export class SkillsComponent {
     // { name: 'Kubernetes', icon: this.faKubernetes, category: 'tools' }, // Perlu cek apakah ini free
     { name: 'Postman', icon: this.faToolbox, category: 'tools' }, // Using faToolbox
     { name: 'GitHub Actions', icon: this.faGit, category: 'tools' }, // Using faGit
-    { name: 'NGINX', icon: this.faServer, category: 'tools' }, // Using faServer for NGINX
     { name: 'Gradle', icon: this.faCogs, category: 'tools' }, // Using faCogs
     { name: 'Apache Maven', icon: this.faCogs, category: 'tools' }, // Using faCogs
     { name: 'NPM', icon: this.faNpm, category: 'tools' },
     { name: 'OpenAPI', icon: this.faFileCode, category: 'tools' }, // Using faFileCode
+    { name: 'NGINX', icon: this.faServer, category: 'tools' }, // Using faServer for NGINX
     { name: 'IntelliJ IDEA', icon: this.faToolbox, category: 'tools' }, // Mengganti ikon JetBrains dengan faToolbox
     { name: 'VS Code', icon: this.faCode, category: 'tools' },
 
