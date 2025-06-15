@@ -12,8 +12,14 @@ import {
 // Impor ikon solid (misal untuk email dan download)
 import { faDownload, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { ModalService } from '../../services/shared/modal.service';
-import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
-
+import {
+  trigger,
+  transition,
+  style,
+  animate,
+  query,
+  stagger,
+} from '@angular/animations';
 
 // Pastikan ikon Font Awesome (brands dan solid) sudah ditambahkan
 // ke library global FontAwesome di proyek Anda (biasanya di app.config.ts atau app.module.ts)
@@ -81,4 +87,3 @@ export class HeroComponent implements OnInit {
     });
   }
 }
-
