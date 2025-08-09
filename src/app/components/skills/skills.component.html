@@ -3,6 +3,7 @@
     <h2 class="section-title">Skills & Expertise</h2>
 
     <div class="skills-categories">
+      <!-- Menggunakan filter category dari komponen TypeScript -->
       <button
         *ngFor="let category of categories"
         class="category-btn"
@@ -13,12 +14,13 @@
     </div>
 
     <div class="skills-grid">
+      <!-- Mengulang filteredSkills yang sudah terfilter -->
       <div
         *ngFor="let skill of filteredSkills"
         class="skill-card"
-        [ngClass]="'category-' + skill.category">
+        [ngClass]="'category-' + skill.category"> <!-- class ini bisa dihapus jika tidak ada gaya spesifik per kategori -->
         <div class="skill-icon">
-          <fa-icon [icon]="skill.icon"></fa-icon>
+          <fa-icon [icon]="skill.icon"></fa-icon> <!-- Menampilkan ikon Font Awesome -->
         </div>
         <h3 class="skill-name">{{ skill.name }}</h3>
       </div>
