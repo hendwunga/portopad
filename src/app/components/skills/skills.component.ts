@@ -1,137 +1,163 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import {
-  // Icons from the original list that are still relevant
-  faHtml5,
-  faCss3Alt,
-  faJs,
+  // Brand Icons (fa-brands)
+  faJava,
+  faPython,
+  faLaravel,
   faAngular,
-  faNode,
-  faGit,
+  faBootstrap,
   faNpm,
   faDocker,
-  faPython,
-
-  // New icons from the brands pack (if available in free tier)
-  faJava,
-  faLaravel,
-  // faKubernetes, // Icon for Kubernetes (Available in free brands - but check free tier)
-  // faJetBrains, // Icon for JetBrains (REQUIRES FONT AWESOME PRO) <-- Dikomen/Dihapus
-  faLinux, // Icon for Linux (Available in free brands)
-  faWindows, // Icon for Windows (Available in free brands)
-  faBootstrap, // Icon for Bootstrap (Available in free brands)
-
-  // faReact, // Removed as React is not in the new list
-  // faVuejs, // Removed as Vue.js is not in the new list
+  faGitAlt, // faGitAlt sekarang dideklarasikan juga sebagai properti faGitHubActions
+  faLinux,
+  faWindows,
+  faJs,
 } from '@fortawesome/free-brands-svg-icons';
 import {
-  // Icons from the original list that are still relevant
+  // Solid Icons (fa-solid)
   faDatabase,
-  faServer, // Often used for backend/APIs
-
-  // New icons from the solid pack (or generic)
-  faToolbox, // Generic for tools
-  faCogs, // Generic for build/configuration
-  faVial, // Generic for testing (JUnit)
-  faFileCode, // Generic for code/specifications (OpenAPI)
-  faCode, // Generic code icon (Kotlin, VS Code)
-
-  // faMobileScreen, // Removed as responsive design is not listed separately
-  // faGlobe, // Removed as web performance is not listed separately
+  faServer,
+  faCode,
+  faVial,
+  faGear,
+  faHammer,
+  faNetworkWired,
+  faFileCode,
+  faPlug,
+  faLayerGroup,
 } from '@fortawesome/free-solid-svg-icons';
 
-// Interface should stay in the .ts file as it defines data structure used by the class
+import {
+  LanguageService,
+  Language,
+} from '../../services/shared/language.service';
+
+type SkillCategoryType =
+  | 'all'
+  | 'languages'
+  | 'frameworks'
+  | 'databases'
+  | 'devops-tools'
+  | 'os-vcs';
+
 interface Skill {
   name: string;
-  icon: any;
-  category: 'frontend' | 'backend' | 'tools' | 'other';
+  icon: IconDefinition;
+  category: Exclude<SkillCategoryType, 'all'>;
+}
+
+interface FilterCategory {
+  value: SkillCategoryType;
+  labelKey: string;
 }
 
 @Component({
   selector: 'app-skills',
   standalone: true,
   imports: [CommonModule, FontAwesomeModule],
-  // References the external template and style files
   templateUrl: './skills.component.html',
   styleUrls: ['./skills.component.scss'],
 })
 export class SkillsComponent {
-  categories = [
-    { value: 'all', label: 'All' },
-    { value: 'backend', label: 'Backend' },
-    { value: 'tools', label: 'Tools' },
-    { value: 'frontend', label: 'Frontend' },
-    { value: 'other', label: 'Other' },
+  // --- Deklarasi Ikon Font Awesome (Agar dapat diakses di template) ---
+  // Deklarasikan semua ikon yang akan digunakan di template atau di array 'skills'
+  faJava = faJava;
+  faPython = faPython;
+  faKotlin = faCode;
+  faLaravel = faLaravel;
+  faSpringBoot = faServer; // Menggunakan faServer sebagai pengganti faSpring (Font Awesome Free)
+  faMySQL = faDatabase;
+  faPostgreSQL = faDatabase;
+  faMongoDB = faDatabase;
+  faSQLDeveloper = faHammer;
+  faDocker = faDocker;
+  faKubernetes = faLayerGroup; // Menggunakan faLayerGroup sebagai alternatif gratis
+  faPostman = faPlug;
+  faGitHubActions = faGitAlt; // Properti ini yang memegang ikon faGitAlt
+  faNGINX = faNetworkWired;
+  faGradle = faGear; // Menggunakan faGear sebagai pengganti faCogs
+  faApacheMaven = faGear; // Menggunakan faGear
+  faNpm = faNpm;
+  faJUnit = faVial;
+  faOpenAPI = faFileCode;
+  faIntelliJIDEA = faCode;
+  faVSCode = faCode;
+  faLinux = faLinux;
+  faWindows11 = faWindows;
+  faAngularJS = faAngular;
+  faBootstrap = faBootstrap;
+  faJs = faJs;
+  // --- Akhir Deklarasi Ikon Font Awesome ---
+
+  categories: FilterCategory[] = [
+    { value: 'all', labelKey: 'filterAll' },
+    { value: 'languages', labelKey: 'filterLanguages' },
+    { value: 'frameworks', labelKey: 'filterFrameworks' },
+    { value: 'databases', labelKey: 'filterDatabases' },
+    { value: 'devops-tools', labelKey: 'filterDevOpsTools' },
+    { value: 'os-vcs', labelKey: 'filterOsVcs' },
   ];
 
-  selectedCategory: string = 'all';
-
-  // Font Awesome icons declaration (updated)
-  faHtml5 = faHtml5;
-  faCss3Alt = faCss3Alt;
-  faJs = faJs;
-  faAngular = faAngular; // Or faJs if specifically targeting AngularJS? faAngular seems fine.
-  faNode = faNode;
-  faGit = faGit;
-  faNpm = faNpm;
-  faDocker = faDocker;
-  faJava = faJava;
-  faLaravel = faLaravel;
-  // faKubernetes = faKubernetes; // Check if this is truly free
-  // faJetBrains = faJetBrains; // <-- Dihapus/Dikomen
-  faLinux = faLinux;
-  faWindows = faWindows;
-  faBootstrap = faBootstrap;
-  faDatabase = faDatabase;
-  faServer = faServer;
-  faToolbox = faToolbox;
-  faCogs = faCogs;
-  faVial = faVial;
-  faFileCode = faFileCode;
-  faCode = faCode;
-  faPython = faPython;
+  selectedCategory: SkillCategoryType = 'all';
 
   skills: Skill[] = [
-    // Backend Skills
-    { name: 'Java', icon: this.faJava, category: 'backend' },
-    { name: 'Python', icon: this.faPython, category: 'backend' },
-    { name: 'Kotlin', icon: this.faCode, category: 'backend' }, // Using faCode for Kotlin
-    { name: 'Laravel', icon: this.faLaravel, category: 'backend' },
-    { name: 'Spring Boot', icon: this.faServer, category: 'backend' }, // Using faServer as a stand-in for Spring Boot
-    { name: 'MySQL', icon: this.faDatabase, category: 'backend' },
-    { name: 'PostgreSQL', icon: this.faDatabase, category: 'backend' }, // Using faDatabase for PostgreSQL
-    { name: 'MongoDB', icon: this.faDatabase, category: 'backend' }, // Using faDatabase for MongoDB
-    { name: 'RESTful APIs', icon: this.faServer, category: 'backend' }, // Using faServer for APIs
-    { name: 'JUnit', icon: this.faVial, category: 'backend' }, // Using faVial for testing framework
+    { name: 'Java', icon: this.faJava, category: 'languages' },
+    { name: 'Kotlin', icon: this.faKotlin, category: 'languages' },
+    { name: 'JavaScript', icon: this.faJs, category: 'languages' },
+    { name: 'Python', icon: this.faPython, category: 'languages' },
 
-    // Frontend Skills
-    { name: 'AngularJS', icon: this.faAngular, category: 'frontend' }, // Using faAngular icon for AngularJS
-    { name: 'JavaScript', icon: this.faJs, category: 'frontend' },
-    { name: 'HTML5', icon: this.faHtml5, category: 'frontend' },
-    { name: 'CSS3', icon: this.faCss3Alt, category: 'frontend' },
-    { name: 'Bootstrap', icon: this.faBootstrap, category: 'frontend' },
+    { name: 'Spring Boot', icon: this.faSpringBoot, category: 'frameworks' },
+    { name: 'Laravel', icon: this.faLaravel, category: 'frameworks' },
+    { name: 'AngularJS', icon: this.faAngularJS, category: 'frameworks' },
+    { name: 'Bootstrap', icon: this.faBootstrap, category: 'frameworks' },
 
-    // Tools
-    { name: 'SQL Developer', icon: this.faToolbox, category: 'tools' }, // Using faToolbox
-    { name: 'Docker', icon: this.faDocker, category: 'tools' },
-    // { name: 'Kubernetes', icon: this.faKubernetes, category: 'tools' }, // Perlu cek apakah ini free
-    { name: 'Postman', icon: this.faToolbox, category: 'tools' }, // Using faToolbox
-    { name: 'GitHub Actions', icon: this.faGit, category: 'tools' }, // Using faGit
-    { name: 'Gradle', icon: this.faCogs, category: 'tools' }, // Using faCogs
-    { name: 'Apache Maven', icon: this.faCogs, category: 'tools' }, // Using faCogs
-    { name: 'NPM', icon: this.faNpm, category: 'tools' },
-    { name: 'OpenAPI', icon: this.faFileCode, category: 'tools' }, // Using faFileCode
-    { name: 'NGINX', icon: this.faServer, category: 'tools' }, // Using faServer for NGINX
-    { name: 'IntelliJ IDEA', icon: this.faToolbox, category: 'tools' }, // Mengganti ikon JetBrains dengan faToolbox
-    { name: 'VS Code', icon: this.faCode, category: 'tools' },
+    { name: 'MySQL', icon: this.faMySQL, category: 'databases' },
+    { name: 'PostgreSQL', icon: this.faPostgreSQL, category: 'databases' },
+    { name: 'MongoDB', icon: this.faMongoDB, category: 'databases' },
 
-    // Other Skills (Operating Systems)
-    { name: 'Linux', icon: this.faLinux, category: 'other' },
-    { name: 'Windows 11', icon: this.faWindows, category: 'other' },
+    {
+      name: 'SQL Developer',
+      icon: this.faSQLDeveloper,
+      category: 'devops-tools',
+    },
+    { name: 'Docker', icon: this.faDocker, category: 'devops-tools' },
+    { name: 'Kubernetes', icon: this.faKubernetes, category: 'devops-tools' },
+    { name: 'Postman', icon: this.faPostman, category: 'devops-tools' },
+    // --- KOREKSI DI SINI: Gunakan this.faGitHubActions ---
+    {
+      name: 'GitHub Actions',
+      icon: this.faGitHubActions,
+      category: 'devops-tools',
+    },
+    // --- AKHIR KOREKSI ---
+    { name: 'NGINX', icon: this.faNGINX, category: 'devops-tools' },
+    { name: 'Gradle', icon: this.faGradle, category: 'devops-tools' },
+    {
+      name: 'Apache Maven',
+      icon: this.faApacheMaven,
+      category: 'devops-tools',
+    },
+    { name: 'NPM', icon: this.faNpm, category: 'devops-tools' },
+    { name: 'JUnit', icon: this.faJUnit, category: 'devops-tools' },
+    { name: 'OpenAPI', icon: this.faOpenAPI, category: 'devops-tools' },
+    {
+      name: 'IntelliJ IDEA',
+      icon: this.faIntelliJIDEA,
+      category: 'devops-tools',
+    },
+    { name: 'VS Code', icon: this.faVSCode, category: 'devops-tools' },
 
-    // Removed: React, Vue.js, Responsive Design, Web Performance
+    { name: 'Linux', icon: this.faLinux, category: 'os-vcs' },
+    { name: 'Windows 11', icon: this.faWindows11, category: 'os-vcs' },
+    // --- KOREKSI DI SINI: Gunakan this.faGitHubActions jika Anda ingin ikon yang sama untuk Git ---
+    { name: 'Git', icon: this.faGitHubActions, category: 'os-vcs' },
+    // --- AKHIR KOREKSI ---
   ];
+
+  constructor(public languageService: LanguageService) {}
 
   get filteredSkills(): Skill[] {
     if (this.selectedCategory === 'all') {
@@ -142,7 +168,7 @@ export class SkillsComponent {
     );
   }
 
-  filterByCategory(category: string): void {
+  filterByCategory(category: SkillCategoryType): void {
     this.selectedCategory = category;
   }
 }

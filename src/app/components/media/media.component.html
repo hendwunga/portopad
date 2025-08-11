@@ -1,10 +1,12 @@
 <section id="media" class="media-gallery-section">
   <div class="container">
-    <h2 class="section-title">Media Gallery</h2>
+    <!-- Judul Bagian -->
+    <h2 class="section-title">{{ languageService.getTranslation('mediaSectionTitle') | async }}</h2>
 
     <div class="gallery-filters">
+      <!-- Loop melalui filters$ (Observable) -->
       <button
-        *ngFor="let filter of filters"
+        *ngFor="let filter of (filters$ | async)"
         class="filter-btn"
         [class.active]="activeFilter === filter.value"
         (click)="setFilter(filter.value)">
@@ -12,16 +14,23 @@
       </button>
     </div>
 
+    <!-- Pesan jika tidak ada item ditemukan -->
+    <div *ngIf="filteredMediaItems.length === 0" class="no-items-message">
+      {{ languageService.getTranslation('noMediaItemsFound') | async }}
+    </div>
+
     <div class="media-grid" @galleryAnimation>
-      <div *ngFor="let item of filteredMediaItems; let i = index"
+      <!-- Gunakan displayedMediaItems untuk loop -->
+      <div *ngFor="let item of displayedMediaItems; let i = index"
            class="media-card"
+           tabindex="0"
            (click)="openMediaModal(item)">
         <div class="media-thumbnail">
            <ng-container [ngSwitch]="item.type">
              <img
                *ngSwitchCase="'image'"
                [ngSrc]="item.thumbnailUrl || item.url || 'assets/placeholder-image.jpg'"
-               [alt]="item.title"
+               [alt]="getTranslatedText(item.title)"
                width="400"
                height="300"
                loading="lazy"
@@ -30,7 +39,7 @@
              <div *ngSwitchCase="'video'" class="thumbnail-video-container">
                 <img
                   [ngSrc]="item.thumbnailUrl || 'assets/placeholder-video.jpg'"
-                  [alt]="item.title + ' Thumbnail'"
+                  [alt]="getTranslatedText(item.title) + ' Thumbnail'"
                   width="400"
                   height="300"
                   loading="lazy"
@@ -44,18 +53,23 @@
         </div>
 
         <div class="media-info">
-           <h3 class="media-title">{{ item.title }}</h3>
+           <h3 class="media-title">{{ getTranslatedText(item.title) }}</h3>
            <p class="media-year">{{ item.year }}</p>
-           <p class="media-description-short" *ngIf="item.description">
-             {{ item.description }}
-           </p>
         </div>
       </div>
     </div>
+
+    <!-- Tombol "Show More" -->
+    <div class="show-more-container" *ngIf="canShowMore">
+      <button class="btn btn-primary show-more-btn" (click)="loadMoreItems()">
+        {{ languageService.getTranslation('showMoreButtonLabel') | async }}
+      </button>
+    </div>
+
   </div>
 
   <!-- === Modal Media Viewer (Internal) === -->
-  <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeMediaModal()">
+  <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeMediaModal()" @modalAnimation>
     <div class="modal-content" (click)="$event.stopPropagation()">
       <div *ngIf="selectedMediaItem" class="media-viewer-content">
 
@@ -64,31 +78,31 @@
              <img
                *ngSwitchCase="'image'"
                [ngSrc]="selectedMediaItem.url || 'assets/placeholder-image.jpg'"
-               [alt]="selectedMediaItem.title"
+               [alt]="getTranslatedText(selectedMediaItem.title)"
                loading="eager"
                class="viewer-image"
                width="1000"
-               height="800"  
+               height="800"
              />
              <div *ngSwitchCase="'video'" class="viewer-video-container">
                <iframe
                  *ngIf="getSafeVideoEmbedUrl(selectedMediaItem) as videoUrl"
                  [src]="videoUrl"
                  frameborder="0"
-                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                 allow="accelerometer; autoplay; clipboard-write; encrypted-m        edia; gyroscope; picture-in-picture; web-share"
                  allowfullscreen
                  class="viewer-video">
                </iframe>
-               <p *ngIf="!getSafeVideoEmbedUrl(selectedMediaItem)">Could not load video.</p>
+               <p *ngIf="!getSafeVideoEmbedUrl(selectedMediaItem)" class="error-message">{{ languageService.getTranslation('videoLoadError') | async }}</p>
              </div>
            </ng-container>
          </div>
 
          <div class="viewer-info-area">
-           <h3 class="viewer-title">{{ selectedMediaItem.title }}</h3>
+           <h3 class="viewer-title">{{ getTranslatedText(selectedMediaItem.title) }}</h3>
            <p class="viewer-year">{{ selectedMediaItem.year }}</p>
            <p class="viewer-description" *ngIf="selectedMediaItem.description">
-             {{ selectedMediaItem.description }}
+             {{ getTranslatedText(selectedMediaItem.description) }}
            </p>
          </div>
 
@@ -97,21 +111,21 @@
               *ngIf="hasPrevious"
               class="nav-btn prev"
               (click)="showPrevious()"
-              aria-label="Previous media">
+              [attr.aria-label]="(languageService.getTranslation('previousMediaLabel') | async)">
               <fa-icon [icon]="faChevronLeft"></fa-icon>
             </button>
             <button
               *ngIf="hasNext"
               class="nav-btn next"
               (click)="showNext()"
-              aria-label="Next media">
+              [attr.aria-label]="(languageService.getTranslation('nextMediaLabel') | async)">
               <fa-icon [icon]="faChevronRight"></fa-icon>
             </button>
           </div>
-           <button class="close-button" (click)="closeMediaModal()">×</button>
+           <button class="close-button" (click)="closeMediaModal()" [attr.aria-label]="languageService.getTranslation('closeModalButton') | async">
+             <fa-icon [icon]="faTimes"></fa-icon>
+           </button>
      </div>
     </div>
   </div>
-  <!-- =================================================== -->
-
 </section>

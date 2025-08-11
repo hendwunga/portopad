@@ -16,26 +16,36 @@
   margin-bottom: var(--space-10);
 }
 
+
 .filter-btn {
   background-color: var(--card-bg);
-  border: none;
-  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border-color); /* Border agar terlihat lebih jelas */
+  padding: var(--space-2) var(--space-4); /* Padding tombol */
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: all var(--transition-speed) var(--transition-timing);
   color: var(--text-color);
   font-weight: 500;
-  font-size: var(--font-size-base); // Assuming a base font size variable
-}
+  font-size: var(--font-size-base); /* Ukuran font standar */
+  white-space: nowrap; /* Mencegah teks pecah baris */
+  outline: none; /* Hapus outline default */
 
-.filter-btn.active {
-  background-color: var(--primary-color);
-  color: white;
-}
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow);
+    background-color: var(--background-color); /* Ubah background saat hover */
+    color: var(--primary-dark); /* Ubah warna teks saat hover */
+  }
 
-.filter-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--box-shadow);
+  &.active {
+    background-color: var(--primary-color);
+    color: white; /* Teks putih di atas primary color */
+    border-color: var(--primary-color); /* Border sama dengan background */
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px var(--primary-color); /* Fokus keyboard */
+  }
 }
 
 .projects-grid {
@@ -72,6 +82,13 @@
   font-size: 0.75rem;
   font-weight: 600;
   z-index: 1;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: var(--space-10); /* Jarak bawah yang konsisten */
+  color: var(--heading-color);
+  font-size: var(--font-size-h2, 2.5rem); /* Gunakan variabel ukuran judul */
 }
 
 .project-card:hover {
@@ -360,5 +377,59 @@
 
   .filter-btn {
     padding: var(--space-2) var(--space-3); // Adjust filter button padding
+  }
+}
+/* --- Kontrol Show More --- */
+.show-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-8); /* Jarak dari grid proyek */
+  padding: var(--space-4) 0;
+  border-top: 1px solid var(--border-color); /* Garis pemisah opsional */
+}
+
+.show-more-btn {
+  /* Anda bisa menggunakan gaya .btn .btn-primary yang sudah ada atau sesuaikan */
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--font-size-lg);
+  border-radius: var(--border-radius);
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-speed) var(--transition-timing);
+  outline: none;
+
+  &:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow);
+  }
+  &:focus-visible {
+    box-shadow: 0 0 0 2px var(--primary-color);
+  }
+}
+
+/* Pesan jika tidak ada item (BARU) */
+.no-items-message {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--font-size-xl);
+  padding: var(--space-8);
+  font-weight: 500;
+}
+
+/* Responsive Adjustments (untuk show more button) */
+@media (max-width: 768px) {
+  .show-more-container {
+    margin-top: var(--space-6);
+  }
+  .show-more-btn {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-base);
+  }
+  .no-items-message {
+    font-size: var(--font-size-lg);
+    padding: var(--space-6);
   }
 }

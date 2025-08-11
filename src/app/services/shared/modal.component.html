@@ -1,0 +1,132 @@
+<div
+  class="modal-overlay"
+  *ngIf="isOpen"
+  (click)="onOverlayClick($event)"
+  @fadeAnimation
+>
+  <div
+    class="modal-container"
+    [class.is-large]="isLarge"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div class="modal-header">
+      <h3 class="modal-title">{{ title }}</h3>
+      <button class="modal-close" (click)="closeModal()" aria-label="Close modal">
+        ×
+      </button>
+    </div>
+    <div class="modal-body">
+      <!-- Tampilkan detail proyek jika modal ID adalah 'project-details' dan ada data proyek -->
+      <div
+        *ngIf="modalId === 'project-details' && selectedProjectDetails"
+        class="project-modal"
+      >
+        <div class="project-modal-gallery">
+          <div class="main-image">
+            <img
+              [ngSrc]="selectedProjectDetails.images[currentImageIndex]"
+              [alt]="getTranslatedText(selectedProjectDetails.title) + ' image ' + (currentImageIndex + 1)"
+              width="800"
+              height="450"
+              priority
+            />
+          </div>
+          <div class="image-thumbnails">
+            <div
+              *ngFor="
+                let image of selectedProjectDetails.images;
+                let i = index
+              "
+              class="thumbnail"
+              [class.active]="i === currentImageIndex"
+              (click)="setCurrentImage(i)"
+            >
+              <img
+                [ngSrc]="image"
+                [alt]="getTranslatedText(selectedProjectDetails.title) + ' thumbnail ' + (i + 1)"
+                width="120"
+                height="75"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="project-modal-content">
+          <!-- JUDUL PROYEK: Gunakan getTranslatedText -->
+          <h3 class="project-title-modal">{{ getTranslatedText(selectedProjectDetails.title) }}</h3>
+          <!-- DESKRIPSI LENGKAP: Gunakan getTranslatedText -->
+          <p class="full-description">
+            {{ getTranslatedText(selectedProjectDetails.description) }}
+          </p>
+
+          <div class="tech-stack">
+            <!-- LABEL TECHNOLOGIES: Gunakan LanguageService -->
+            <h4>{{ languageService.getTranslation('technologiesUsed') | async }}</h4>
+            <div class="tech-tags">
+              <span
+                *ngFor="let tech of selectedProjectDetails.technologies"
+                >{{ tech }}</span
+              >
+            </div>
+          </div>
+
+          <div class="project-modal-links">
+            <a
+              *ngIf="selectedProjectDetails.githubUrl"
+              [href]="selectedProjectDetails.githubUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline"
+              [attr.aria-label]="(languageService.getTranslation('githubRepoButton') | async)"
+            >
+              <fa-icon [icon]="faGithub" class="btn-icon"></fa-icon>
+              {{ languageService.getTranslation('githubRepoButton') | async }}
+            </a>
+            <a
+              *ngIf="selectedProjectDetails.liveUrl"
+              [href]="selectedProjectDetails.liveUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-primary"
+              [attr.aria-label]="(languageService.getTranslation('liveDemoButton') | async)"
+            >
+              <fa-icon [icon]="faLink" class="btn-icon"></fa-icon>
+              {{ languageService.getTranslation('liveDemoButton') | async }}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tampilkan detail aktivitas jika modal ID adalah 'activity-details' -->
+      <div
+        *ngIf="modalId === 'activity-details' && selectedActivityDetails"
+        class="activity-modal"
+      >
+        <h4>{{ selectedActivityDetails.title }} ({{ selectedActivityDetails.year }})</h4>
+        <img
+          [ngSrc]="selectedActivityDetails.modalImageUrl"
+          [alt]="selectedActivityDetails.title"
+          width="700"
+          height="400"
+          priority
+          style="max-width: 100%; height: auto; border-radius: var(--border-radius); margin-bottom: var(--space-4);"
+        />
+        <p>{{ selectedActivityDetails.fullDescription }}</p>
+        <a *ngIf="selectedActivityDetails.externalLink"
+           [href]="selectedActivityDetails.externalLink"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="btn btn-primary">
+           View Link
+        </a>
+      </div>
+
+      <!-- Konten default jika tidak ada yang cocok -->
+      <div *ngIf="!selectedProjectDetails && !selectedActivityDetails">
+        <p>Loading content...</p>
+      </div>
+    </div>
+  </div>
+</div>

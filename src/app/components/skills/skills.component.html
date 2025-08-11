@@ -1,6 +1,7 @@
+<!-- src/app/components/skills/skills.component.html -->
 <section id="skills" class="skills">
   <div class="container">
-    <h2 class="section-title">Skills & Expertise</h2>
+    <h2 class="section-title">{{ (languageService.getTranslation('skillsTitle') | async) }}</h2>
 
     <div class="skills-categories">
       <button
@@ -8,7 +9,7 @@
         class="category-btn"
         [class.active]="selectedCategory === category.value"
         (click)="filterByCategory(category.value)">
-        {{ category.label }}
+        {{ (languageService.getTranslation(category.labelKey) | async) }} <!-- Menggunakan labelKey untuk terjemahan -->
       </button>
     </div>
 

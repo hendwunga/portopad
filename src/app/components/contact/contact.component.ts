@@ -11,8 +11,10 @@ import {
   faMapMarkerAlt,
   faPhone,
   faEnvelope,
-  faPaperPlane, // Tetap butuh icon paper plane untuk tombol
+  faPaperPlane,
 } from '@fortawesome/free-solid-svg-icons';
+
+import { LanguageService } from '../../services/shared/language.service'; // <-- Import LanguageService
 
 @Component({
   selector: 'app-contact',
@@ -25,19 +27,14 @@ export class ContactComponent {
   faMapMarkerAlt = faMapMarkerAlt;
   faPhone = faPhone;
   faEnvelope = faEnvelope;
-  faPaperPlane = faPaperPlane; // Gunakan ini untuk icon kirim
+  faPaperPlane = faPaperPlane;
 
   contactForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    subject: new FormControl(''), // Subjek tetap opsional
+    subject: new FormControl(''),
     message: new FormControl('', [Validators.required]),
   });
-
-  // Hapus:
-  // isSubmitting = false;
-  // submitMessage = '';
-  // submitSuccess = false;
 
   get nameControl() {
     return this.contactForm.get('name') as FormControl;
@@ -52,36 +49,39 @@ export class ContactComponent {
     return this.contactForm.get('message') as FormControl;
   }
 
-  // Hapus atau kosongkan method onSubmit jika tidak ada logika lain yang dibutuhkan
-  // Kita akan menggunakan event click pada link di HTML untuk membuka mailto
-  // Method ini bisa dihapus sepenuhnya jika hanya berisi simulasi submit
-  // onSubmit(): void {
-  //   // Logika simulasi submit dihapus
-  // }
+  // Inject LanguageService (public agar bisa diakses di template)
+  constructor(public readonly languageService: LanguageService) {}
 
-  // Method untuk membuat link mailto
-  // Menggunakan getter agar selalu update dengan nilai form
   get mailtoLink(): string {
     const formValue = this.contactForm.value;
-    const subject = encodeURIComponent(formValue.subject || ''); // Encode subject, gunakan string kosong jika null
+    // Menggunakan getTranslationSync untuk subjek dan body karena mereka akan digunakan dalam URL mailto
+    // yang tidak mendukung Observable.
+    const subjectPrefix =
+      this.languageService.getTranslationSync('subjectField');
+    const nameLabel = this.languageService.getTranslationSync('nameFieldLabel');
+    const emailLabel =
+      this.languageService.getTranslationSync('emailFieldLabel');
+    const messageLabel =
+      this.languageService.getTranslationSync('messageFieldLabel');
+
+    const subject = encodeURIComponent(
+      `${subjectPrefix}: ${formValue.subject || ''}`
+    );
     const body = encodeURIComponent(
-      `Name: ${formValue.name || ''}\r\n` + // \r\n untuk baris baru
-        `Email: ${formValue.email || ''}\r\n\r\n` + // Dua \r\n untuk jarak baris
-        `Message:\r\n${formValue.message || ''}`
+      `${nameLabel}: ${formValue.name || ''}\r\n` +
+        `${emailLabel}: ${formValue.email || ''}\r\n\r\n` +
+        `${messageLabel}:\r\n${formValue.message || ''}`
     );
 
-    // Pastikan email tujuan sudah benar
     const recipient = 'hendrowunga073@gmail.com';
 
     return `mailto:${recipient}?subject=${subject}&body=${body}`;
   }
 
-  // Method untuk mencegah default klik jika form tidak valid
   handleMailtoClick(event: MouseEvent): void {
     if (this.contactForm.invalid) {
-      event.preventDefault(); // Mencegah navigasi mailto
-      // Opsional: Tampilkan pesan error atau tandai field yang salah
-      this.contactForm.markAllAsTouched(); // Menampilkan pesan error validasi
+      event.preventDefault();
+      this.contactForm.markAllAsTouched();
     }
   }
 }

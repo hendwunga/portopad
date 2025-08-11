@@ -5,13 +5,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faGithub,
   faLinkedin,
-  faTwitter, // Disertakan jika masih relevan
-  faInstagram, // Impor faInstagram
-  faTiktok, // Impor faTiktok
+  faTwitter, // Jika ingin menambahkan Twitter
+  faInstagram,
+  faTiktok,
 } from '@fortawesome/free-brands-svg-icons';
-// Impor ikon solid (misal untuk email dan download)
 import { faDownload, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { ModalService } from '../../services/shared/modal.service';
+import { LanguageService } from '../../services/shared/language.service';
+
 import {
   trigger,
   transition,
@@ -20,10 +21,6 @@ import {
   query,
   stagger,
 } from '@angular/animations';
-
-// Pastikan ikon Font Awesome (brands dan solid) sudah ditambahkan
-// ke library global FontAwesome di proyek Anda (biasanya di app.config.ts atau app.module.ts)
-// menggunakan `library.add(...)`.
 
 @Component({
   selector: 'app-hero',
@@ -61,29 +58,37 @@ import {
   ],
 })
 export class HeroComponent implements OnInit {
-  // Deklarasikan ikon Font Awesome yang akan digunakan
   faGithub = faGithub;
   faLinkedin = faLinkedin;
-  faTwitter = faTwitter; // Jika masih ingin menampilkannya
-  faInstagram = faInstagram; // Deklarasikan Instagram
-  faTiktok = faTiktok; // Deklarasikan TikTok
+  faTwitter = faTwitter;
+  faInstagram = faInstagram;
+  faTiktok = faTiktok;
   faDownload = faDownload;
-  faEnvelope = faEnvelope; // Deklarasikan ikon email solid
+  faEnvelope = faEnvelope;
 
-  // Sample profile image (replace with your own)
-  profileImage = 'assets/logos/gitPf.jpeg';
+  profileImage = 'assets/logos/gitPf.jpeg'; // Path lokal untuk gambar profil
 
-  constructor(private readonly modalService: ModalService) {}
+  // URL CV Anda. Ganti dengan URL RAW GitHub Anda atau CDN lainnya.
+  // Contoh GitHub Raw:
+  // cvUrl ='https://raw.githubusercontent.com/hendrowunga/portopad/main/src/assets/resume.pdf';
+  // Jika Anda menyimpannya di folder assets lokal dan ingin mengunduhnya langsung (seperti sebelumnya):
+  cvUrl = 'assets/Resume_Hendrikus_Wunga.pdf';
 
-  ngOnInit(): void {}
+  constructor(
+    private readonly modalService: ModalService,
+    public readonly languageService: LanguageService // <-- Inject LanguageService (public agar diakses di HTML)
+  ) {}
 
+  ngOnInit(): void {
+    // Tidak ada logika khusus di sini untuk bahasa, karena `getTranslation` dari service sudah `Observable`
+  }
+
+  // Metode untuk membuka modal profil
   openProfileModal(): void {
     this.modalService.openModal('profile-modal', {
-      title: 'Profile',
-      isLarge: false, // Sesuaikan ukuran modal jika perlu
-      imageUrl: this.profileImage, // Teruskan URL gambar profil
-      // Anda mungkin juga ingin meneruskan alt text atau data lain
-      // altText: 'Hendro Wunga Profile Picture'
+      title: 'Profile', // Judul ini akan ditimpa atau diterjemahkan di ModalComponent
+      isLarge: false,
+      imageUrl: this.profileImage, // Mengirim URL gambar untuk ditampilkan di modal
     });
   }
 }

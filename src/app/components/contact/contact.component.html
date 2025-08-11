@@ -1,16 +1,13 @@
+<!-- src/app/components/contact/contact.component.html -->
 <section id="contact" class="contact">
   <div class="container">
-    <h2 class="section-title">Contact Me</h2>
+    <h2 class="section-title">{{ (languageService.getTranslation('contactSectionTitle') | async) }}</h2>
 
     <div class="contact-content">
       <div class="contact-info">
-        <h3>Get in Touch</h3>
+        <h3>{{ (languageService.getTranslation('getInTouchTitle') | async) }}</h3>
         <p>
-          I'm always open to new opportunities, collaborations,
-          or just a
-          friendly chat. Feel free to reach out using any of the
-          methods
-          below.
+          {{ (languageService.getTranslation('getInTouchDescription') | async) }}
         </p>
 
         <div class="contact-details">
@@ -19,8 +16,8 @@
               <fa-icon [icon]="faMapMarkerAlt"></fa-icon>
             </span>
             <div>
-              <h4>Location</h4>
-              <p>Sleman, Yogyakarta, Indonesia</p>
+              <h4>{{ (languageService.getTranslation('locationLabel') | async) }}</h4>
+              <p>Sleman, Yogyakarta, Indonesia</p> <!-- Ini bisa hardcode atau jadi terjemahan jika lokasi bisa berubah -->
             </div>
           </div>
 
@@ -29,8 +26,8 @@
               <fa-icon [icon]="faPhone"></fa-icon>
             </span>
             <div>
-              <h4>Phone</h4>
-              <p>+62 852 1733 1968</p>
+              <h4>{{ (languageService.getTranslation('phoneLabel') | async) }}</h4>
+              <p>+62 852 1733 1968</p> <!-- Ini bisa hardcode -->
             </div>
           </div>
 
@@ -39,99 +36,71 @@
               <fa-icon [icon]="faEnvelope"></fa-icon>
             </span>
             <div>
-              <h4>Email</h4>
-              <p>hendrowunga073&#64;gmail.com</p>
+              <h4>{{ (languageService.getTranslation('emailLabel') | async) }}</h4>
+              <p>hendrowunga073&#64;gmail.com</p> <!-- Ini bisa hardcode -->
             </div>
           </div>
         </div>
       </div>
 
       <div class="contact-form-wrapper">
-        <h3>Send a Message</h3>
-        <!-- Hapus (ngSubmit)="onSubmit()" dari tag form -->
+        <h3>{{ (languageService.getTranslation('sendMessageTitle') | async) }}</h3>
         <form [formGroup]="contactForm" class="contact-form">
           <div class="form-group">
-            <label for="name">Name</label>
+            <label for="name">{{ (languageService.getTranslation('nameFieldLabel') | async) }}</label>
             <input
               type="text"
               id="name"
               formControlName="name"
-              placeholder="Your Name"
-              [class.invalid]="
-                   nameControl.invalid &&
-                   (nameControl.dirty || nameControl.touched)
-                 " />
+              [placeholder]="languageService.getTranslationSync('nameFieldPlaceholder')"
+              [class.invalid]="nameControl.invalid && (nameControl.dirty || nameControl.touched)" />
             <div
-              *ngIf="
-                   nameControl.invalid &&
-                   (nameControl.dirty || nameControl.touched)
-                 "
+              *ngIf="nameControl.invalid && (nameControl.dirty || nameControl.touched)"
               class="error-message">
-              <span
-                *ngIf="nameControl.errors?.['required']">Name
-                is required</span>
+              <span *ngIf="nameControl.errors?.['required']">{{ (languageService.getTranslation('nameRequiredError') | async) }}</span>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="email">Email</label>
+            <label for="email">{{ (languageService.getTranslation('emailFieldLabel') | async) }}</label>
             <input
               type="email"
               id="email"
               formControlName="email"
-              placeholder="Your Email"
-              [class.invalid]="
-                   emailControl.invalid &&
-                   (emailControl.dirty || emailControl.touched)
-                 " />
+              [placeholder]="languageService.getTranslationSync('emailFieldPlaceholder')"
+              [class.invalid]="emailControl.invalid && (emailControl.dirty || emailControl.touched)" />
             <div
-              *ngIf="
-                   emailControl.invalid &&
-                   (emailControl.dirty || emailControl.touched)
-                 "
+              *ngIf="emailControl.invalid && (emailControl.dirty || emailControl.touched)"
               class="error-message">
-              <span
-                *ngIf="emailControl.errors?.['required']">Email
-                is required</span>
-              <span
-                *ngIf="emailControl.errors?.['email']">Please
-                enter a valid email</span>
+              <span *ngIf="emailControl.errors?.['required']">{{ (languageService.getTranslation('emailRequiredError') | async) }}</span>
+              <span *ngIf="emailControl.errors?.['email']">{{ (languageService.getTranslation('emailInvalidError') | async) }}</span>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="subject">Subject</label>
+            <label for="subject">{{ (languageService.getTranslation('subjectFieldLabel') | async) }}</label>
             <input
               type="text"
               id="subject"
               formControlName="subject"
-              placeholder="Subject" />
+              [placeholder]="languageService.getTranslationSync('subjectFieldPlaceholder')" />
           </div>
 
           <div class="form-group">
-            <label for="message">Message</label>
+            <label for="message">{{ (languageService.getTranslation('messageFieldLabel') | async) }}</label>
             <textarea
               id="message"
               formControlName="message"
               rows="5"
-              placeholder="Your Message"
-              [class.invalid]="
-                   messageControl.invalid &&
-                   (messageControl.dirty || messageControl.touched)
-                 "></textarea>
+              [placeholder]="languageService.getTranslationSync('messageFieldPlaceholder')"
+              [class.invalid]="messageControl.invalid && (messageControl.dirty || messageControl.touched)"></textarea>
             <div
-              *ngIf="
-                   messageControl.invalid &&
-                   (messageControl.dirty || messageControl.touched)
-                 "
+              *ngIf="messageControl.invalid && (messageControl.dirty || messageControl.touched)"
               class="error-message">
-              <span
-                *ngIf="messageControl.errors?.['required']">Message
-                is required</span>
+              <span *ngIf="messageControl.errors?.['required']">{{ (languageService.getTranslation('messageRequiredError') | async) }}</span>
             </div>
           </div>
 
-          <!-- Ganti tombol submit dengan link <a> -->
           <a
              [href]="mailtoLink"
              class="btn btn-primary"
@@ -140,18 +109,8 @@
              aria-label="Send message via email client"
              title="Send message via email client">
              <fa-icon [icon]="faPaperPlane" class="btn-icon"></fa-icon>
-             Send Message
+             {{ (languageService.getTranslation('sendMessageButton') | async) }}
           </a>
-
-          <!-- Hapus blok pesan submit -->
-          <!--
-          <div
-            *ngIf="submitMessage"
-            class="submit-message"
-            [class.success]="submitSuccess">
-            {{ submitMessage }}
-          </div>
-          -->
         </form>
       </div>
     </div>

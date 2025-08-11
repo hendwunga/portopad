@@ -1,60 +1,13 @@
-<!-- Hapus struktur footer yang lama dan ganti dengan ini -->
+<!-- src/app/components/footer/footer.component.html -->
 <footer class="footer">
   <div class="container">
-    <!-- Kontainer untuk elemen yang rata tengah -->
     <div class="footer-centered-content">
-      <!-- Teks Hak Cipta -->
-      <p class="copyright">© {{ currentYear }} Hend Wunga</p>
-
-      <!-- Ikon Sosial -->
-      <!-- <div class="social-links">
-        <a
-          href="mailto:hendrowunga073@gmail.com"
-          aria-label="Email Hendro Wunga"
-          title="Email Hendro Wunga">
-          <fa-icon [icon]="faEnvelope"></fa-icon>
-        </a>
-        <a
-          href="https://www.linkedin.com/in/hendrowunga/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Hendro Wunga's LinkedIn Profile"
-          title="LinkedIn">
-          <fa-icon [icon]="faLinkedin"></fa-icon>
-        </a>
-        <a
-          href="https://github.com/hendrowunga"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Hendro Wunga's GitHub Profile"
-          title="GitHub">
-          <fa-icon [icon]="faGithub"></fa-icon>
-        </a>
-        <a
-          href="https://www.instagram.com/hendrowunga7/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Hendro Wunga's Instagram Profile"
-          title="Instagram">
-          <fa-icon [icon]="faInstagram"></fa-icon>
-        </a>
-        <a
-          href="https://www.tiktok.com/@hend_tech"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Hendro Wunga's TikTok Profile"
-          title="TikTok">
-          <fa-icon [icon]="faTiktok"></fa-icon>
-        </a>
-        <a
-          href="https://www.kaggle.com/hendrowunga"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Hendro Wunga's Kaggle Profile"
-          title="Kaggle">
-          <fa-icon [icon]="faKaggle"></fa-icon>
-        </a>
-      </div> -->
+      <!-- Teks Hak Cipta dengan terjemahan dan tahun dinamis -->
+      <p class="copyright">
+        {{ formattedCopyrightText$ | async }} <!-- HANYA ini yang diperlukan -->
+      </p>
+      <!-- Jika ada deskripsi lain di footer -->
+      <!-- <p class="footer-description">{{ (languageService.getTranslation('footerDescription') | async) }}</p> -->
     </div>
   </div>
 </footer>

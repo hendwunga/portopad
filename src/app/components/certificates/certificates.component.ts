@@ -1,3 +1,4 @@
+// src/app/components/certificates/certificates.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -6,15 +7,31 @@ import {
   faCertificate,
 } from '@fortawesome/free-solid-svg-icons';
 
+import { LanguageService } from '../../services/shared/language.service'; // <-- Import LanguageService
+
+// --- Definisi Tipe Kategori Sertifikat ---
+type CertificateCategoryType =
+  | 'all'
+  | 'professional'
+  | 'academic'
+  | 'organization';
+
 interface Certificate {
   id: number;
   name: string;
   issuer: string;
   date: string;
-  category: 'professional' | 'academic' | 'organization';
+  // Gunakan CertificateCategoryType, tapi exclude 'all' karena 'all' bukan kategori cert
+  category: Exclude<CertificateCategoryType, 'all'>;
   imageUrl?: string;
   credentialUrl?: string;
 }
+
+interface FilterOption {
+  value: CertificateCategoryType;
+  labelKey: string; // Menggunakan key untuk terjemahan
+}
+// --- Akhir Definisi Tipe Kategori Sertifikat ---
 
 @Component({
   selector: 'app-certificates',
@@ -27,14 +44,16 @@ export class CertificatesComponent {
   faExternalLinkAlt = faExternalLinkAlt;
   faCertificate = faCertificate;
 
-  filters = [
-    { value: 'all', label: 'All' },
-    { value: 'professional', label: 'Professional' },
-    { value: 'academic', label: 'Academic' },
-    { value: 'organization', label: 'Organization' },
+  // --- UPDATE FILTER DENGAN LABELKEY ---
+  filters: FilterOption[] = [
+    { value: 'all', labelKey: 'certFilterAll' },
+    { value: 'professional', labelKey: 'certFilterProfessional' },
+    { value: 'academic', labelKey: 'certFilterAcademic' },
+    { value: 'organization', labelKey: 'certFilterOrganizational' },
   ];
 
-  activeFilter = 'all';
+  // --- UPDATE TIPE activeFilter ---
+  activeFilter: CertificateCategoryType = 'all';
 
   certificates: Certificate[] = [
     {
@@ -92,7 +111,6 @@ export class CertificatesComponent {
       credentialUrl:
         'https://drive.google.com/file/d/16GMJAy0L-5EutaHbSwxCcGdWhDxPC3Wt/view?usp=sharing',
     },
-
     {
       id: 6,
       name: 'Sports Week Committee',
@@ -107,7 +125,7 @@ export class CertificatesComponent {
     {
       id: 7,
       name: 'General Election Committee',
-      issuer: 'aculty of Science and Technology',
+      issuer: 'Faculty of Science and Technology', // Perbaiki typo "aculty"
       date: 'Nov 2023',
       category: 'organization',
       imageUrl:
@@ -117,16 +135,30 @@ export class CertificatesComponent {
     },
   ];
 
+  // Inject LanguageService (public agar bisa diakses di template)
+  constructor(public readonly languageService: LanguageService) {}
+
   get filteredCertificates(): Certificate[] {
     if (this.activeFilter === 'all') {
-      return this.certificates;
+      // Menggunakan slice() untuk membuat salinan sebelum pengurutan
+      return this.certificates.slice().sort((a, b) => {
+        // Asumsi format tanggal 'MMM YYYY' atau 'YYYY'
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return dateB.getTime() - dateA.getTime(); // Urutkan dari terbaru
+      });
     }
-    return this.certificates.filter(
-      (cert) => cert.category === this.activeFilter
-    );
+    return this.certificates
+      .filter((cert) => cert.category === this.activeFilter)
+      .sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return dateB.getTime() - dateA.getTime();
+      });
   }
 
-  setFilter(filter: string): void {
+  // --- UPDATE TIPE PARAMETER setFilter ---
+  setFilter(filter: CertificateCategoryType): void {
     this.activeFilter = filter;
   }
 }

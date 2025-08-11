@@ -1,34 +1,35 @@
+
 .media-gallery-section {
   background-color: var(--background-color);
-  padding: var(--section-padding, 80px 20px);
-  margin-top: var(--section-spacing-vertical, 80px);
+  padding: var(--space-xl, 60px) var(--space-md, 20px);
 }
 
 .media-gallery-section .container {
    max-width: var(--container-width, 1200px);
    margin: 0 auto;
-   padding: 0 var(--space-4, 1rem);
+   padding: 0 var(--space-4);
 }
 
 .media-gallery-section .section-title {
     text-align: center;
-    margin-bottom: var(--space-10, 4rem);
-    color: var(--heading-color, #000);
+    margin-bottom: var(--space-10);
+    color: var(--heading-color);
+    font-size: var(--font-size-h2, 2.5rem);
  }
 
 .gallery-filters {
-  display: flex; justify-content: center; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-10);
+  display: flex; justify-content: center; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-10);
 }
 .filter-btn {
-   background-color: var(--card-bg); border: 1px solid var(--border-color, #eee); padding: var(--space-2) var(--space-4); border-radius: var(--border-radius); cursor: pointer; transition: all var(--transition-speed, 0.3s) var(--transition-timing, ease-in-out); color: var(--text-color); font-weight: 500; font-size: 0.9rem; outline: none;
-   &:hover { transform: translateY(-2px); box-shadow: var(--box-shadow, 0 2px 5px rgba(0,0,0,0.1)); }
-   &.active { background-color: var(--primary-color); color: var(--primary-text-color, white); border-color: var(--primary-color); }
-   &:focus-visible { box-shadow: 0 0 0 3px var(--primary-color-translucent, rgba(0, 123, 255, 0.5)); }
+   background-color: var(--card-bg); border: 1px solid var(--border-color); padding: var(--space-2) var(--space-4); border-radius: var(--border-radius); cursor: pointer; transition: all var(--transition-speed) var(--transition-timing); color: var(--text-color); font-weight: 500; font-size: var(--font-size-base); outline: none;
+   &:hover { transform: translateY(-2px); box-shadow: var(--box-shadow); background-color: var(--background-color); color: var(--primary-dark); }
+   &.active { background-color: var(--primary-color); color: white; border-color: var(--primary-color); }
+   &:focus-visible { box-shadow: 0 0 0 2px var(--primary-color); }
 }
 
 .media-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--space-6);
 }
 
@@ -38,13 +39,20 @@
   overflow: hidden;
   cursor: pointer;
   box-shadow: var(--box-shadow);
-  transition: transform var(--transition-speed) var(--transition-timing), box-shadow var(--transition-speed) var(--transition-timing);
+  transition: transform var(--transition-speed) var(--transition-timing), box-shadow var(--transition-speed) var(--transition-timing), border-color var(--transition-speed) var(--transition-timing);
   display: flex; flex-direction: column;
-}
+  border: 1px solid transparent;
+  outline: none;
 
-.media-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--box-shadow-hover, 0 5px 15px rgba(0,0,0,0.15));
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-hover);
+    border-color: var(--primary-color);
+  }
+  &:focus-visible {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px var(--primary-color);
+  }
 }
 
 .media-thumbnail {
@@ -63,12 +71,12 @@
 
 .play-icon-overlay {
     position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
     display: flex; justify-content: center; align-items: center;
     opacity: 0;
     transition: opacity var(--transition-speed) var(--transition-timing);
      .media-card:hover & { opacity: 1; }
-     fa-icon { font-size: 3rem; color: white; }
+     fa-icon { font-size: 3.5rem; color: white; }
 }
 
 .media-info {
@@ -77,126 +85,356 @@
 }
 
 .media-title {
-  font-weight: 600; font-size: 1.125rem; margin-bottom: var(--space-2); color: var(--heading-color, #000);
+  font-weight: 600; font-size: var(--font-size-md); margin-bottom: var(--space-2); color: var(--heading-color);
 }
 
 .media-year {
-  color: var(--text-muted); font-size: 0.875rem; margin-bottom: var(--space-2);
+  color: var(--text-muted); font-size: var(--font-size-sm); margin-bottom: var(--space-2);
 }
 
 .media-description-short {
-   color: var(--text-color); font-size: 0.9rem; margin-top: var(--space-2); line-height: 1.4; flex-grow: 1;
+   color: var(--text-color); font-size: var(--font-size-sm); margin-top: var(--space-2); line-height: 1.4; flex-grow: 1;
+   white-space: pre-wrap;
 }
 
 
 /* --- Gaya Modal Media Viewer (Internal ke komponen ini) --- */
 .modal-overlay {
   position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   display: flex; justify-content: center; align-items: center;
   z-index: 2000;
-  overflow-y: auto; padding: var(--space-4, 1rem);
+  overflow-y: auto; padding: var(--space-4);
 }
 
 .modal-content {
   background-color: var(--card-bg, #fff);
-  padding: var(--space-4, 1rem);
+  padding: var(--space-6, 2rem); /* Tingkatkan padding internal untuk ruang lebih */
   border-radius: var(--border-radius, 8px);
-  max-width: 90%;
+  max-width: 90%; /* Tetap ini sebagai persentase dari viewport */
   max-height: 95vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   position: relative;
   box-shadow: var(--box-shadow-lg, 0 10px 20px rgba(0,0,0,0.2));
+  animation: modalAnimation 0.3s ease-out; /* Pastikan animasi dipanggil */
 }
 
 .media-viewer-content {
   position: relative;
-  width: 100%;
+  width: 90%;
   max-width: 1000px;
   margin: 0 auto;
+  /* --- KOREKSI DI SINI: Hapus properti flex yang mungkin menyebabkan masalah video --- */
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* --- AKHIR KOREKSI --- */
 }
 
 .viewer-media-area {
-   position: relative; width: 100%; background-color: var(--background-color, #f8f9fa);
-   margin-bottom: var(--space-4, 1rem);
+  position: relative;
+  width: 100%;
+  /* background-color: var(--background-color, #f8f9fa); // Bisa dihilangkan jika tidak perlu */
+  margin-bottom: var(--space-6, 2rem); /* Tingkatkan margin bottom agar ada jarak dari info */
+  display: flex; /* Untuk memusatkan gambar/video di dalamnya */
+  justify-content: center;
+  align-items: center;
+  min-height: 450px; /* <--- KUNCI: Set tinggi minimum yang lebih besar untuk area media */
+  max-height: 80vh; /* Batas tinggi agar tidak terlalu besar */
+  overflow: hidden; /* Penting untuk object-fit */
+  background-color: black; /* Background saat video/gambar dimuat */
+}
+
+.viewer-media-area {
+   position: relative; width: 100%; background-color: var(--background-color);
+   margin-bottom: var(--space-4);
+   border-radius: var(--border-radius);
+   overflow: hidden;
+   /* display: flex; -> KOREKSI: Ini dihapus */
+   /* justify-content: center; -> KOREKSI: Ini dihapus */
+   /* align-items: center; -> KOREKSI: Ini dihapus */
 }
 
 .viewer-image {
-  display: block; width: 100%; height: auto;
-  max-height: 80vh;
-  object-fit: contain;
+  display: block;
+  width: 100%;
+  height: 100%; /* Agar gambar mengisi min-height dari .viewer-media-area */
+  object-fit: contain; /* PENTING: agar seluruh gambar terlihat, tidak terpotong */
   margin: 0 auto;
 }
 
 .viewer-video-container {
-  position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: black;
-  /* Gaya opsional untuk video TikTok vertikal */
-  /* & iframe { width: 100%; height: 100%; } */
-  /* &.tiktok-video { padding-bottom: 177.78%; } // Contoh rasio 9:16 */
+  position: relative;
+  padding-bottom: 56.25%; /* Rasio aspek 16:9 (lebar / tinggi * 100) */
+  height: 0;
+  overflow: hidden;
+  width: 100%; /* Pastikan ini 100% dari parentnya */
+  max-height: 100%; /* Batasi agar tidak melebihi parentnya */
 }
 
 .viewer-video {
   position: absolute; top: 0; left: 0; width: 100%; height: 100%;
 }
 
+.video-error-message {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: var(--font-size-sm);
+    margin: var(--space-4) 0;
+    padding: var(--space-2);
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-sm);
+}
+
 .viewer-info-area {
-   padding: 0 var(--space-4, 1rem) var(--space-4, 1rem);
+   padding: var(--space-4, 1rem) var(--space-4, 1rem) var(--space-4, 1rem); /* Sesuaikan padding */
    text-align: center;
 }
 
 .viewer-title {
-   font-size: 1.5rem; font-weight: 700; color: var(--heading-color, #000); margin-bottom: var(--space-2);
+   font-size: 1.8rem; /* Lebih besar dari 1.5rem */
+   font-weight: 700;
+   color: var(--heading-color, #000);
+   margin-bottom: var(--space-3); /* Sedikit lebih banyak jarak */
 }
 
-.viewer-year { font-size: 1rem; color: var(--text-muted, #666); margin-bottom: var(--space-2); }
+.viewer-year { font-size: var(--font-size-base); color: var(--text-muted); margin-bottom: var(--space-2); }
 
 .viewer-description {
-   font-size: 1rem; color: var(--text-color, #333); line-height: 1.6; margin-top: var(--space-3);
+   font-size: 1.1rem; /* Sedikit lebih besar dari 1rem */
+   color: var(--text-color, #333);
+   line-height: 1.7; /* Lebih mudah dibaca */
+   margin-top: var(--space-3);
+   max-height: 200px; /* Batasi tinggi agar tidak terlalu panjang */
+   overflow-y: auto; /* Memungkinkan scroll jika deskripsi panjang */
 }
 
 .viewer-navigation {
-  position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%);
-  display: flex; justify-content: space-between; padding: 0 var(--space-4);
-  pointer-events: none; z-index: 10;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 var(--space-6); /* Sesuaikan padding agar tombol lebih dekat ke tepi modal */
+  pointer-events: none;
+  z-index: 10;
 }
 
 .nav-btn {
-  width: 48px; height: 48px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.9);
-  border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
-  color: var(--text-color, #333); transition: all var(--transition-speed) var(--transition-timing);
-  pointer-events: auto; box-shadow: var(--box-shadow-sm, 0 1px 3px rgba(0,0,0,0.1)); outline: none;
+  width: 48px; height: 48px; border-radius: 50%; background-color: var(--card-bg);
+  border: 1px solid var(--border-color); cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: var(--text-color); transition: all var(--transition-speed) var(--transition-timing);
+  pointer-events: auto; box-shadow: var(--box-shadow); outline: none;
   fa-icon { font-size: 1.5rem; }
-}
 
-.nav-btn:hover { background-color: white; transform: scale(1.1); box-shadow: var(--box-shadow, 0 2px 5px rgba(0,0,0,0.15)); }
-.nav-btn:focus-visible { box-shadow: 0 0 0 3px var(--primary-color-translucent, rgba(0, 123, 255, 0.5)); }
+  &:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: var(--box-shadow-hover);
+  }
+  &:focus-visible { box-shadow: 0 0 0 2px var(--primary-color); }
+}
 
 .close-button {
-  position: absolute; top: var(--space-3, 0.75rem); right: var(--space-3, 0.75rem);
-  background: none; border: none; font-size: 2rem; cursor: pointer;
-  color: var(--text-muted, #666);
-  transition: color var(--transition-speed, 0.3s) ease;
-  z-index: 10;
-  &:hover { color: var(--text-color, #333); }
+  position: absolute; top: var(--space-3); right: var(--space-3);
+  background: transparent; border: none; font-size: 2rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: color var(--transition-speed) var(--transition-timing);
+  z-index: 10; outline: none;
+  fa-icon { font-size: 1em; }
+  &:hover { color: var(--primary-color); }
+  &:focus-visible { box-shadow: 0 0 0 2px var(--primary-color); }
 }
 
 
-/* Responsive Adjustments */
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .media-gallery-section { padding: var(--space-8) var(--space-md); }
+    .media-gallery-section .section-title { font-size: var(--font-size-xxl); margin-bottom: var(--space-8); }
+    .gallery-filters { gap: var(--space-2); margin-bottom: var(--space-8); }
+    .filter-btn { font-size: var(--font-size-sm); padding: var(--space-1) var(--space-3); }
+    .media-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: var(--space-5); }
+    .media-card { padding: 0; }
+    .media-thumbnail { height: 180px; }
+    .play-icon-overlay fa-icon { font-size: 3rem; }
+    .media-info { padding: var(--space-3); }
+    .media-title { font-size: var(--font-size-base); }
+    .media-year { font-size: var(--font-size-xs); }
+    .media-description-short { font-size: var(--font-size-sm); }
+    .nav-btn { width: 40px; height: 40px; fa-icon { font-size: 1.3rem; } }
+    .viewer-navigation { padding: 0 var(--space-2); }
+    .viewer-title { font-size: var(--font-size-lg); }
+    .viewer-year { font-size: var(--font-size-sm); }
+    .viewer-description { font-size: var(--font-size-sm); }
+    .close-button { font-size: 1.5rem; top: var(--space-2); right: var(--space-2); }
+}
+
 @media (max-width: 768px) {
-   .modal-content { max-width: 95%; }
-   .media-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: var(--space-4); }
-   .media-thumbnail { height: 180px; }
-   .play-icon-overlay fa-icon { font-size: 2.5rem; }
-   .media-info { padding: var(--space-3); }
-   .media-title { font-size: 1.3rem; }
-   .media-year { font-size: 0.9rem; }
-   .media-description-short { font-size: 0.9rem; }
-   .nav-btn { width: 40px; height: 40px; fa-icon { font-size: 1.3rem; } }
-   .viewer-navigation { padding: 0 var(--space-2); }
-    .viewer-title { font-size: 1.3rem; }
-    .viewer-year { font-size: 0.9rem; }
-    .viewer-description { font-size: 0.9rem; }
-    .close-button { font-size: 1.5rem; top: var(--space-2, 0.5rem); right: var(--space-2, 0.5rem); }
+   .modal-content {
+      max-width: 95vw; // Umumnya tetap 95vw di mobile/tablet
+   }
+   .media-viewer-content {
+      max-width: 100%; // Di mobile, gunakan lebar penuh dari modal-content
+   }
+   .viewer-media-area {
+      min-height: 250px; // Sesuaikan tinggi minimum di mobile
+   }
+   .viewer-title { font-size: 1.5rem; } // Sesuaikan ukuran font judul di mobile
+   .viewer-description { font-size: 0.95rem; max-height: 150px; } // Batasi tinggi deskripsi di mobile
+   .nav-btn { width: 40px; height: 40px; fa-icon { font-size: 1.3rem; } } // Ukuran tombol nav
+   .viewer-navigation { padding: 0 var(--space-3); } // Padding nav di mobile
+}
+
+@media (max-width: 576px) {
+    .media-gallery-section { padding: var(--space-6) var(--space-sm); }
+    .media-gallery-section .section-title { font-size: var(--font-size-xl); margin-bottom: var(--space-6); }
+    .gallery-filters { gap: var(--space-1); margin-bottom: var(--space-6); }
+    .filter-btn { font-size: var(--font-size-xs); padding: var(--space-0) var(--space-2); }
+    .media-grid { grid-template-columns: 1fr; gap: var(--space-3); }
+    .media-thumbnail { height: 140px; }
+    .play-icon-overlay fa-icon { font-size: 2.5rem; }
+    .media-info { padding: var(--space-2); }
+    .media-title { font-size: var(--font-size-base); }
+    .media-description-short { font-size: var(--font-size-xs); }
+    .nav-btn { width: 35px; height: 35px; fa-icon { font-size: 1.1rem; } }
+    .close-button { font-size: 1.3rem; }
+    .viewer-info-area { padding: 0 var(--space-2) var(--space-2); }
+}
+
+/* --- Kontrol Pagination --- */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2, 0.5rem); /* Jarak antar tombol */
+  margin-top: var(--space-8, 2rem); /* Jarak dari grid media */
+  padding: var(--space-4, 1rem) 0;
+  border-top: 1px solid var(--border-color); /* Garis pemisah opsional */
+}
+
+.pagination-btn {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-speed, 0.3s) var(--transition-timing, ease-in-out);
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: var(--font-size-base, 1rem);
+  min-width: 40px; /* Lebar minimum untuk tombol angka */
+  text-align: center;
+  display: flex; /* Untuk ikon di tengah */
+  justify-content: center;
+  align-items: center;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow-sm);
+    background-color: var(--background-color-light);
+    color: var(--primary-dark);
+  }
+
+  &.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    pointer-events: none; /* Nonaktifkan klik pada halaman aktif */
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  fa-icon {
+    font-size: 0.9rem;
+  }
+}
+
+.pagination-btn.page-number {
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem); /* Khusus untuk angka */
+}
+
+/* Pesan jika tidak ada item */
+.no-items-message {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--font-size-lg);
+  padding: var(--space-8, 2rem);
+}
+
+/* Responsive Adjustments untuk pagination */
+@media (max-width: 768px) {
+  .pagination-controls {
+    flex-wrap: wrap; /* Izinkan tombol pagination wrap */
+    gap: var(--space-1, 0.25rem); /* Kurangi jarak antar tombol */
+    margin-top: var(--space-6, 1.5rem);
+  }
+  .pagination-btn {
+    padding: var(--space-1, 0.25rem) var(--space-2, 0.5rem);
+    font-size: 0.85rem;
+    min-width: 35px;
+  }
+}
+
+/* --- Kontrol Show More --- */
+.show-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-8); /* Jarak dari grid media */
+  padding: var(--space-4) 0;
+  border-top: 1px solid var(--border-color); /* Garis pemisah opsional */
+}
+
+.show-more-btn {
+  /* Anda bisa menggunakan gaya .btn .btn-primary yang sudah ada atau sesuaikan */
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--font-size-lg);
+  border-radius: var(--border-radius);
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-speed) var(--transition-timing);
+  outline: none;
+
+  &:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow);
+  }
+  &:focus-visible {
+    box-shadow: 0 0 0 2px var(--primary-color);
+  }
+}
+
+/* Pesan jika tidak ada item */
+.no-items-message {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--font-size-xl); /* Sedikit lebih besar */
+  padding: var(--space-8);
+  font-weight: 500;
+}
+
+/* Responsive Adjustments (pastikan tidak ada konflik dengan pagination sebelumnya jika Anda masih memiliki kodenya) */
+@media (max-width: 768px) {
+  .show-more-container {
+    margin-top: var(--space-6);
+  }
+  .show-more-btn {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-base);
+  }
+  .no-items-message {
+    font-size: var(--font-size-lg);
+    padding: var(--space-6);
+  }
 }

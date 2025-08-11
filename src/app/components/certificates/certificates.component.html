@@ -1,14 +1,17 @@
+<!-- src/app/components/certificates/certificates.component.html -->
 <section id="certificates" class="certificates">
      <div class="container">
-          <h2 class="section-title">Certificates</h2>
+          <!-- Judul Section -->
+          <h2 class="section-title">{{ (languageService.getTranslation('certificatesSectionTitle') | async) }}</h2>
 
           <div class="certificate-filters">
+               <!-- Loop melalui array filters yang sudah diperbarui dengan labelKey -->
                <button
                     *ngFor="let filter of filters"
                     class="filter-btn"
                     [class.active]="activeFilter === filter.value"
                     (click)="setFilter(filter.value)">
-                    {{ filter.label }}
+                    {{ (languageService.getTranslation(filter.labelKey) | async) }}
                </button>
           </div>
 
@@ -19,19 +22,17 @@
                     [href]="certificate.credentialUrl || certificate.imageUrl"
                     target="_blank"
                     rel="noopener noreferrer"
-                    [attr.aria-label]="'View Certificate: ' + certificate.name">
+                    [attr.aria-label]="(languageService.getTranslation('viewCertificateButton') | async) + ': ' + certificate.name">
                     <div class="certificate-icon">
                          <fa-icon [icon]="faCertificate"></fa-icon>
                     </div>
                     <div class="certificate-info">
-                         <h3 class="certificate-name">{{ certificate.name
-                              }}</h3>
-                         <p class="certificate-issuer">{{ certificate.issuer
-                              }}</p>
+                         <h3 class="certificate-name">{{ certificate.name }}</h3>
+                         <p class="certificate-issuer">{{ certificate.issuer }}</p>
                          <p class="certificate-date">{{ certificate.date }}</p>
                          <span class="view-btn">
                               <fa-icon [icon]="faExternalLinkAlt"></fa-icon>
-                              View Certificate
+                              {{ (languageService.getTranslation('viewCertificateButton') | async) }}
                          </span>
                     </div>
                </a>

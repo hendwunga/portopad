@@ -1,11 +1,8 @@
+<!-- src/app/components/header/header.component.html -->
 <header
   [class.scrolled]="scrolled"
   [class.mobile-nav-open]="isMobileNavOpen">
   <div class="container header-container">
-    <div class="logo">
-      <!-- <a href="#" class="logo-link">Portfolio</a> -->
-    </div>
-
     <button
       class="mobile-nav-toggle"
       aria-label="Toggle navigation"
@@ -15,19 +12,27 @@
 
     <nav class="main-nav" [class.active]="isMobileNavOpen">
       <ul class="nav-list">
-        <li><a href="#hero" (click)="closeMobileNav()">Home</a></li>
-        <li><a href="#about" (click)="closeMobileNav()">About</a></li>
-        <li><a href="#skills" (click)="closeMobileNav()">Skills</a></li>
-        <li><a href="#projects" (click)="closeMobileNav()">Projects</a></li>
+        <li><a href="#hero" (click)="closeMobileNav()">{{ (languageService.getTranslation('homeLink') | async) }}</a></li>
+        <li><a href="#about" (click)="closeMobileNav()">{{ (languageService.getTranslation('aboutLink') | async) }}</a></li>
+        <li><a href="#skills" (click)="closeMobileNav()">{{ (languageService.getTranslation('skillsLink') | async) }}</a></li>
+        <li><a href="#projects" (click)="closeMobileNav()">{{ (languageService.getTranslation('projectsLink') | async) }}</a></li>
         <li>
-          <a href="#certificates" (click)="closeMobileNav()">Certificates</a>
+          <a href="#certificates" (click)="closeMobileNav()">{{ (languageService.getTranslation('certificatesLink') | async) }}</a>
         </li>
-        <li><a href="#activity" (click)="closeMobileNav()">Activity</a></li>
-        <li><a href="#media" (click)="closeMobileNav()">Media</a></li>
-        <li><a href="#contact" (click)="closeMobileNav()">Contact</a></li>
+        <li><a href="#media" (click)="closeMobileNav()">{{ (languageService.getTranslation('mediaLink') | async) }}</a></li>
+        <li><a href="#contact" (click)="closeMobileNav()">{{ (languageService.getTranslation('contactLink') | async) }}</a></li>
       </ul>
     </nav>
 
+    <!-- Language Toggle Button -->
+    <button
+      class="language-toggle"
+      (click)="toggleLanguage()"
+      aria-label="Toggle language">
+      {{ currentLanguage === 'en' ? 'ID' : 'EN' }} <!-- Tampilkan bahasa aktif lainnya -->
+    </button>
+
+    <!-- Theme Toggle Button -->
     <button
       class="theme-toggle"
       (click)="toggleTheme()"
