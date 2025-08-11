@@ -8,7 +8,6 @@ import { AboutComponent } from './components/about/about.component';
 import { SkillsComponent } from './components/skills/skills.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { CertificatesComponent } from './components/certificates/certificates.component';
-import { ActivityComponent } from './components/activity/activity.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ModalComponent } from './services/shared/modal.component';
 import { MediaComponent } from './components/media/media.component';
@@ -26,7 +25,6 @@ import { MediaComponent } from './components/media/media.component';
     SkillsComponent,
     ProjectsComponent,
     CertificatesComponent,
-    ActivityComponent,
     MediaComponent,
     ContactComponent,
     ModalComponent,
@@ -39,7 +37,6 @@ import { MediaComponent } from './components/media/media.component';
       <app-skills></app-skills>
       <app-projects></app-projects>
       <app-certificates></app-certificates>
-      <app-activity></app-activity>
       <app-media></app-media>
       <app-contact></app-contact>
     </main>
