@@ -76,14 +76,16 @@ header.scrolled {
   width: 100%;
 }
 
+/* Base styles for toggle buttons (theme and mobile nav) */
 .theme-toggle,
-.mobile-nav-toggle {
+.mobile-nav-toggle,
+.language-toggle { /* Tambahkan .language-toggle di sini */
   background: transparent;
   border: none;
   color: var(--text-color);
-  font-size: 1.25rem;
+  font-size: 1.15rem; /* Ukuran ikon tombol yang konsisten */
   cursor: pointer;
-  width: 40px;
+  width: 40px; /* Ukuran tombol tetap */
   height: 40px;
   display: flex;
   align-items: center;
@@ -91,13 +93,38 @@ header.scrolled {
   border-radius: 50%;
   transition: background-color var(--transition-speed) var(--transition-timing),
     color var(--transition-speed) var(--transition-timing);
+  outline: none; /* Hapus outline default */
+  flex-shrink: 0; /* Mencegah tombol menyusut */
 }
 
 .theme-toggle:hover,
-.mobile-nav-toggle:hover {
+.mobile-nav-toggle:hover,
+.language-toggle:hover {
   background-color: var(--primary-glow);
   color: var(--primary-color);
 }
+.theme-toggle:focus-visible,
+.mobile-nav-toggle:focus-visible,
+.language-toggle:focus-visible {
+  box-shadow: 0 0 0 2px var(--primary-color); /* Focus ring */
+}
+
+/* Language toggle specific styles */
+.language-toggle {
+    font-size: 0.9rem; /* Ukuran font untuk label EN/ID */
+    font-weight: 600;
+    text-transform: uppercase;
+    width: 45px; /* Sedikit lebih lebar untuk teks */
+    border-radius: var(--border-radius-sm); /* Bentuk kotak membulat */
+    border: 1px solid var(--border-color); /* Border agar terlihat */
+    margin-left: var(--space-4); /* Jarak dari nav */
+}
+.language-toggle:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
 
 /* By default, mobile nav toggle is hidden on larger screens */
 .mobile-nav-toggle {
