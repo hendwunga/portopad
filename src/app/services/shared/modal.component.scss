@@ -1,0 +1,308 @@
+/* Gaya umum modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Lebih gelap */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: var(--space-4);
+  backdrop-filter: blur(5px); /* Efek blur yang bagus */
+}
+
+.modal-container {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow-lg); /* Bayangan lebih besar */
+  width: 90%; /* Default width */
+  max-width: 999px; /* Default max-width, sedikit lebih besar */
+  max-height: 90vh; /* Biarkan lebih banyak ruang vertikal */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  animation: fadeInScale 0.3s ease-out; /* Animasi masuk */
+}
+
+.modal-container.is-large {
+  max-width: 1200px; /* Max-width untuk modal besar */
+}
+
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0; /* Mencegah header menyusut */
+}
+
+.modal-title {
+  margin: 0;
+  font-size: var(--font-size-xl); /* Sesuaikan dengan variabel font Anda */
+  color: var(--heading-color);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 2rem; /* Ukuran silang lebih besar */
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: color var(--transition-speed) var(--transition-timing);
+  padding: 0; /* Hapus padding default tombol */
+  line-height: 1; /* Pastikan centering vertikal */
+}
+
+.modal-close:hover {
+  color: var(--error-color);
+  transform: scale(1.1); /* Efek hover */
+}
+
+.modal-body {
+  padding: var(--space-5); /* Padding lebih besar */
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+/* Styles for the project details content INSIDE the modal body */
+.project-modal {
+  display: grid;
+  grid-template-columns: 2fr;
+  gap: var(--space-6);
+  height: 100%; /* Penting: agar flex-grow di main-image berfungsi */
+}
+
+.project-modal-gallery {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-image {
+  flex-grow: 1; /* Memungkinkan gambar utama memenuhi ruang */
+  margin-bottom: var(--space-4);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px; /* Tinggi minimum agar tidak terlalu kecil */
+  background-color: var(--background-color-light); /* Background saat gambar loading */
+}
+
+.main-image img {
+  width: 100%;
+  height: 100%; /* Agar mengisi min-height */
+  object-fit: contain; /* PENTING: agar seluruh gambar terlihat, tidak terpotong */
+  display: block;
+}
+
+.image-thumbnails {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  padding-bottom: var(--space-2); /* Untuk scrollbar */
+  flex-shrink: 0; /* Mencegah thumbnails menyusut */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: var(--primary-color) var(--background-color); /* For Firefox */
+}
+/* Custom scrollbar for Webkit */
+.image-thumbnails::-webkit-scrollbar {
+  height: 8px;
+}
+.image-thumbnails::-webkit-scrollbar-track {
+  background: var(--background-color);
+  border-radius: 4px;
+}
+.image-thumbnails::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  border: 2px solid var(--background-color);
+}
+
+
+.thumbnail {
+  width: 100px; /* Ukuran thumbnail lebih besar */
+  height: 60px; /* Ukuran thumbnail lebih besar */
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all var(--transition-speed) var(--transition-timing);
+  flex-shrink: 0;
+  border: 2px solid transparent; /* Border untuk indikator aktif */
+  box-shadow: var(--box-shadow-sm); /* Sedikit bayangan */
+
+  &.active {
+    opacity: 1;
+    border-color: var(--primary-color);
+    box-shadow: var(--box-shadow-md);
+  }
+  &:hover {
+    opacity: 1;
+    transform: translateY(-2px); /* Efek hover kecil */
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Thumbnail bisa di-cover */
+  }
+}
+
+.project-modal-content {
+  display: flex;
+  flex-direction: column;
+  color: var(--text-color);
+}
+
+.project-title-modal { /* Nama kelas baru agar tidak konflik dengan .project-title di card */
+  font-size: var(--font-size-h3, 2rem);
+  color: var(--heading-color);
+  margin-bottom: var(--space-3);
+}
+
+.full-description {
+  line-height: 1.7;
+  margin-bottom: var(--space-4);
+  flex-grow: 1; /* Memungkinkan deskripsi mengisi ruang */
+  overflow-y: auto; /* Jika deskripsi sangat panjang, memungkinkan scroll */
+  max-height: 250px; /* Batasi tinggi agar tombol tidak terlalu jauh */
+}
+
+.tech-stack {
+  margin: var(--space-4) 0;
+  flex-shrink: 0; /* Mencegah menyusut saat deskripsi panjang */
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-color); /* Garis pemisah */
+}
+
+.tech-stack h4 {
+  margin-bottom: var(--space-2);
+  color: var(--heading-color);
+  font-size: var(--font-size-lg);
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tech-tags span {
+  background-color: var(--primary-glow);
+  color: var(--primary-color);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.project-modal-links {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: auto; /* Mendorong ke bawah */
+  padding-top: var(--space-4); /* Jarak dari konten di atas */
+  border-top: 1px solid var(--border-color); /* Garis pemisah */
+  flex-shrink: 0; /* Mencegah menyusut */
+
+  .btn {
+    padding: var(--space-2) var(--space-5);
+    font-size: var(--font-size-base);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-width: 150px;
+    justify-content: center;
+    text-decoration: none; /* Hapus underline default link */
+
+    fa-icon {
+      font-size: 1.1rem;
+    }
+  }
+  .btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: 1px solid var(--primary-color);
+    &:hover {
+      background-color: var(--primary-dark);
+      border-color: var(--primary-dark);
+    }
+  }
+  .btn-outline {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    &:hover {
+      background-color: var(--primary-glow);
+    }
+  }
+}
+
+/* Animasi untuk modal */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .modal-container.is-large {
+    max-width: 95vw; /* Lebih lebar di mobile */
+    padding: var(--space-4);
+  }
+  .modal-body {
+    padding: var(--space-4);
+  }
+  .project-modal {
+    grid-template-columns: 1fr; /* 1 kolom di layar kecil */
+    gap: var(--space-4);
+  }
+  .modal-close {
+    font-size: 1.5rem;
+  }
+  .project-modal-content .project-title-modal {
+    font-size: var(--font-size-h4, 1.8rem);
+  }
+  .full-description {
+    max-height: 150px; /* Batasi tinggi deskripsi di mobile */
+  }
+  .project-modal-links {
+    flex-direction: column;
+    gap: var(--space-3);
+    .btn {
+      width: 100%; /* Tombol mengisi lebar penuh */
+    }
+  }
+  .main-image {
+    min-height: 200px; /* Tinggi minimum gambar utama di mobile */
+  }
+}
+
+@media (max-width: 576px) {
+  .modal-container {
+    padding: var(--space-3);
+  }
+  .modal-body {
+    padding: var(--space-3);
+  }
+  .image-thumbnails {
+    padding-bottom: 0;
+  }
+  .thumbnail {
+    width: 80px;
+    height: 50px;
+  }
+}
