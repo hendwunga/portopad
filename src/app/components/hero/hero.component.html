@@ -1,42 +1,39 @@
+<!-- src/app/components/hero/hero.component.html -->
 <section id="hero" class="hero">
   <div class="overlay"></div>
   <div class="container hero-container">
     <div class="hero-content" @heroAnimation>
       <h1 class="hero-title">
-        Hi, I'm <span class="highlight">Hend Wunga</span>
+        {{ (languageService.getTranslation('heroGreeting') | async) }} <span class="highlight">Hend Wunga</span>
       </h1>
-      <p class="hero-subtitle">Backend Developer with a DevOps Focus</p>
-      <p class="hero-description">
-        Focusing on robust server-side development and implementing DevOps
-        practices for automation and deployment, my practical experience is
-        built through dedicated personal projects.
-      </p>
+      <p class="hero-subtitle">{{ (languageService.getTranslation('heroSubtitle') | async) }}</p>
+      <p class="hero-description">{{ (languageService.getTranslation('heroDescription') | async) }}</p>
       <div class="hero-cta">
-        <a href="#contact" class="btn btn-primary">
-          <fa-icon [icon]="faEnvelope"
-            class="btn-icon"></fa-icon>
-          Contact Me
+        <a href="#contact" class="btn btn-primary"
+           [attr.aria-label]="(languageService.getTranslation('contactMeButton') | async)"
+           title="{{ (languageService.getTranslation('contactMeButton') | async) }}">
+          <fa-icon [icon]="faEnvelope" class="btn-icon"></fa-icon>
+          {{ (languageService.getTranslation('contactMeButton') | async) }}
         </a>
-        <a href="assets/resume.pdf" class="btn btn-outline"
-          download>
-          <fa-icon [icon]="faDownload"
-            class="btn-icon"></fa-icon>
-          Download CV
+        <a [href]="cvUrl" class="btn btn-outline" download
+           [attr.aria-label]="(languageService.getTranslation('downloadCvButton') | async)"
+           title="{{ (languageService.getTranslation('downloadCvButton') | async) }}">
+          <fa-icon [icon]="faDownload" class="btn-icon"></fa-icon>
+          {{ (languageService.getTranslation('downloadCvButton') | async) }}
         </a>
       </div>
       <div class="social-links">
-        <!-- Menggunakan Font Awesome untuk semua ikon sosial -->
         <a
           href="mailto:hendrowunga073@gmail.com"
-          aria-label="Email Hendro Wunga"
-          title="Email Hendro Wunga">
+          [attr.aria-label]="(languageService.getTranslation('emailMeLabel') | async) || 'Email Hendro Wunga'"
+          title="{{ (languageService.getTranslation('emailMeLabel') | async) || 'Email Hendro Wunga' }}">
           <fa-icon [icon]="faEnvelope"></fa-icon>
         </a>
         <a
           href="https://www.linkedin.com/in/hendrowunga/"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Hendro Wunga's LinkedIn Profile"
+          [attr.aria-label]="(languageService.getTranslation('linkedinProfileLabel') | async) || 'Hendro Wunga\'s LinkedIn Profile'"
           title="LinkedIn">
           <fa-icon [icon]="faLinkedin"></fa-icon>
         </a>
@@ -44,47 +41,39 @@
           href="https://github.com/hendrowunga"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Hendro Wunga's GitHub Profile"
+          [attr.aria-label]="(languageService.getTranslation('githubProfileLabel') | async) || 'Hendro Wunga\'s GitHub Profile'"
           title="GitHub">
           <fa-icon [icon]="faGithub"></fa-icon>
         </a>
+        <!-- Aktifkan kembali Instagram/TikTok jika Anda punya link dan ingin menampilkannya -->
+        <!-- Pastikan Anda menambahkan faInstagram dan faTiktok ke imports di .ts -->
         <a
           href="https://www.instagram.com/hendrowunga7/"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Hendro Wunga's Instagram Profile"
+          [attr.aria-label]="(languageService.getTranslation('instagramProfileLabel') | async) || 'Hendro Wunga\'s Instagram Profile'"
           title="Instagram">
           <fa-icon [icon]="faInstagram"></fa-icon>
         </a>
-        <!-- Tambahkan link TikTok menggunakan Font Awesome -->
         <a
           href="https://www.tiktok.com/@hend_tech"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Hendro Wunga's TikTok Profile"
+          [attr.aria-label]="(languageService.getTranslation('tiktokProfileLabel') | async) || 'Hendro Wunga\'s TikTok Profile'"
           title="TikTok">
           <fa-icon [icon]="faTiktok"></fa-icon>
         </a>
-        <!-- Hapus link Twitter jika tidak digunakan -->
-        <!-- <a
-             href="https://twitter.com/"
-             target="_blank"
-             rel="noopener noreferrer"
-             aria-label="Twitter"
-           >
-             <fa-icon [icon]="faTwitter"></fa-icon>
-           ></a> -->
       </div>
     </div>
     <div class="hero-image" @heroImageAnimation>
-      <!-- Gunakan NgOptimizedImage dan priority untuk gambar utama Hero -->
       <img
         [ngSrc]="profileImage"
         alt="Profile"
         width="400"
         height="550"
         class="profile-image"
-        priority /> <!-- Tambahkan (click) handler ke gambar -->
+        priority
+        (click)="openProfileModal()" /> <!-- Tambahkan (click) untuk modal profil -->
     </div>
   </div>
   <div class="scroll-down">
