@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import {
-  // Brand Icons (fa-brands) - Pastikan ini adalah ikon gratis yang tersedia
+  // Brand Icons (fa-brands)
   faJava,
   faPython,
   faLaravel,
@@ -11,31 +11,30 @@ import {
   faBootstrap,
   faNpm,
   faDocker,
-  faGitAlt, // <-- KOREKSI: Tambahkan deklarasi ini
-  faGithub, // Ini juga brand icon
+  faGitAlt, // faGitAlt sekarang dideklarasikan juga sebagai properti faGitHubActions
   faLinux,
   faWindows,
   faJs,
-  // faSpring tidak tersedia di free-brands-svg-icons
 } from '@fortawesome/free-brands-svg-icons';
 import {
-  // Solid Icons (fa-solid) - Pastikan ini adalah ikon gratis yang tersedia
+  // Solid Icons (fa-solid)
   faDatabase,
-  faServer, // <-- KOREKSI: Menggunakan faServer untuk Spring Boot
-  faCode, // Untuk Kotlin, VS Code, IntelliJ IDEA
-  faVial, // Untuk JUnit
-  faGear, // <-- KOREKSI: Menggunakan faGear sebagai pengganti faCogs (untuk Gradle, Maven)
-  faHammer, // Untuk SQL Developer
-  faNetworkWired, // Untuk NGINX
-  faFileCode, // Untuk OpenAPI
-  faPlug, // Untuk Postman
-  faLayerGroup, // Untuk Kubernetes (alternatif gratis)
-  faTimes, // Untuk tombol tutup, jika digunakan di sini juga
-  faChevronLeft, // Jika ikon navigasi digunakan di sini
-  faChevronRight, // Jika ikon navigasi digunakan di sini
+  faServer,
+  faCode,
+  faVial,
+  faGear,
+  faHammer,
+  faNetworkWired,
+  faFileCode,
+  faPlug,
+  faLayerGroup,
 } from '@fortawesome/free-solid-svg-icons';
 
-// --- Definisi Interface Baru ---
+import {
+  LanguageService,
+  Language,
+} from '../../services/shared/language.service';
+
 type SkillCategoryType =
   | 'all'
   | 'languages'
@@ -52,9 +51,8 @@ interface Skill {
 
 interface FilterCategory {
   value: SkillCategoryType;
-  label: string;
+  labelKey: string;
 }
-// --- Akhir Definisi Interface Baru ---
 
 @Component({
   selector: 'app-skills',
@@ -65,22 +63,23 @@ interface FilterCategory {
 })
 export class SkillsComponent {
   // --- Deklarasi Ikon Font Awesome (Agar dapat diakses di template) ---
+  // Deklarasikan semua ikon yang akan digunakan di template atau di array 'skills'
   faJava = faJava;
   faPython = faPython;
   faKotlin = faCode;
   faLaravel = faLaravel;
-  faSpringBoot = faServer; // <-- KOREKSI: Menggunakan faServer
+  faSpringBoot = faServer; // Menggunakan faServer sebagai pengganti faSpring (Font Awesome Free)
   faMySQL = faDatabase;
   faPostgreSQL = faDatabase;
   faMongoDB = faDatabase;
   faSQLDeveloper = faHammer;
   faDocker = faDocker;
-  faKubernetes = faLayerGroup;
+  faKubernetes = faLayerGroup; // Menggunakan faLayerGroup sebagai alternatif gratis
   faPostman = faPlug;
-  faGitHubActions = faGitAlt; // <-- KOREKSI: Tambahkan deklarasi ini
+  faGitHubActions = faGitAlt; // Properti ini yang memegang ikon faGitAlt
   faNGINX = faNetworkWired;
-  faGradle = faGear; // <-- KOREKSI: Menggunakan faGear
-  faApacheMaven = faGear; // <-- KOREKSI: Menggunakan faGear
+  faGradle = faGear; // Menggunakan faGear sebagai pengganti faCogs
+  faApacheMaven = faGear; // Menggunakan faGear
   faNpm = faNpm;
   faJUnit = faVial;
   faOpenAPI = faFileCode;
@@ -91,43 +90,34 @@ export class SkillsComponent {
   faAngularJS = faAngular;
   faBootstrap = faBootstrap;
   faJs = faJs;
-  faTimes = faTimes; // Jika digunakan di template ini (misal di modal)
-  faChevronLeft = faChevronLeft; // Jika digunakan di template ini
-  faChevronRight = faChevronRight; // Jika digunakan di template ini
   // --- Akhir Deklarasi Ikon Font Awesome ---
 
-  // --- Filter Kategori Baru ---
   categories: FilterCategory[] = [
-    { value: 'all', label: 'All' },
-    { value: 'languages', label: 'Languages' },
-    { value: 'frameworks', label: 'Frameworks' },
-    { value: 'databases', label: 'Databases' },
-    { value: 'devops-tools', label: 'DevOps & Tools' },
-    { value: 'os-vcs', label: 'OS & VCS' },
+    { value: 'all', labelKey: 'filterAll' },
+    { value: 'languages', labelKey: 'filterLanguages' },
+    { value: 'frameworks', labelKey: 'filterFrameworks' },
+    { value: 'databases', labelKey: 'filterDatabases' },
+    { value: 'devops-tools', labelKey: 'filterDevOpsTools' },
+    { value: 'os-vcs', labelKey: 'filterOsVcs' },
   ];
 
   selectedCategory: SkillCategoryType = 'all';
 
-  // --- Data Keahlian Baru dengan Ikon Font Awesome dan Kategori yang Disesuaikan ---
   skills: Skill[] = [
-    // Languages
     { name: 'Java', icon: this.faJava, category: 'languages' },
     { name: 'Kotlin', icon: this.faKotlin, category: 'languages' },
     { name: 'JavaScript', icon: this.faJs, category: 'languages' },
     { name: 'Python', icon: this.faPython, category: 'languages' },
 
-    // Frameworks
-    { name: 'Spring Boot', icon: this.faSpringBoot, category: 'frameworks' }, // Menggunakan faServer
+    { name: 'Spring Boot', icon: this.faSpringBoot, category: 'frameworks' },
     { name: 'Laravel', icon: this.faLaravel, category: 'frameworks' },
     { name: 'AngularJS', icon: this.faAngularJS, category: 'frameworks' },
     { name: 'Bootstrap', icon: this.faBootstrap, category: 'frameworks' },
 
-    // Databases
     { name: 'MySQL', icon: this.faMySQL, category: 'databases' },
     { name: 'PostgreSQL', icon: this.faPostgreSQL, category: 'databases' },
     { name: 'MongoDB', icon: this.faMongoDB, category: 'databases' },
 
-    // DevOps & Tools
     {
       name: 'SQL Developer',
       icon: this.faSQLDeveloper,
@@ -136,11 +126,13 @@ export class SkillsComponent {
     { name: 'Docker', icon: this.faDocker, category: 'devops-tools' },
     { name: 'Kubernetes', icon: this.faKubernetes, category: 'devops-tools' },
     { name: 'Postman', icon: this.faPostman, category: 'devops-tools' },
+    // --- KOREKSI DI SINI: Gunakan this.faGitHubActions ---
     {
       name: 'GitHub Actions',
       icon: this.faGitHubActions,
       category: 'devops-tools',
     },
+    // --- AKHIR KOREKSI ---
     { name: 'NGINX', icon: this.faNGINX, category: 'devops-tools' },
     { name: 'Gradle', icon: this.faGradle, category: 'devops-tools' },
     {
@@ -158,11 +150,14 @@ export class SkillsComponent {
     },
     { name: 'VS Code', icon: this.faVSCode, category: 'devops-tools' },
 
-    // Operating Systems & Version Control Systems
     { name: 'Linux', icon: this.faLinux, category: 'os-vcs' },
     { name: 'Windows 11', icon: this.faWindows11, category: 'os-vcs' },
-    { name: 'Git', icon: this.faGitHubActions, category: 'os-vcs' }, // Menggunakan ikon yang sama dengan GitHub Actions
+    // --- KOREKSI DI SINI: Gunakan this.faGitHubActions jika Anda ingin ikon yang sama untuk Git ---
+    { name: 'Git', icon: this.faGitHubActions, category: 'os-vcs' },
+    // --- AKHIR KOREKSI ---
   ];
+
+  constructor(public languageService: LanguageService) {}
 
   get filteredSkills(): Skill[] {
     if (this.selectedCategory === 'all') {

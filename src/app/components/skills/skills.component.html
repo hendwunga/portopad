@@ -1,26 +1,25 @@
+<!-- src/app/components/skills/skills.component.html -->
 <section id="skills" class="skills">
   <div class="container">
-    <h2 class="section-title">Skills & Expertise</h2>
+    <h2 class="section-title">{{ (languageService.getTranslation('skillsTitle') | async) }}</h2>
 
     <div class="skills-categories">
-      <!-- Menggunakan filter category dari komponen TypeScript -->
       <button
         *ngFor="let category of categories"
         class="category-btn"
         [class.active]="selectedCategory === category.value"
         (click)="filterByCategory(category.value)">
-        {{ category.label }}
+        {{ (languageService.getTranslation(category.labelKey) | async) }} <!-- Menggunakan labelKey untuk terjemahan -->
       </button>
     </div>
 
     <div class="skills-grid">
-      <!-- Mengulang filteredSkills yang sudah terfilter -->
       <div
         *ngFor="let skill of filteredSkills"
         class="skill-card"
-        [ngClass]="'category-' + skill.category"> <!-- class ini bisa dihapus jika tidak ada gaya spesifik per kategori -->
+        [ngClass]="'category-' + skill.category">
         <div class="skill-icon">
-          <fa-icon [icon]="skill.icon"></fa-icon> <!-- Menampilkan ikon Font Awesome -->
+          <fa-icon [icon]="skill.icon"></fa-icon>
         </div>
         <h3 class="skill-name">{{ skill.name }}</h3>
       </div>
