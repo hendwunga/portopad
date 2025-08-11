@@ -14,7 +14,7 @@ import {
   query,
   stagger,
 } from '@angular/animations';
-
+import { LanguageService } from '../../services/shared/language.service';
 @Component({
   selector: 'app-about',
   standalone: true,
@@ -47,4 +47,5 @@ export class AboutComponent {
   faBriefcase = faBriefcase;
   faGraduationCap = faGraduationCap;
   faCode = faCode;
+  constructor(public languageService: LanguageService) {}
 }

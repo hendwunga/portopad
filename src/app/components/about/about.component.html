@@ -1,38 +1,24 @@
+<!-- src/app/components/about/about.component.html -->
 <section id="about" class="about">
      <div class="container">
-          <h2 class="section-title">About Me</h2>
+          <h2 class="section-title">{{ (languageService.getTranslation('aboutMeTitle') | async) }}</h2>
 
           <div class="about-content" @fadeInStagger>
                <div class="about-text">
                     <p class="lead">
-                         I am a Backend Developer with a focus on building
-                         robust, scalable, and efficient server-side
-                         applications.
+                         {{ (languageService.getTranslation('aboutLeadText') | async) }}
                     </p>
 
                     <p>
-                         My practical experience has been forged through
-                         hands-on work on numerous personal projects. I've
-                         successfully tackled complex problems and transformed
-                         concepts into functional realities by applying
-                         technologies such as Java Spring Boot, Docker, and
-                         relational databases.
+                         {{ (languageService.getTranslation('aboutParagraph2') | async) }}
                     </p>
 
                     <p>
-                         I actively integrate DevOps principles into my
-                         workflow, including containerization and automating
-                         CI/CD pipelines, to ensure reliable and streamlined
-                         deployments. My core technical competencies include API
-                         design, database management, and effective
-                         collaboration within development teams using
-                         methodologies like GitHub Flow.
+                         {{ (languageService.getTranslation('aboutParagraph3') | async) }}
                     </p>
 
                     <p>
-                         I am seeking opportunities to contribute my proven
-                         backend development and DevOps-aligned skills in a
-                         challenging and collaborative professional setting.
+                         {{ (languageService.getTranslation('aboutParagraph4') | async) }}
                     </p>
                </div>
 
@@ -42,8 +28,8 @@
                               <fa-icon [icon]="faBriefcase"></fa-icon>
                          </span>
                          <div>
-                              <h3>Experience</h3>
-                              <p>Project-based</p>
+                              <h3>{{ (languageService.getTranslation('experienceTitle') | async) }}</h3>
+                              <p>{{ (languageService.getTranslation('experienceDescription') | async) }}</p>
                          </div>
                     </div>
 
@@ -52,10 +38,9 @@
                               <fa-icon [icon]="faGraduationCap"></fa-icon>
                          </span>
                          <div>
-                              <h3>Education</h3>
-                              <p>B.Sc. Computer Science, Sanata Dharma
-                                   University</p>
-                              <p>GPA: 3.13</p>
+                              <h3>{{ (languageService.getTranslation('educationTitle') | async) }}</h3>
+                              <p>{{ (languageService.getTranslation('educationUniversity') | async) }}</p>
+                              <p>{{ (languageService.getTranslation('educationGpaLabel') | async) }} 3.13</p> <!-- Menggunakan label IPK -->
                          </div>
                     </div>
 
@@ -64,9 +49,8 @@
                               <fa-icon [icon]="faCode"></fa-icon>
                          </span>
                          <div>
-                              <h3>Projects</h3>
-                              <p>10+ completed</p>
-                              <!-- Atau angka yang sesuai -->
+                              <h3>{{ (languageService.getTranslation('projectsTitleAbout') | async) }}</h3>
+                              <p>{{ (languageService.getTranslation('projectsCompletedAbout') | async) }}</p> <!-- Menggunakan key yang lebih spesifik -->
                          </div>
                     </div>
                </div>
