@@ -1,11 +1,12 @@
 <section id="projects" class="projects">
   <div class="container">
-    <h2 class="section-title">Projects</h2>
+    <!-- Judul Bagian -->
+    <h2 class="section-title">{{ languageService.getTranslation('projectsSectionTitle') | async }}</h2>
 
     <div class="filters">
-      <!-- Loop melalui array filters yang sudah diperbarui -->
+      <!-- Loop melalui filters$ (Observable) -->
       <button
-        *ngFor="let filter of filters"
+        *ngFor="let filter of (filters$ | async)"
         class="filter-btn"
         [class.active]="activeFilter === filter.value"
         (click)="setFilter(filter.value)">
@@ -13,25 +14,35 @@
       </button>
     </div>
 
+    <!-- Pesan jika tidak ada proyek ditemukan (BARU) -->
+    <div *ngIf="filteredProjectsByCategory.length === 0" class="no-items-message">
+      {{ languageService.getTranslation('noProjectsFound') | async }}
+    </div>
+
     <div class="projects-grid">
       <div
-        *ngFor="let project of filteredProjects"
+        *ngFor="let project of displayedProjects"
         class="project-card"
         [class.featured]="project.featured">
+        <!-- Label "Featured" sebagai elemen HTML agar bisa diterjemahkan -->
+        <span *ngIf="project.featured" class="featured-label">{{ languageService.getTranslation('featuredLabel') | async }}</span>
+
         <div class="project-thumbnail">
           <img
             [ngSrc]="project.thumbnail"
-            [alt]="project.title"
+            [alt]="getTranslatedText(project.title)"
             width="500"
             height="250"
             loading="lazy"
-            (click)="openProjectDetails(project)" /> <!-- Panggil metode openProjectDetails -->
+            (click)="openProjectDetails(project)" />
         </div>
         <div class="project-info">
-          <h3 class="project-title">{{ project.title }}</h3>
+          <!-- Judul Proyek yang Diterjemahkan -->
+          <h3 class="project-title">{{ getTranslatedText(project.title) }}</h3>
+          <!-- Deskripsi Proyek yang Diterjemahkan dan Dipotong -->
           <p class="project-description">
-            {{ project.description | slice : 0 : 100
-            }}{{ project.description.length > 100 ? '...' : '' }}
+            {{ getTranslatedText(project.description) | slice : 0 : 100
+            }}{{ getTranslatedText(project.description).length > 100 ? '...' : '' }}
           </p>
           <div class="project-technologies">
             <span *ngFor="let tech of project.technologies.slice(0, 3)">{{
@@ -43,8 +54,9 @@
           <div class="project-actions">
             <button
               class="btn btn-primary"
-              (click)="openProjectDetails(project)"> <!-- Panggil metode openProjectDetails -->
-              View Details
+              (click)="openProjectDetails(project)">
+              <!-- Tombol "View Details" yang Diterjemahkan -->
+              {{ languageService.getTranslation('viewDetailsButton') | async }}
             </button>
             <div class="project-links">
               <a
@@ -53,7 +65,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 class="project-link"
-                aria-label="GitHub repository">
+                [attr.aria-label]="(languageService.getTranslation('githubRepoButton') | async)">
                 <fa-icon [icon]="faGithub"></fa-icon>
               </a>
               <a
@@ -62,7 +74,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 class="project-link"
-                aria-label="Live site">
+                [attr.aria-label]="(languageService.getTranslation('liveDemoButton') | async)">
                 <fa-icon [icon]="faChrome"></fa-icon>
               </a>
             </div>
@@ -70,9 +82,13 @@
         </div>
       </div>
     </div>
+
+    <!-- Tombol "Show More" (BARU) -->
+    <div class="show-more-container" *ngIf="canShowMoreProjects">
+      <button class="btn btn-primary show-more-btn" (click)="loadMoreProjects()">
+        {{ languageService.getTranslation('showMoreButtonLabel') | async }}
+      </button>
+    </div>
+
   </div>
-
-  <!-- Hapus struktur Modal Project Details dari sini -->
-  <!-- Struktur modal sekarang berada di ModalComponent.html -->
-
 </section>
