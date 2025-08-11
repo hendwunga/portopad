@@ -70,10 +70,9 @@ export class HeroComponent implements OnInit {
 
   // URL CV Anda. Ganti dengan URL RAW GitHub Anda atau CDN lainnya.
   // Contoh GitHub Raw:
-  cvUrl = 'https://raw.githubusercontent.com/hendrowunga/portopad/main/src/assets/resume.pdf';
+  // cvUrl ='https://raw.githubusercontent.com/hendrowunga/portopad/main/src/assets/resume.pdf';
   // Jika Anda menyimpannya di folder assets lokal dan ingin mengunduhnya langsung (seperti sebelumnya):
-  // cvUrl = 'assets/resume.pdf';
-
+  cvUrl = 'assets/Resume_Hendrikus_Wunga.pdf';
 
   constructor(
     private readonly modalService: ModalService,
