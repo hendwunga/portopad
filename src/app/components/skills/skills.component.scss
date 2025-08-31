@@ -59,7 +59,10 @@
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Sesuaikan ukuran minmax agar lebih kecil */
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(120px, 1fr)
+  ); /* Sesuaikan ukuran minmax agar lebih kecil */
   gap: var(--space-5); /* Jarak antar kartu skill */
 }
 
@@ -74,7 +77,7 @@
   text-align: center;
   box-shadow: var(--box-shadow);
   transition: transform var(--transition-speed) var(--transition-timing),
-              box-shadow var(--transition-speed) var(--transition-timing); /* Transisi untuk shadow */
+    box-shadow var(--transition-speed) var(--transition-timing); /* Transisi untuk shadow */
   border: 1px solid var(--border-color); /* Tambahkan border */
 
   &:hover {
@@ -97,7 +100,6 @@
   &.category-os-vcs { color: var(--info-color, #17a2b8); }
   */
 }
-
 
 .skill-name {
   font-size: var(--font-size-base); /* Ukuran font nama skill */

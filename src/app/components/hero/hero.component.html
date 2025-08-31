@@ -4,20 +4,23 @@
   <div class="container hero-container">
     <div class="hero-content" @heroAnimation>
       <h1 class="hero-title">
-        {{ (languageService.getTranslation('heroGreeting') | async) }} <span class="highlight">Hend Wunga</span>
+        {{ (languageService.getTranslation('heroGreeting') | async) }} <span
+          class="highlight">Hend Wunga</span>
       </h1>
-      <p class="hero-subtitle">{{ (languageService.getTranslation('heroSubtitle') | async) }}</p>
-      <p class="hero-description">{{ (languageService.getTranslation('heroDescription') | async) }}</p>
+      <p class="hero-subtitle">{{
+        (languageService.getTranslation('heroSubtitle') | async) }}</p>
+      <p class="hero-description">{{
+        (languageService.getTranslation('heroDescription') | async) }}</p>
       <div class="hero-cta">
         <a href="#contact" class="btn btn-primary"
-           [attr.aria-label]="(languageService.getTranslation('contactMeButton') | async)"
-           title="{{ (languageService.getTranslation('contactMeButton') | async) }}">
+          [attr.aria-label]="(languageService.getTranslation('contactMeButton') | async)"
+          title="{{ (languageService.getTranslation('contactMeButton') | async) }}">
           <fa-icon [icon]="faEnvelope" class="btn-icon"></fa-icon>
           {{ (languageService.getTranslation('contactMeButton') | async) }}
         </a>
         <a [href]="cvUrl" class="btn btn-outline" download
-           [attr.aria-label]="(languageService.getTranslation('downloadCvButton') | async)"
-           title="{{ (languageService.getTranslation('downloadCvButton') | async) }}">
+          [attr.aria-label]="(languageService.getTranslation('downloadCvButton') | async)"
+          title="{{ (languageService.getTranslation('downloadCvButton') | async) }}">
           <fa-icon [icon]="faDownload" class="btn-icon"></fa-icon>
           {{ (languageService.getTranslation('downloadCvButton') | async) }}
         </a>
@@ -38,7 +41,7 @@
           <fa-icon [icon]="faLinkedin"></fa-icon>
         </a>
         <a
-          href="https://github.com/hendrowunga"
+          href="https://github.com/hendwunga"
           target="_blank"
           rel="noopener noreferrer"
           [attr.aria-label]="(languageService.getTranslation('githubProfileLabel') | async) || 'Hendro Wunga\'s GitHub Profile'"
@@ -73,7 +76,8 @@
         height="550"
         class="profile-image"
         priority
-        (click)="openProfileModal()" /> <!-- Tambahkan (click) untuk modal profil -->
+        (click)="openProfileModal()" />
+      <!-- Tambahkan (click) untuk modal profil -->
     </div>
   </div>
   <div class="scroll-down">

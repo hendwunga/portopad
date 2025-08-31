@@ -1,8 +1,8 @@
-
 .contact {
+  display: block;
   background-color: var(--background-color);
-  padding: var(--section-padding); // Add section padding
-  margin-top: var(--section-spacing-vertical, 80px);
+  color: var(--text-color);
+  padding: var(--space-xl, 60px) var(--space-md, 20px);
 }
 
 .section-title {

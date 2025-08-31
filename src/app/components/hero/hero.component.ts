@@ -72,7 +72,8 @@ export class HeroComponent implements OnInit {
   // Contoh GitHub Raw:
   // cvUrl ='https://raw.githubusercontent.com/hendrowunga/portopad/main/src/assets/resume.pdf';
   // Jika Anda menyimpannya di folder assets lokal dan ingin mengunduhnya langsung (seperti sebelumnya):
-  cvUrl = 'assets/Resume_Hendrikus_Wunga.pdf';
+  // cvUrl = 'assets/Resume_Hendrikus_Wunga.pdf';
+  cvUrl = 'assets/RESUME_HENDRIKUS_WUNGA.pdf';
 
   constructor(
     private readonly modalService: ModalService,

@@ -1,7 +1,8 @@
 .about {
+  display: block;
   background-color: var(--background-color);
-  position: relative;
-  overflow: hidden;
+  color: var(--text-color);
+  padding: var(--space-xl, 60px) var(--space-md, 20px);
 }
 
 .about::before {

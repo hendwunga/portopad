@@ -6,7 +6,10 @@
 }
 
 .container {
-  max-width: var(--container-width, 1200px); /* Sesuaikan dengan lebar container utama Anda */
+  max-width: var(
+    --container-width,
+    1200px
+  ); /* Sesuaikan dengan lebar container utama Anda */
   margin: 0 auto;
   padding: 0 var(--space-4); /* Padding samping agar konten tidak menempel */
 }
@@ -59,7 +62,10 @@
 
 .certificates-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Ukuran kartu lebih fleksibel */
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(280px, 1fr)
+  ); /* Ukuran kartu lebih fleksibel */
   gap: var(--space-6);
 }
 
@@ -71,8 +77,8 @@
   align-items: center;
   box-shadow: var(--box-shadow);
   transition: transform var(--transition-speed) var(--transition-timing),
-              box-shadow var(--transition-speed) var(--transition-timing),
-              border-color var(--transition-speed) var(--transition-timing); /* Tambah transisi border */
+    box-shadow var(--transition-speed) var(--transition-timing),
+    border-color var(--transition-speed) var(--transition-timing); /* Tambah transisi border */
   cursor: pointer;
   text-decoration: none; /* Untuk kasus jika tetap jadi <a> */
   color: var(--text-color); /* Pastikan warna teks sesuai tema */
@@ -86,8 +92,8 @@
   }
 
   &:focus-visible {
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 2px var(--primary-color); /* Focus ring */
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--primary-color); /* Focus ring */
   }
 }
 
@@ -148,7 +154,6 @@
 .certificate-card:hover .view-btn {
   color: var(--primary-dark);
 }
-
 
 /* --- Modal Detail Sertifikat Styles --- */
 .certificate-modal-overlay {
@@ -262,7 +267,6 @@
     border-color: var(--primary-dark);
   }
 }
-
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
